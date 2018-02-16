@@ -29,147 +29,176 @@
 <body >
 
 <div ng-app="myApp" ng-controller="myCtrl">
-    <div  class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="accordion panel-group" id="accordion">
+<div  class="container">
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading active">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                Save University
-                            </a>
-                            </h4>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div id="collapseOne" class="panel-collapse collapse in">
-                            <div class="panel-body" style="height: 350px">
-                                <h1>University</h1>
-                                <form>
-                                    <p> Name : <input type="text" ng-model="university.name"></p>
-                                    <p> Capacity : <input type="number" ng-model="university.capacity"></p>
-                                </form>
-                                <p><button class="btn" ng-click="sendUniversityData()">Save University</button></p>
-                                <p ng-if="messageOfSaveUniversity" class="ng-invalid">{{messageOfSaveUniversity}}</p>
-                            </div>
-                        </div>
-                        <!-- /#collapseOne -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="accordion panel-group" id="accordion">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading active">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            Save University
+                        </a>
+                        </h4>
                     </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                Save Student
-                            </a>
-                            </h4>
+                    <!-- /.panel-heading -->
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body" style="height: 350px">
+                            <h1>University</h1>
+                            <form>
+                                <p> Name : <input type="text" ng-model="university.name"></p>
+                                <p> Capacity : <input type="number" ng-model="university.capacity"></p>
+                            </form>
+                            <p><button class="btn" ng-click="sendUniversityData()">Save University</button></p>
+                            <p ng-if="messageOfSaveUniversity" class="ng-invalid">{{messageOfSaveUniversity}}</p>
                         </div>
-                        <!-- /.panel-heading -->
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                            <div class="panel-body" style="height: 350px">
-                                <h1>Student</h1>
-                                <form>
-                                    <p> Name : <input type="text" ng-model="student.name"></p>
-                                    <p> Age : <input type="number" ng-model="student.age"></p>
-                                    <p>University : <select ng-model="selectedUniversityOfStudent" ng-options="value.name for (key, value)
-                                        in allUniversities"></select>
-                                    </p>
-                                </form>
-                                <p>University Capacity : {{selectedUniversityOfStudent.capacity}}</p>
-                                <p>Number of Recorded Student : {{selectedUniversityOfStudent.number}}</p>
-
-                                <p><button class="btn" ng-click="sendStudentData()">Save Student</button></p>
-                                <p ng-if="messageOfSaveStudent" class="ng-invalid">{{messageOfSaveStudent}}</p>
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /#collapseTwo -->
                     </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                Save Class
-                            </a>
-                            </h4>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div id="collapseThree" class="panel-collapse collapse">
-                            <div class="panel-body" style="height: 350px">
-                                <h1>Class</h1>
-                                <form>
-                                    <p> Name : <input type="text" ng-model="className"></p>
-                                    <p><button class="btn" ng-click="sendClassData()">Save Class Data</button></p>
-                                    <p ng-if="messageClass" class="ng-invalid">{{messageClass}}</p>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- /#collapseThree -->
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                Save Teacher
-                            </a>
-                            </h4>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div id="collapseFour" class="panel-collapse collapse">
-                            <div class="panel-body" style="height: 350px">
-                                <h1>Teacher</h1>
-                                <form>
-                                    <p> Name : <input type="text" ng-model="teacherName"></p>
-                                    <p> Class : <select ng-model="selectedClassOfTeacher" ng-options="value.name for (key, value)
-                                        in notSelectedAllClasses"></select></p>
-                                    <p> University : <select ng-model="selectedUniversityOfTeacher" ng-options="value.name for (key, value) in allUniversities"></select>
-                                    </p>
-                                </form>
-                                <p><button class="btn" ng-click="sendTeacherData()">Save Teacher Data</button></p>
-                                <p ng-if="messageOfTeacher" class="ng-invalid">{{messageOfTeacher}}</p>
-
-
-                            </div>
-                        </div>
-                        <!-- /#collapseFour-->
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                                Save Student - Class
-                            </a>
-                            </h4>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div id="collapseFive" class="panel-collapse collapse">
-                            <div class="panel-body" style="height: 350px">
-                                <h1>Student - Class</h1>
-                                <form>
-                                    <p>Student : <select ng-model="selectedStudentOfSC" ng-options="value.name for (key, value)
-                                        in allStudents"></select></p>
-                                    <p>Class : <select ng-model="selectedClassOfSC" ng-options="value.name for (key, value)
-                                        in allClasses"></select></p>
-                                </form>
-                                <p><button class="btn" ng-click="sendSCData()">Save Student-Class</button></p>
-                                <p ng-if="messageOfSaveSC" class="ng-invalid">{{messageOfSaveSC}}</p>
-
-
-                            </div>
-                        </div>
-                        <!-- /#collapseFive -->
-                    </div>
-
+                    <!-- /#collapseOne -->
                 </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                            Save Student
+                        </a>
+                        </h4>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body" style="height: 350px">
+                            <h1>Student</h1>
+                            <form>
+                                <p> Name : <input type="text" ng-model="student.name"></p>
+                                <p> Age : <input type="number" ng-model="student.age"></p>
+                                <p>University : <select ng-model="selectedUniversityOfStudent" ng-options="value.name for (key, value)
+                                    in allUniversities"></select>
+                                </p>
+                            </form>
+                            <p>University Capacity : {{selectedUniversityOfStudent.capacity}}</p>
+                            <p>Number of Recorded Student : {{selectedUniversityOfStudent.number}}</p>
+
+                            <p><button class="btn" ng-click="sendStudentData()">Save Student</button></p>
+                            <p ng-if="messageOfSaveStudent" class="ng-invalid">{{messageOfSaveStudent}}</p>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /#collapseTwo -->
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                            Save Class
+                        </a>
+                        </h4>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body" style="height: 350px">
+                            <h1>Class</h1>
+                            <form>
+                                <p> Name : <input type="text" ng-model="className"></p>
+                                <p><button class="btn" ng-click="sendClassData()">Save Class Data</button></p>
+                                <p ng-if="messageClass" class="ng-invalid">{{messageClass}}</p>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /#collapseThree -->
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                            Save Teacher
+                        </a>
+                        </h4>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body" style="height: 350px">
+                            <h1>Teacher</h1>
+                            <form>
+                                <p> Name : <input type="text" ng-model="teacherName"></p>
+                            </form>
+
+                            <p><button class="btn" ng-click="sendTeacherData()">Save Teacher Data</button></p>
+                            <p ng-if="messageOfTeacher" class="ng-invalid">{{messageOfTeacher}}</p>
+
+
+                        </div>
+                    </div>
+                    <!-- /#collapseFour-->
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                            Save Student - Class
+                        </a>
+                        </h4>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div id="collapseFive" class="panel-collapse collapse">
+                        <div class="panel-body" style="height: 350px">
+                            <h1>Student - Class</h1>
+                            <form>
+                                <p>Student : <select ng-model="selectedStudentOfSC" ng-options="value.name for (key, value)
+                                    in allStudents"></select></p>
+                                <p>Class : <select ng-model="selectedClassOfSC" ng-options="value.name for (key, value)
+                                    in allClasses"></select></p>
+                            </form>
+                            <p><button class="btn" ng-click="sendSCData()">Save Student-Class</button></p>
+                            <p ng-if="messageOfSaveSC" class="ng-invalid">{{messageOfSaveSC}}</p>
+
+
+                        </div>
+                    </div>
+                    <!-- /#collapseFive -->
+                </div>
+
+
+                <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSixth">
+                                    Save Teacher - Class
+                                </a>
+                            </h4>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div id="collapseSixth" class="panel-collapse collapse">
+
+                            <div class="panel-body" style="height: 350px">
+                                <h1>Teacher - Class</h1>
+                                <form>
+                                    <p>Teacher : <select ng-model="selectedTeacherOfTC" ng-options="value.name for (key, value)
+                                    in allTeachers"></select></p>
+                                    
+                                    <p>Class : <select ng-model="selectedClassOfSC" ng-options="value.name for (key, value)
+                                    in allClasses"></select></p>
+                                </form>
+                                <p><button class="btn" ng-click="sendTCData()">Save Teacher-Class</button></p>
+                                <p ng-if="messageOfSaveTC" class="ng-invalid">{{messageOfSaveTC}}</p>
+
+
+                            </div>
+                        </div>
+                        <!-- /#collapseSixth -->
+                </div>
+
+
             </div>
         </div>
-        <p><a href="findPage">Go to Inquiry Screen</a> </p>
-
     </div>
+    <p><a href="findPage">Go to Inquiry Screen</a> </p>
+
+</div>
 </div>
 
     <script src="js/homePagesjs.js"></script>

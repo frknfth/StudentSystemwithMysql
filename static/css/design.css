@@ -1,6 +1,3 @@
-
-    
-    
     body{
         text-align:center;
         padding-top: 10px;
@@ -36,8 +33,46 @@
     th,td{
         padding: 5px;
     }
+    th{
+        text-align: center !important;
+        font-size: 17px;
+    }
 
+    p {
+        line-height: 1.75;
+    }
 
+    a:hover {
+        color: #21ca92;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: 700;
+        font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .panel-heading.active  {
+        background-color: #809fff !important;
+
+    }
+
+    .panel-heading.hover {
+        background-color: #193791 !important;
+
+    }
+    .panel-body{
+        border : 1px solid #809fff;
+        height: 350px;
+    }
+
+    .btn{
+        margin-left: 5px;
+    }
 
     @import url(http://fonts.googleapis.com/css?family=Raleway);
     #cssmenu,
@@ -153,38 +188,6 @@
 
     #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
         color: rgb(125, 116, 156);
-      }
-      
-      p {
-        line-height: 1.75;
-      }      
-      
-      a:hover {
-        color: #21ca92;
-      }   
-      
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-weight: 700;
-        font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      }   
-
-      .panel-heading.active  {
-            background-color: #809fff !important;
-            
-      }      
-
-      .panel-heading.hover {
-        background-color: #193791 !important;
-
-      }
-    .panel-body{
-        border : 1px solid #809fff;
-        height: 350px;
     }
 
 

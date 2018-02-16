@@ -23,73 +23,99 @@
         <p>Student Name : <input type="text" ng-model="studentName"><button class=" btn" ng-click="findStudent()">Find Student
         </button></p>
 
-        <table align="center" style="width:90%" class="table table-bordered">
-            <tr>
-                <th>Delete</th>
-                <th>Student Id</th>
-                <th>Student Name</th>
-                <th>Student Age</th>
-                <th>University Name</th>
-                <th>University Capacity</th>
-                <th>Recorded Student in the University</th>
+        <div style="overflow-x: auto">
 
-            </tr>
-            <tr ng-repeat="x in students ">
-                <td align="center"> <button ng-click="deleteStudent(x.id,x.name,x.age,x.uni.id)" class="btn btn-danger">X</button> </td>
+            <table align="center" style="width:90%" class="table table-bordered">
+                <tr>
+                    <th>Delete</th>
+                    <th>Student Id</th>
+                    <th>Student Name</th>
+                    <th>Student Age</th>
+                    <th>University Name</th>
+                    <th>University Capacity</th>
+                    <th>Recorded Student in the University</th>
 
-                <td> {{x.id }} </td>
-                <td> {{x.name }} </td>
-                <td> {{x.age }} </td>
-                <td> {{x.uni.name }} </td>
-                <td> {{x.uni.capacity }} </td>
-                <td> {{x.uni.number }} </td>
+                </tr>
+                <tr ng-repeat="x in students ">
+                    <td align="center"> <button ng-click="deleteStudent(x.id,x.name,x.age,x.uni.id)" class="btn btn-danger">X</button> </td>
 
-            </tr>
-        </table>
+                    <td> {{x.id }} </td>
+                    <td> {{x.name }} </td>
+                    <td> {{x.age }} </td>
+                    <td> {{x.uni.name }} </td>
+                    <td> {{x.uni.capacity }} </td>
+                    <td> {{x.uni.number }} </td>
+
+                </tr>
+            </table>
+        </div>
 
         <br><br><br>
 
         <p> University Name : <input type="text" ng-model="universityName"><button class=" btn" ng-click="findUniversity()">
             Find University</button></p>
 
-        <table align="center" style="width:90%" class="table table-bordered">
-            <tr>
-                <th>Delete</th>
-                <th>University ID</th>
-                <th>University Name</th>
-                <th>University Capacity</th>
-                <th>Number of Recorded Student</th>
-            </tr>
-            <tr ng-repeat="x in universities ">
-                <td align="center"> <button ng-click="deleteUniversity(x.id,x.name,x.capacity,x.number)" class="btn btn-danger">X</button> </td>
+        <div style="overflow-x: auto">
+            <table align="center" style="width:90%" class="table table-bordered">
+                <tr>
+                    <th>Delete</th>
+                    <th>University ID</th>
+                    <th>University Name</th>
+                    <th>University Capacity</th>
+                    <th>Number of Recorded Student</th>
+                </tr>
+                <tr ng-repeat="x in universities ">
+                    <td align="center"> <button ng-click="deleteUniversity(x.id,x.name,x.capacity,x.number)" class="btn btn-danger">X</button> </td>
 
-                <td> {{x.id }} </td>
-                <td> {{x.name }} </td>
-                <td> {{x.capacity }} </td>
-                <td> {{x.number }} </td>
-            </tr>
-        </table>
+                    <td> {{x.id }} </td>
+                    <td> {{x.name }} </td>
+                    <td> {{x.capacity }} </td>
+                    <td> {{x.number }} </td>
+                </tr>
+            </table>
+        </div>
 
         <br><br><br>
 
-        <p> Teacher Name : <input type="text" ng-model="teacherName"><button class=" btn" ng-click="findTeacher()">
-            Find Teacher</button></p>
 
-        <table align="center" style="width:90%" class="table table-bordered">
-            <tr>
-                <th> ID</th>
-                <th> Name</th>
-                <th> Class Id</th>
-                <th>University Name</th>
-            </tr>
-            <tr ng-repeat="x in teachers ">
 
-                <td> {{x.id }} </td>
-                <td> {{x.name }} </td>
-                <td> {{x.classId }} </td>
-                <td> {{x.uni.name }} </td>
-            </tr>
-        </table>
+        <div class="row">
+            <div class="col-md-6">
+
+                <p> Teacher Name : <input type="text" ng-model="teacherName"><button class=" btn" ng-click="findTeacher()">
+                    Find Teacher</button>
+                </p>
+                <table align="center" style="width:90%" class="table table-bordered ">
+                    <tr >
+                        <th> ID</th>
+                        <th> Name</th>
+                    </tr>
+                    <tr ng-repeat="x in teachers ">
+                        <td> {{x.id }} </td>
+                        <td> {{x.name }} </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col-md-6">
+
+                <p> Class Name : <input type="text" ng-model="className"><button class=" btn" ng-click="findClass()">
+                    Find Teacher</button>
+                </p>
+                <table align="center" style="width:90%" class="table table-bordered ">
+                    <tr >
+                        <th> ID</th>
+                        <th> Name</th>
+                    </tr>
+                    <tr ng-repeat="x in classes ">
+                        <td> {{x.id }} </td>
+                        <td> {{x.name }} </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
 
 
         <br><br>

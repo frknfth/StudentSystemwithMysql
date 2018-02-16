@@ -10,6 +10,9 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http){
     $scope.teacherName ="";
     $scope.teachers ="";
 
+    $scope.className ="";
+    $scope.classes ="";
+
     $scope.findStudent=function () {
         $http.get("/getStudentData",{headers:{'Name':$scope.studentName}}).then(function mySuccess(response) {
             $scope.students = response.data;
@@ -26,9 +29,17 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http){
         });
     };
 
-    $scope.findTeacher=function () {
+    $scope.findTeacher = function () {
         $http.get("/getTeacherData",{headers:{'Name':$scope.teacherName}}).then(function mySuccess(response) {
             $scope.teachers = response.data;
+        }, function myError(response) {
+            $scope.students = response.statusText;
+        });
+    };
+
+    $scope.findClass = function () {
+        $http.get("/getAllClasses",{headers:{'Name':$scope.className}}).then(function mySuccess(response) {
+            $scope.classes = response.data;
         }, function myError(response) {
             $scope.students = response.statusText;
         });

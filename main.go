@@ -39,28 +39,22 @@ type University struct {
 type Class struct {
 	ID        int    `json:"id"`
 	Name      string `json:"name"`
-	TeacherID int    `json:"teacherId"`
 }
 
 // Teacher for get response(saveTeacherAndClass)
 type Teacher struct {
 	ID      int    `json:"id"`
 	Name    string `json:"name"`
-	ClassID int    `json:"classId"`
-	UniID   int    `json:"uniId"`
-}
-
-// KomplexTeacher for getTeacherData
-type KomplexTeacher struct {
-	ID      int        `json:"id"`
-	Name    string     `json:"name"`
-	ClassID int        `json:"classId"`
-	Uni     University `json:"uni"`
 }
 
 // StudentAndClass for get response(saveTeacherAndClass)
 type StudentAndClass struct {
 	SID int `json:"s_id"`
+	CID int `json:"c_id"`
+}
+
+type TeacherAndClass struct {
+	TID int `json:"t_id"`
 	CID int `json:"c_id"`
 }
 
@@ -173,6 +167,7 @@ func saveTeacher(rw http.ResponseWriter, req *http.Request) {
 	checkErr(err)
 	teacher := Teacher{}
 	json.Unmarshal(body, &teacher)
+	log.Println(teacher)
 
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
 	checkErr(err)
@@ -183,24 +178,16 @@ func saveTeacher(rw http.ResponseWriter, req *http.Request) {
 	teacher.Name = strings.TrimSpace(teacher.Name)
 	if len(teacher.Name) == 0 {
 		messageToClient = messageToClient + "Name is empty. "
-	}
-	if teacher.ClassID < 1 {
-		messageToClient = messageToClient + "Class is not selected. "
-	}
-	if teacher.UniID < 1 {
-		messageToClient = messageToClient + "University is not selected."
-	}
-	if messageToClient != "" {
 		rw.Write([]byte(messageToClient))
 		return
 	}
 
-	stmt, err := db.Query("INSERT Teacher SET Name=?,ClassId=?,UniId=?", teacher.Name, teacher.ClassID, teacher.UniID)
+	stmt, err := db.Query("INSERT Teacher SET Name=?", teacher.Name)
 	checkErr(err)
 	defer stmt.Close()
 }
 
-//insert teacher-class to the database
+//insert student-class to the database
 func saveStudentAndClass(rw http.ResponseWriter, req *http.Request) {
 	body, err := ioutil.ReadAll(req.Body)
 	checkErr(err)
@@ -225,6 +212,36 @@ func saveStudentAndClass(rw http.ResponseWriter, req *http.Request) {
 	}
 
 	rows, err := db.Query("INSERT StudentClass SET s_id=?, c_id=?", sc.SID, sc.CID)
+	checkErr(err)
+	defer rows.Close()
+}
+
+//insert teacher-class to the database
+func saveTeacherAndClass(rw http.ResponseWriter, req *http.Request) {
+	body, err := ioutil.ReadAll(req.Body)
+	checkErr(err)
+	tc := TeacherAndClass{}
+	json.Unmarshal(body, &tc)
+
+	log.Println(tc)
+	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
+	checkErr(err)
+	defer db.Close()
+
+	messageToClient := ""
+
+	if tc.TID < 1 {
+		messageToClient = messageToClient + "teacher is not selected."
+	}
+	if tc.CID < 1 {
+		messageToClient = messageToClient + "Class is not selected."
+	}
+	if messageToClient != "" {
+		rw.Write([]byte(messageToClient))
+		return
+	}
+
+	rows, err := db.Query("INSERT TeacherClass SET t_id=?, c_id=?", tc.TID, tc.CID)
 	checkErr(err)
 	defer rows.Close()
 }
@@ -307,7 +324,7 @@ func getTeacherData(rw http.ResponseWriter, req *http.Request) {
 	if len(requestedName) == 0 {
 		return
 	}
-	teachers := make([]KomplexTeacher, 0)
+	teachers := make([]Teacher, 0)
 
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
 	checkErr(err)
@@ -318,27 +335,11 @@ func getTeacherData(rw http.ResponseWriter, req *http.Request) {
 	defer rows.Close()
 
 	for rows.Next() {
-		komplexTeacher := KomplexTeacher{}
 		teacher := Teacher{}
-		err := rows.Scan(&teacher.ID, &teacher.Name, &teacher.ClassID, &teacher.UniID)
+		err := rows.Scan(&teacher.ID, &teacher.Name)
 		checkErr(err)
 
-		university := University{}
-		stm, err := db.Query("SELECT * FROM University WHERE University_ID= ?", teacher.UniID)
-		checkErr(err)
-		defer stm.Close()
-
-		for stm.Next() {
-			err := stm.Scan(&university.ID, &university.Name, &university.Capacity, &university.Number)
-			checkErr(err)
-		}
-
-		komplexTeacher.ID = teacher.ID
-		komplexTeacher.Name = teacher.Name
-		komplexTeacher.ClassID = teacher.ClassID
-		komplexTeacher.Uni = university
-
-		teachers = append(teachers, komplexTeacher)
+		teachers = append(teachers, teacher)
 	}
 	json.NewEncoder(rw).Encode(teachers)
 }
@@ -404,12 +405,35 @@ func getAllClasses(rw http.ResponseWriter, req *http.Request) {
 
 	for rows.Next() {
 		class := Class{}
-		err := rows.Scan(&class.ID, &class.Name, &class.TeacherID)
+		err := rows.Scan(&class.ID, &class.Name)
 		checkErr(err)
 
 		allClasses = append(allClasses, class)
 	}
 	json.NewEncoder(rw).Encode(allClasses)
+}
+
+//return all teachers in the database
+func getAllTeachers(rw http.ResponseWriter, req *http.Request) {
+
+	allTeachers := make([]Teacher, 0)
+
+	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
+	checkErr(err)
+	defer db.Close()
+
+	rows, err := db.Query("SELECT * FROM Teacher")
+	checkErr(err)
+	defer rows.Close()
+
+	for rows.Next() {
+		teacher := Teacher{}
+		err := rows.Scan(&teacher.ID, &teacher.Name)
+		checkErr(err)
+
+		allTeachers = append(allTeachers, teacher)
+	}
+	json.NewEncoder(rw).Encode(allTeachers)
 }
 
 func getNotSelectedClasses(rw http.ResponseWriter, req *http.Request) {
@@ -426,12 +450,8 @@ func getNotSelectedClasses(rw http.ResponseWriter, req *http.Request) {
 
 	for rows.Next() {
 		class := Class{}
-		err := rows.Scan(&class.ID, &class.Name, &class.TeacherID)
+		err := rows.Scan(&class.ID, &class.Name)
 		checkErr(err)
-
-		if class.TeacherID == 0 {
-			allClasses = append(allClasses, class)
-		}
 
 	}
 	json.NewEncoder(rw).Encode(allClasses)
@@ -488,9 +508,9 @@ func main() {
 		http.ServeFile(w, r, "static/css/design.css")
 	})
 
-	http.HandleFunc("/saveStudent", saveStudent)
-
 	http.HandleFunc("/saveUniversity", saveUniversity)
+
+	http.HandleFunc("/saveStudent", saveStudent)
 
 	http.HandleFunc("/saveClass", saveClass)
 
@@ -498,11 +518,15 @@ func main() {
 
 	http.HandleFunc("/saveStudentAndClass", saveStudentAndClass)
 
-	http.HandleFunc("/getStudentData", getStudentData)
+	http.HandleFunc("/saveTeacherAndClass", saveTeacherAndClass)
+
 
 	http.HandleFunc("/getUniversityData", getUniversityData)
 
+	http.HandleFunc("/getStudentData", getStudentData)
+
 	http.HandleFunc("/getTeacherData", getTeacherData)
+
 
 	http.HandleFunc("/getAllUniversities", getAllUniversities)
 
@@ -510,7 +534,11 @@ func main() {
 
 	http.HandleFunc("/getAllClasses", getAllClasses)
 
+	http.HandleFunc("/getAllTeachers", getAllTeachers)
+
+
 	http.HandleFunc("/getNotSelectedClasses", getNotSelectedClasses)
+
 
 	http.HandleFunc("/deleteStudent", deleteStudent)
 
