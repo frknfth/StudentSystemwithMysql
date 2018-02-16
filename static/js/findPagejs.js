@@ -56,7 +56,8 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http){
 
     $scope.deleteUniversity=function (a, b, c, d) {
         if(confirm("are you sure delete this university and all students in it? : " + b)) {
-            $http.post("/deleteUniversity", {"id": a, "name": b, "capacity": c, "number": d}).then(function mySuccess(response) {
+            $http.post("/deleteUniversity", {"id": a, "name": b, "capacity": c, "number": d}).then(function mySuccess
+                (response) {
                 $scope.findStudent();
                 $scope.findUniversity();
             }, function myError(response) {

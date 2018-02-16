@@ -1,31 +1,30 @@
 
 angular.module("myApp",[]).controller("myCtrl", function ($scope, $http){
 
-    $scope.university = {"name":"", "capacity": ""};
     $scope.messageOfSaveUniversity = "";
-
-    $scope.student = {"name":"", "age": "" };
     $scope.messageOfSaveStudent = "";
+    $scope.messageOfSaveSC ="";
+    $scope.messageOfSaveTC ="";
+    $scope.messageOfSaveTeacher="";
+    $scope.messageOfSaveClass="";
 
-    $scope.allUniversities ="";
-    $scope.selectedUniversityOfStudent ={"id":"","name":"","capacity":"","number":""};
-
+    $scope.university = {"name":"", "capacity": ""};
+    $scope.student = {"name":"", "age": "" };
     $scope.className ="";
-
     $scope.teacherName = "";
-    $scope.notSelectedAllClasses ="";
 
     $scope.allStudents ="";
-    $scope.allClasses ="";
-    $scope.selectedStudentOfSC={"id":"","name":"","age":"","uni":""};
-    $scope.selectedClassOfSC = {"id":"","name":""};
-    $scope.messageOfSaveSC ="";
-
     $scope.allTeachers ="";
     $scope.allClasses ="";
+    $scope.allUniversities ="";
+
+    $scope.selectedUniversityOfStudent ={"id":"","name":"","capacity":"","number":""};
+
+    $scope.selectedStudentOfSC={"id":"","name":"","age":"","uni":""};
+    $scope.selectedClassOfSC = {"id":"","name":""};
+
     $scope.selectedTeacherOfTC={"id":"","name":""};
     $scope.selectedClassOfTC = {"id":"","name":""};
-    $scope.messageOfSaveTC ="";
 
     $scope.sendUniversityData = function () {
         var url = "/saveUniversity";
@@ -33,8 +32,12 @@ angular.module("myApp",[]).controller("myCtrl", function ($scope, $http){
         $http.post(url, $scope.university).then(function mySuccess(response) {
 
             $scope.messageOfSaveStudent = "";
-            $scope.messageOfTeacherAndClass = "";
             $scope.messageOfSaveSC ="";
+            $scope.messageOfSaveTC ="";
+            $scope.messageOfSaveTeacher="";
+            $scope.messageOfSaveClass="";
+
+            $scope.university="";
 
             $scope.messageOfSaveUniversity = response.data;
 
@@ -55,8 +58,12 @@ angular.module("myApp",[]).controller("myCtrl", function ($scope, $http){
 
         $http.post(url, data).then(function mySuccess(response) {
             $scope.messageOfSaveUniversity = "";
-            $scope.messageOfTeacherAndClass = "";
             $scope.messageOfSaveSC ="";
+            $scope.messageOfSaveTC ="";
+            $scope.messageOfSaveTeacher="";
+            $scope.messageOfSaveClass="";
+
+            $scope.student="";
 
             $scope.messageOfSaveStudent = response.data;
 
@@ -69,13 +76,7 @@ angular.module("myApp",[]).controller("myCtrl", function ($scope, $http){
             $http.get("/getAllStudents").then(function mySuccess(response) {
                 $scope.allStudents = response.data;
             }, function myError(response) {
-                $scope.messageOfTeacherAndClass = response.statusText;
-            });
-
-            $http.get("/getAllClasses").then(function mySuccess(response) {
-                $scope.allClasses = response.data;
-            }, function myError(response) {
-                $scope.messageOfTeacherAndClass = response.statusText;
+                $scope.messageOfSaveStudent = response.statusText;
             });
 
         }, function myError(response) {
@@ -88,28 +89,24 @@ angular.module("myApp",[]).controller("myCtrl", function ($scope, $http){
 
         $http.post(url,  {"name":$scope.className}).then(function mySuccess(response) {
 
-            $scope.messageOfSaveStudent = "";
             $scope.messageOfSaveUniversity = "";
+            $scope.messageOfSaveStudent = "";
             $scope.messageOfSaveSC ="";
-            $scope.messageOfTeacherAndClass="";
+            $scope.messageOfSaveTC ="";
+            $scope.messageOfSaveTeacher="";
+
             $scope.className ="";
 
-            $scope.messageClass = response.data;
-
+            $scope.messageOfSaveClass = response.data;
 
             $http.get("/getAllClasses").then(function mySuccess(response) {
                 $scope.allClasses = response.data;
             }, function myError(response) {
-                $scope.messageClass = response.statusText;
-            });
-            $http.get("/getNotSelectedClasses").then(function mySuccess(response) {
-                $scope.notSelectedAllClasses = response.data;
-            }, function myError(response) {
-                $scope.messageOfTeacherAndClass = response.statusText;
+                $scope.messageOfSaveClass = response.statusText;
             });
 
         }, function myError(response) {
-            $scope.messageClass = response.statusText;
+            $scope.messageOfSaveClass = response.statusText;
         });
     };
 
@@ -118,14 +115,19 @@ angular.module("myApp",[]).controller("myCtrl", function ($scope, $http){
 
         $http.post(url,  data).then(function mySuccess(response) {
 
-            $scope.messageOfSaveStudent = "";
             $scope.messageOfSaveUniversity = "";
+            $scope.messageOfSaveStudent = "";
             $scope.messageOfSaveSC ="";
+            $scope.messageOfSaveTC ="";
+            $scope.messageOfSaveTeacher="";
+            $scope.messageOfSaveClass="";
 
-            $scope.messageOfTeacherAndClass = response.data;
+            $scope.teacherName ="";
+
+            $scope.messageOfSaveTeacher = response.data;
 
         }, function myError(response) {
-            $scope.messageOfSaveUniversity = response.statusText;
+            $scope.messageOfSaveTeacher = response.statusText;
         });
     };
 
@@ -135,9 +137,14 @@ angular.module("myApp",[]).controller("myCtrl", function ($scope, $http){
 
         $http.post(url,  data).then(function mySuccess(response) {
 
-            $scope.messageOfSaveStudent = "";
             $scope.messageOfSaveUniversity = "";
-            $scope.messageOfTeacherAndClass ="";
+            $scope.messageOfSaveStudent = "";
+            $scope.messageOfSaveTC ="";
+            $scope.messageOfSaveTeacher="";
+            $scope.messageOfSaveClass="";
+
+            $scope.selectedStudentOfSC="";
+            $scope.selectedClassOfSC="";
 
             $scope.messageOfSaveSC = response.data;
 
@@ -148,42 +155,47 @@ angular.module("myApp",[]).controller("myCtrl", function ($scope, $http){
 
     $scope.sendTCData = function () {
         var url = "/saveTeacherAndClass", data = {"t_id": $scope.selectedTeacherOfTC.id,
-            "c_id" : $scope.selectedClassOfSC.id};
+            "c_id" : $scope.selectedClassOfTC.id};
 
         $http.post(url,  data).then(function mySuccess(response) {
 
-            $scope.messageOfSaveStudent = "";
             $scope.messageOfSaveUniversity = "";
-            $scope.messageOfTeacherAndClass ="";
+            $scope.messageOfSaveStudent = "";
+            $scope.messageOfSaveSC ="";
+            $scope.messageOfSaveTeacher="";
+            $scope.messageOfSaveClass="";
+
+            $scope.selectedTeacherOfTC="";
+            $scope.selectedClassOfTC="";
 
             $scope.messageOfSaveTC = response.data;
 
         }, function myError(response) {
-            $scope.messageOfSaveSC = response.statusText;
+            $scope.messageOfSaveTC = response.statusText;
         });
     };
 
     $http.get("/getAllUniversities").then(function mySuccess(response) {
         $scope.allUniversities = response.data;
     }, function myError(response) {
-        $scope.messageOfTeacherAndClass = response.statusText;
+        $scope.messageOfSaveUniversity = response.statusText;
     });
 
     $http.get("/getAllStudents").then(function mySuccess(response) {
         $scope.allStudents = response.data;
     }, function myError(response) {
-        $scope.messageOfTeacherAndClass = response.statusText;
+        $scope.messageOfSaveStudent = response.statusText;
     });
 
     $http.get("/getAllClasses").then(function mySuccess(response) {
         $scope.allClasses = response.data;
     }, function myError(response) {
-        $scope.messageOfTeacherAndClass = response.statusText;
+        $scope.messageOfSaveClass = response.statusText;
     });
 
     $http.get("/getAllTeachers").then(function mySuccess(response) {
         $scope.allTeachers = response.data;
     }, function myError(response) {
-        $scope.messageOfTeacherAndClass = response.statusText;
+        $scope.messageOfSaveTeacher = response.statusText;
     });
 });

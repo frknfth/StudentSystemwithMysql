@@ -115,7 +115,8 @@ func saveUniversity(rw http.ResponseWriter, req *http.Request) {
 	checkErr(err)
 	defer db.Close()
 
-	stmt, err := db.Prepare("INSERT University SET University_Name=?,University_Capacity=?,University_RecordedStudent=?")
+	stmt, err :=
+		db.Prepare("INSERT University SET University_Name=?,University_Capacity=?,University_RecordedStudent=?")
 	checkErr(err)
 
 	messageToClient := ""
@@ -167,7 +168,6 @@ func saveTeacher(rw http.ResponseWriter, req *http.Request) {
 	checkErr(err)
 	teacher := Teacher{}
 	json.Unmarshal(body, &teacher)
-	log.Println(teacher)
 
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
 	checkErr(err)

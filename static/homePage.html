@@ -28,7 +28,7 @@
 
 <body >
 
-<div ng-app="myApp" ng-controller="myCtrl">
+<div class="home" ng-app="myApp" ng-controller="myCtrl">
 <div  class="container">
 
     <div class="row">
@@ -103,7 +103,7 @@
                             <form>
                                 <p> Name : <input type="text" ng-model="className"></p>
                                 <p><button class="btn" ng-click="sendClassData()">Save Class Data</button></p>
-                                <p ng-if="messageClass" class="ng-invalid">{{messageClass}}</p>
+                                <p ng-if="messageOfSaveClass" class="ng-invalid">{{messageOfSaveClass}}</p>
                             </form>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                             </form>
 
                             <p><button class="btn" ng-click="sendTeacherData()">Save Teacher Data</button></p>
-                            <p ng-if="messageOfTeacher" class="ng-invalid">{{messageOfTeacher}}</p>
+                            <p ng-if="messageOfSaveTeacher" class="ng-invalid">{{messageOfSaveTeacher}}</p>
 
 
                         </div>
@@ -180,7 +180,7 @@
                                     <p>Teacher : <select ng-model="selectedTeacherOfTC" ng-options="value.name for (key, value)
                                     in allTeachers"></select></p>
                                     
-                                    <p>Class : <select ng-model="selectedClassOfSC" ng-options="value.name for (key, value)
+                                    <p>Class : <select ng-model="selectedClassOfTC" ng-options="value.name for (key, value)
                                     in allClasses"></select></p>
                                 </form>
                                 <p><button class="btn" ng-click="sendTCData()">Save Teacher-Class</button></p>
