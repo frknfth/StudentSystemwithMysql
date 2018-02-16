@@ -77,8 +77,6 @@
 
         <br><br><br>
 
-
-
         <div class="row">
             <div class="col-md-6">
 
@@ -87,10 +85,14 @@
                 </p>
                 <table align="center" style="width:90%" class="table table-bordered ">
                     <tr >
+                        <th>Delete</th>
                         <th> ID</th>
                         <th> Name</th>
                     </tr>
                     <tr ng-repeat="x in teachers ">
+                        <td align="center"> <button ng-click="deleteTeacher(x.id,x.name)"
+                                                    class="btn btn-danger">X</button> </td>
+
                         <td> {{x.id }} </td>
                         <td> {{x.name }} </td>
                     </tr>
@@ -104,10 +106,14 @@
                 </p>
                 <table align="center" style="width:90%" class="table table-bordered ">
                     <tr >
+                        <th>Delete</th>
                         <th> ID</th>
                         <th> Name</th>
                     </tr>
                     <tr ng-repeat="x in classes ">
+                        <td align="center"> <button ng-click="deleteClass(x.id,x.name)"
+                                                    class="btn btn-danger">X</button> </td>
+
                         <td> {{x.id }} </td>
                         <td> {{x.name }} </td>
                     </tr>

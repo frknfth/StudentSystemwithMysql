@@ -223,7 +223,6 @@ func saveTeacherAndClass(rw http.ResponseWriter, req *http.Request) {
 	tc := TeacherAndClass{}
 	json.Unmarshal(body, &tc)
 
-	log.Println(tc)
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
 	checkErr(err)
 	defer db.Close()
@@ -343,6 +342,36 @@ func getTeacherData(rw http.ResponseWriter, req *http.Request) {
 	}
 	json.NewEncoder(rw).Encode(teachers)
 }
+
+func getClassData(rw http.ResponseWriter, req *http.Request) {
+
+	requestedName := req.Header.Get("Name")
+	requestedName = strings.TrimSpace(requestedName)
+
+	if len(requestedName) == 0 {
+		return
+	}
+	classes := make([]Class, 0)
+
+	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
+	checkErr(err)
+	defer db.Close()
+
+	rows, err := db.Query("SELECT * FROM Class WHERE Name LIKE ?", "%"+requestedName+"%")
+	checkErr(err)
+	defer rows.Close()
+
+	for rows.Next() {
+		class := Class{}
+		err := rows.Scan(&class.ID, &class.Name)
+		checkErr(err)
+
+		classes = append(classes, class)
+	}
+	json.NewEncoder(rw).Encode(classes)
+}
+
+
 
 //return all universities in the database
 func getAllUniversities(rw http.ResponseWriter, req *http.Request) {
@@ -487,6 +516,40 @@ func deleteUniversity(rw http.ResponseWriter, req *http.Request) {
 	checkErr(err)
 }
 
+func deleteTeacher(rw http.ResponseWriter, req *http.Request) {
+
+	body, err := ioutil.ReadAll(req.Body)
+	checkErr(err)
+	teacher := Teacher{}
+	json.Unmarshal(body, &teacher)
+
+	log.Println(teacher)
+
+	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
+	checkErr(err)
+	defer db.Close()
+
+	_, err = db.Query("DELETE FROM Teacher WHERE Id=?", teacher.ID)
+	checkErr(err)
+}
+
+func deleteClass(rw http.ResponseWriter, req *http.Request) {
+
+	body, err := ioutil.ReadAll(req.Body)
+	checkErr(err)
+	class := Class{}
+	json.Unmarshal(body, &class)
+
+	log.Println(class)
+
+	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
+	checkErr(err)
+	defer db.Close()
+
+	_, err = db.Query("DELETE FROM Class WHERE Id=?", class.ID)
+	checkErr(err)
+}
+
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/homePage.html")
@@ -527,6 +590,8 @@ func main() {
 
 	http.HandleFunc("/getTeacherData", getTeacherData)
 
+	http.HandleFunc("/getClassData", getClassData)
+
 
 	http.HandleFunc("/getAllUniversities", getAllUniversities)
 
@@ -543,6 +608,11 @@ func main() {
 	http.HandleFunc("/deleteStudent", deleteStudent)
 
 	http.HandleFunc("/deleteUniversity", deleteUniversity)
+
+	http.HandleFunc("/deleteTeacher", deleteTeacher)
+
+	http.HandleFunc("/deleteClass", deleteClass)
+
 
 	log.Fatal(http.ListenAndServe(":1112", nil))
 }

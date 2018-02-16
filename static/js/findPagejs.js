@@ -17,7 +17,6 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http){
         $http.get("/getStudentData",{headers:{'Name':$scope.studentName}}).then(function mySuccess(response) {
             $scope.students = response.data;
         }, function myError(response) {
-            $scope.students = response.statusText;
         });
     };
 
@@ -25,7 +24,6 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http){
         $http.get("/getUniversityData",{headers:{'Name':$scope.universityName}}).then(function mySuccess(response) {
             $scope.universities = response.data;
         }, function myError(response) {
-            $scope.students = response.statusText;
         });
     };
 
@@ -33,15 +31,13 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http){
         $http.get("/getTeacherData",{headers:{'Name':$scope.teacherName}}).then(function mySuccess(response) {
             $scope.teachers = response.data;
         }, function myError(response) {
-            $scope.students = response.statusText;
         });
     };
 
     $scope.findClass = function () {
-        $http.get("/getAllClasses",{headers:{'Name':$scope.className}}).then(function mySuccess(response) {
+        $http.get("/getClassData",{headers:{'Name':$scope.className}}).then(function mySuccess(response) {
             $scope.classes = response.data;
         }, function myError(response) {
-            $scope.students = response.statusText;
         });
     };
 
@@ -52,7 +48,6 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http){
                 $scope.findStudent();
                 $scope.findUniversity();
             }, function myError(response) {
-                $scope.students = response.statusText;
             });
         } else{
             return false;
@@ -65,11 +60,32 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http){
                 $scope.findStudent();
                 $scope.findUniversity();
             }, function myError(response) {
-                $scope.students = response.statusText;
             });
         } else{
             return false;
         }
-    }
+    };
+
+    $scope.deleteTeacher=function (a, b) {
+        if(confirm("are you sure delete this university and all students in it? : " + b)) {
+            $http.post("/deleteTeacher", {"id": a, "name": b}).then(function mySuccess(response) {
+                $scope.findTeacher();
+            }, function myError(response) {
+            });
+        } else{
+            return false;
+        }
+    };
+
+    $scope.deleteClass=function (a, b) {
+        if(confirm("are you sure delete this class? : " + b)) {
+            $http.post("/deleteClass", {"id": a, "name": b}).then(function mySuccess(response) {
+                $scope.findClass();
+            }, function myError(response) {
+            });
+        } else{
+            return false;
+        }
+    };
 
 });

@@ -186,13 +186,4 @@ angular.module("myApp",[]).controller("myCtrl", function ($scope, $http){
     }, function myError(response) {
         $scope.messageOfTeacherAndClass = response.statusText;
     });
-
-    /*
-    $http.get("/getNotSelectedClasses").then(function mySuccess(response) {
-        $scope.notSelectedAllClasses = response.data;
-    }, function myError(response) {
-        $scope.messageOfTeacherAndClass = response.statusText;
-    });
-    */
-
 });
