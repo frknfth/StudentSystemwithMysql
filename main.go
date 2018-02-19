@@ -419,7 +419,7 @@ func getAllStudents(rw http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(rw).Encode(allStudents)
 }
 
-//return all students in the database
+//return all classes in the database
 func getAllClasses(rw http.ResponseWriter, req *http.Request) {
 
 	allClasses := make([]Class, 0)
@@ -465,27 +465,6 @@ func getAllTeachers(rw http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(rw).Encode(allTeachers)
 }
 
-func getNotSelectedClasses(rw http.ResponseWriter, req *http.Request) {
-
-	allClasses := make([]Class, 0)
-
-	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
-	checkErr(err)
-	defer db.Close()
-
-	rows, err := db.Query("SELECT * FROM Class")
-	checkErr(err)
-	defer rows.Close()
-
-	for rows.Next() {
-		class := Class{}
-		err := rows.Scan(&class.ID, &class.Name)
-		checkErr(err)
-
-	}
-	json.NewEncoder(rw).Encode(allClasses)
-}
-
 func deleteStudent(rw http.ResponseWriter, req *http.Request) {
 
 	body, err := ioutil.ReadAll(req.Body)
@@ -523,8 +502,6 @@ func deleteTeacher(rw http.ResponseWriter, req *http.Request) {
 	teacher := Teacher{}
 	json.Unmarshal(body, &teacher)
 
-	log.Println(teacher)
-
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
 	checkErr(err)
 	defer db.Close()
@@ -539,8 +516,6 @@ func deleteClass(rw http.ResponseWriter, req *http.Request) {
 	checkErr(err)
 	class := Class{}
 	json.Unmarshal(body, &class)
-
-	log.Println(class)
 
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
 	checkErr(err)
@@ -602,9 +577,6 @@ func main() {
 	http.HandleFunc("/getAllTeachers", getAllTeachers)
 
 
-	http.HandleFunc("/getNotSelectedClasses", getNotSelectedClasses)
-
-
 	http.HandleFunc("/deleteStudent", deleteStudent)
 
 	http.HandleFunc("/deleteUniversity", deleteUniversity)
@@ -614,7 +586,7 @@ func main() {
 	http.HandleFunc("/deleteClass", deleteClass)
 
 
-	log.Fatal(http.ListenAndServe(":1112", nil))
+	log.Fatal(http.ListenAndServe(":1111", nil))
 }
 
 func checkErr(err error) {

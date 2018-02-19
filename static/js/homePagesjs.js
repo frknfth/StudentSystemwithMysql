@@ -126,6 +126,12 @@ angular.module("myApp",[]).controller("myCtrl", function ($scope, $http){
 
             $scope.messageOfSaveTeacher = response.data;
 
+            $http.get("/getAllTeachers").then(function mySuccess(response) {
+                $scope.allTeachers = response.data;
+            }, function myError(response) {
+                $scope.messageOfSaveTeacher = response.statusText;
+            });
+
         }, function myError(response) {
             $scope.messageOfSaveTeacher = response.statusText;
         });
@@ -155,7 +161,7 @@ angular.module("myApp",[]).controller("myCtrl", function ($scope, $http){
 
     $scope.sendTCData = function () {
         var url = "/saveTeacherAndClass", data = {"t_id": $scope.selectedTeacherOfTC.id,
-            "c_id" : $scope.selectedClassOfTC.id};
+                                                  "c_id" : $scope.selectedClassOfTC.id};
 
         $http.post(url,  data).then(function mySuccess(response) {
 

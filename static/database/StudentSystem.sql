@@ -56,9 +56,6 @@ CREATE TABLE `Student` (
 -- Dumping data for table `Student`
 --
 
-INSERT INTO `Student` (`Student_ID`, `Student_Name`, `Student_Age`, `Student_UniversityID`) VALUES
-(4, 'Furkan', 22, 3);
-
 --
 -- Triggers `Student`
 --
@@ -90,8 +87,6 @@ CREATE TABLE `StudentClass` (
 -- Dumping data for table `StudentClass`
 --
 
-INSERT INTO `StudentClass` (`s_id`, `c_id`) VALUES
-(4, 4);
 
 -- --------------------------------------------------------
 
@@ -108,8 +103,6 @@ CREATE TABLE `Teacher` (
 -- Dumping data for table `Teacher`
 --
 
-INSERT INTO `Teacher` (`Id`, `Name`) VALUES
-(2, 'test15');
 
 -- --------------------------------------------------------
 
@@ -126,8 +119,6 @@ CREATE TABLE `TeacherClass` (
 -- Dumping data for table `TeacherClass`
 --
 
-INSERT INTO `TeacherClass` (`t_id`, `c_id`) VALUES
-(2, 1);
 
 -- --------------------------------------------------------
 
@@ -145,9 +136,6 @@ CREATE TABLE `University` (
 --
 -- Dumping data for table `University`
 --
-
-INSERT INTO `University` (`University_ID`, `University_Name`, `University_Capacity`, `University_RecordedStudent`) VALUES
-(3, 'Tobb', 12, 1);
 
 --
 -- Indexes for dumped tables
