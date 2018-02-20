@@ -37,14 +37,14 @@ type University struct {
 
 // Class for get response(saveTeacherAndClass)
 type Class struct {
-	ID        int    `json:"id"`
-	Name      string `json:"name"`
+	ID   int    `json:"id"`
+	Name string `json:"name"`
 }
 
 // Teacher for get response(saveTeacherAndClass)
 type Teacher struct {
-	ID      int    `json:"id"`
-	Name    string `json:"name"`
+	ID   int    `json:"id"`
+	Name string `json:"name"`
 }
 
 // StudentAndClass for get response(saveTeacherAndClass)
@@ -371,8 +371,6 @@ func getClassData(rw http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(rw).Encode(classes)
 }
 
-
-
 //return all universities in the database
 func getAllUniversities(rw http.ResponseWriter, req *http.Request) {
 
@@ -529,9 +527,11 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/homePage.html")
 	})
+
 	http.HandleFunc("/findPage", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/findPage.html")
 	})
+
 	http.HandleFunc("/js/homePagesjs.js", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/js/homePagesjs.js")
 	})
@@ -539,9 +539,11 @@ func main() {
 	http.HandleFunc("/js/findPagejs.js", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/js/findPagejs.js")
 	})
+
 	http.HandleFunc("/css/bootstrap.css", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/css/bootstrap.css")
 	})
+
 	http.HandleFunc("/css/design.css", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/css/design.css")
 	})
@@ -558,7 +560,6 @@ func main() {
 
 	http.HandleFunc("/saveTeacherAndClass", saveTeacherAndClass)
 
-
 	http.HandleFunc("/getUniversityData", getUniversityData)
 
 	http.HandleFunc("/getStudentData", getStudentData)
@@ -566,7 +567,6 @@ func main() {
 	http.HandleFunc("/getTeacherData", getTeacherData)
 
 	http.HandleFunc("/getClassData", getClassData)
-
 
 	http.HandleFunc("/getAllUniversities", getAllUniversities)
 
@@ -576,7 +576,6 @@ func main() {
 
 	http.HandleFunc("/getAllTeachers", getAllTeachers)
 
-
 	http.HandleFunc("/deleteStudent", deleteStudent)
 
 	http.HandleFunc("/deleteUniversity", deleteUniversity)
@@ -584,7 +583,6 @@ func main() {
 	http.HandleFunc("/deleteTeacher", deleteTeacher)
 
 	http.HandleFunc("/deleteClass", deleteClass)
-
 
 	log.Fatal(http.ListenAndServe(":1111", nil))
 }
