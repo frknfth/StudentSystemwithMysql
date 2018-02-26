@@ -1,12 +1,35 @@
 angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
 
-    $scope.allStudents ="";
-    $scope.allUniversities ="";
-    $scope.allTeachers ="";
-    $scope.allClasses ="";
 
     $scope.university={"name":"", "capacity": ""};
     $scope.student={"name":"", "age": ""};
+
+    $scope.messageOfSaveUniversity = "";
+    $scope.messageOfSaveStudent = "";
+    $scope.messageOfSaveSC ="";
+    $scope.messageOfSaveTC ="";
+    $scope.messageOfSaveTeacher="";
+    $scope.messageOfSaveClass="";
+
+    $scope.university = {"name":"", "capacity": ""};
+    $scope.student = {"name":"", "age": "" };
+    $scope.class ={"dep":"","code":"","name":""};
+    $scope.teacherName = "";
+
+    $scope.allUniversities ="";
+    $scope.allStudents ="";
+    $scope.allTeachers ="";
+    $scope.allClasses ="";
+    $scope.allDepartments="";
+
+    $scope.selectedUniversityOfStudent ={"id":"","name":"","capacity":"","number":""};
+    $scope.selectedDepartmentOfClass = {"id":"","name":""};
+
+    $scope.selectedStudentOfSC={"id":"","name":"","age":"","uni":""};
+    $scope.selectedClassOfSC = {"id":"","name":""};
+
+    $scope.selectedTeacherOfTC={"id":"","name":""};
+    $scope.selectedClassOfTC = {"id":"","name":""};
 
     $scope.sendUniversityData = function () {
         var url = "/saveUniversity";
@@ -45,6 +68,8 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
             $scope.messageOfSaveTeacher="";
             $scope.messageOfSaveClass="";
 
+            $scope.student={"name":"", "age": ""};
+
             $scope.messageOfSaveStudent = response.data;
 
             $http.get("/getAllUniversities").then(function mySuccess(response) {
@@ -64,6 +89,34 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
         });
     };
 
+    $scope.sendClassData = function () {
+        var url = "/saveClass";
+
+        $scope.class.dep = $scope.selectedDepartmentOfClass.name;
+
+        $http.post(url,  $scope.class).then(function mySuccess(response) {
+
+            $scope.messageOfSaveUniversity = "";
+            $scope.messageOfSaveStudent = "";
+            $scope.messageOfSaveSC ="";
+            $scope.messageOfSaveTC ="";
+            $scope.messageOfSaveTeacher="";
+
+            $scope.class ={"dep":"","code":"","name":""};
+
+            $scope.getClassData();
+            $scope.messageOfSaveClass = response.data;
+
+            $http.get("/getAllClasses").then(function mySuccess(response) {
+                $scope.allClasses = response.data;
+            }, function myError(response) {
+                $scope.messageOfSaveClass = response.statusText;
+            });
+
+        }, function myError(response) {
+            $scope.messageOfSaveClass = response.statusText;
+        });
+    };
 
     $scope.deleteUniversity=function (a, b, c, d) {
         if(confirm("are you sure delete this university and all students in it : " + b + " ?")) {
@@ -103,8 +156,8 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
 
     $scope.deleteClass=function (a, b) {
         if(confirm("are you sure delete this class? : " + b)) {
-            $http.post("/deleteClass", {"id": a, "name": b}).then(function mySuccess(response) {
-                $scope.getAllData();
+            $http.post("/deleteClass", {"id": a}).then(function mySuccess(response) {
+                $scope.getClassData();
             }, function myError(response) {
             });
         } else{
@@ -136,9 +189,12 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
         });
     };
 
+
+
+
     $scope.getTeacherData = function () {
-        $http.get("/getAllStudents").then(function mySuccess(response) {
-            $scope.allStudents = response.data;
+        $http.get("/getAllTeachers").then(function mySuccess(response) {
+            $scope.allTeachers = response.data;
         }, function myError(response) {
             $scope.messageOfSaveStudent = response.statusText;
         });
@@ -148,5 +204,11 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
         $scope.allUniversities = response.data;
     }, function myError(response) {
         $scope.messageOfSaveUniversity = response.statusText;
+    });
+
+    $http.get("/getAllDepartments").then(function mySuccess(response) {
+        $scope.allDepartments = response.data;
+    }, function myError(response) {
+        $scope.messageOfSaveClass = response.statusText;
     });
 });

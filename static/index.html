@@ -8,13 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>New Page</title>
+    <title>Registration System</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -22,8 +22,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.js"></script>
 
-    <script src="js/all.js"></script>
-
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="js/index.js"></script>
 
 </head>
@@ -103,6 +102,7 @@
 
                         <div style="display: block" id="index1">
                             <div style="overflow-x: auto">
+                                <p ng-if="messageOfSaveUniversity" class="ng-invalid">{{messageOfSaveUniversity}}</p>
                                 <table class="table table-bordered">
                                     <tr>
                                         <th>University ID</th>
@@ -138,9 +138,8 @@
                         <div style="display: none" id="index2">
                             <div style="overflow-x: auto">
 
-                                {{messageOfSaveStudent}}
+                                <p ng-if="messageOfSaveStudent" class="ng-invalid">{{messageOfSaveStudent}}</p>
                                 <table align="center" class="table table-bordered" >
-
                                     <tr>
                                         <th>Student Id</th>
                                         <th>Student Name</th>
@@ -160,7 +159,7 @@
                                         <td> {{selectedUniversityOfStudent.capacity}} </td>
                                         <td> {{selectedUniversityOfStudent.number}} </td>
                                         <td> <button ng-click="sendStudentData()"
-                                                class=" btn btn-danger"> <i class="fas fa-plus-square"></i>
+                                                class=" btn btn-info"> <i class="fas fa-plus-square"></i>
                                              </button>
                                         </td>
                                     </tr>
@@ -179,14 +178,38 @@
                             </div>
                         </div>
 
-
                         <div style="display: none" id="index3">
-                            <h1>Class</h1>
-                            <form>
-                                <p> Name : <input type="text" ng-model="className"></p>
-                                <p><button class="btn-primary" ng-click="sendClassData()">Save Class Data</button></p>
-                                <p ng-if="messageOfSaveClass" class="ng-invalid">{{messageOfSaveClass}}</p>
-                            </form>
+                            <p ng-if="messageOfSaveClass" class="ng-invalid">{{messageOfSaveClass}}</p>
+                            <table align="center" style="width:90%" class="table table-bordered ">
+                                <tr >
+                                    <th> ID</th>
+                                    <th> Department</th>
+                                    <th> Code</th>
+                                    <th> Name</th>
+                                    <th><i class="fas fa-archive"></i></th>
+                                </tr>
+                                <tr>
+                                    <td> ... </td>
+                                    <td> <select ng-model="selectedDepartmentOfClass"
+                                                 ng-options="value.name for (key, value)
+                                            in allDepartments"></select>
+                                    </td>
+                                    <td> <input type="number" ng-model="class.code"> </td>
+                                    <td> <input type="text" ng-model="class.name"></td>
+                                    <td> <button ng-click="sendClassData()"
+                                                 class=" btn btn-info"> <i class="fas fa-plus-square"></i>
+                                         </button>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="x in allClasses ">
+                                    <td> {{x.id }} </td>
+                                    <td> {{x.dep }} </td>
+                                    <td> {{x.code }} </td>
+                                    <td> {{x.name }} </td>
+                                    <td align="center"> <button ng-click="deleteClass(x.id,x.name)"
+                                                                class="btn btn-danger">X</button> </td>
+                                </tr>
+                            </table>
                         </div>
 
                         <div style="display:none" id="index4">

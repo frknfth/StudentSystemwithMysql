@@ -4,11 +4,9 @@
     <list default="true" id="455f3428-cbaf-4b02-a703-c32f17338602" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/main.go" afterPath="$PROJECT_DIR$/main.go" />
-      <change beforePath="$PROJECT_DIR$/static/css/design.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/findPage.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/homePage.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/js/findPagejs.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/js/homePagesjs.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/static/css/simple-sidebar.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/static/index.html" afterPath="$PROJECT_DIR$/static/index.html" />
+      <change beforePath="$PROJECT_DIR$/static/js/index.js" afterPath="$PROJECT_DIR$/static/js/index.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,31 +29,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-22">
-              <caret line="160" column="74" lean-forward="false" selection-start-line="160" selection-start-column="74" selection-end-line="160" selection-end-column="74" />
+            <state relative-caret-position="855">
+              <caret line="57" column="47" lean-forward="false" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="45" column="41" lean-forward="false" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="simple-sidebar.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/css/simple-sidebar.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1980">
-              <caret line="132" column="5" lean-forward="false" selection-start-line="132" selection-start-column="5" selection-end-line="132" selection-end-column="5" />
+            <state relative-caret-position="647">
+              <caret line="118" column="6" lean-forward="false" selection-start-line="118" selection-start-column="6" selection-end-line="118" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -64,26 +52,28 @@
       <file leaf-file-name="main.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="625" column="40" lean-forward="false" selection-start-line="625" selection-start-column="40" selection-end-line="625" selection-end-column="40" />
+            <state relative-caret-position="350">
+              <caret line="72" column="24" lean-forward="true" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="24" />
               <folding>
                 <element signature="e#14#137#0" expanded="true" />
-                <marker date="1519216479000" expanded="true" signature="1569:1616" ph="SELECT * FRO... University" />
-                <marker date="1519216479000" expanded="true" signature="6660:6707" ph="SELECT * FRO... Student" />
-                <marker date="1519216479000" expanded="true" signature="6943:6990" ph="SELECT * FRO... University" />
-                <marker date="1519216479000" expanded="true" signature="7885:7938" ph="SELECT * FRO... University" />
-                <marker date="1519216479000" expanded="true" signature="8638:8677" ph="SELECT * FRO... Teacher" />
-                <marker date="1519216479000" expanded="true" signature="9304:9341" ph="SELECT * FRO... Class" />
-                <marker date="1519216479000" expanded="true" signature="9882:9906" ph="SELECT * FRO... University" />
-                <marker date="1519216479000" expanded="true" signature="10523:10544" ph="SELECT * FRO... Student" />
-                <marker date="1519216479000" expanded="true" signature="10523:10546" ph="SELECT * FRO... Student" />
-                <marker date="1519216479000" expanded="true" signature="10757:10804" ph="SELECT * FRO... University" />
-                <marker date="1519216479000" expanded="true" signature="11533:11552" ph="SELECT * FRO... Class" />
-                <marker date="1519216479000" expanded="true" signature="12064:12085" ph="SELECT * FRO... Teacher" />
-                <marker date="1519216479000" expanded="true" signature="12640:12678" ph="DELETE FROM Student... " />
-                <marker date="1519216479000" expanded="true" signature="13041:13085" ph="DELETE FROM University... " />
-                <marker date="1519216479000" expanded="true" signature="13439:13469" ph="DELETE FROM Teacher... " />
-                <marker date="1519216479000" expanded="true" signature="13812:13840" ph="DELETE FROM Class... " />
+                <marker date="1519651351000" expanded="true" signature="1726:1773" ph="SELECT * FRO... University" />
+                <marker date="1519651351000" expanded="true" signature="7106:7153" ph="SELECT * FRO... Student" />
+                <marker date="1519651351000" expanded="true" signature="7389:7436" ph="SELECT * FRO... University" />
+                <marker date="1519651351000" expanded="true" signature="8331:8384" ph="SELECT * FRO... University" />
+                <marker date="1519651351000" expanded="true" signature="9084:9123" ph="SELECT * FRO... Teacher" />
+                <marker date="1519651351000" expanded="true" signature="9750:9787" ph="SELECT * FRO... Class" />
+                <marker date="1519651351000" expanded="true" signature="10328:10352" ph="SELECT * FRO... University" />
+                <marker date="1519651351000" expanded="true" signature="10969:10990" ph="SELECT * FRO... Student" />
+                <marker date="1519651351000" expanded="true" signature="10969:10992" ph="SELECT * FRO... Student" />
+                <marker date="1519651351000" expanded="true" signature="11203:11250" ph="SELECT * FRO... University" />
+                <marker date="1519651351000" expanded="true" signature="11979:11998" ph="SELECT * FRO... Class" />
+                <marker date="1519651351000" expanded="true" signature="12542:12563" ph="SELECT * FRO... Teacher" />
+                <marker date="1519651351000" expanded="true" signature="13100:13114" ph="SELECT * FRO... Teacher" />
+                <marker date="1519651351000" expanded="true" signature="13100:13124" ph="SELECT * FRO... Department" />
+                <marker date="1519651351000" expanded="true" signature="13687:13725" ph="DELETE FROM Student... " />
+                <marker date="1519651351000" expanded="true" signature="14088:14132" ph="DELETE FROM University... " />
+                <marker date="1519651351000" expanded="true" signature="14486:14516" ph="DELETE FROM Teacher... " />
+                <marker date="1519651351000" expanded="true" signature="14859:14887" ph="DELETE FROM Class... " />
               </folding>
             </state>
           </provider>
@@ -92,7 +82,7 @@
       <file leaf-file-name="findPagejs.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../mysqlOld/findPagejs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
+            <state relative-caret-position="119">
               <caret line="10" column="24" lean-forward="false" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
               <folding />
             </state>
@@ -102,8 +92,8 @@
       <file leaf-file-name="findPage.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../mysqlOld/findPage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="126" column="17" lean-forward="false" selection-start-line="126" selection-start-column="17" selection-end-line="126" selection-end-column="17" />
+            <state relative-caret-position="769">
+              <caret line="103" column="34" lean-forward="true" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -112,8 +102,8 @@
       <file leaf-file-name="homePage.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../mysqlOld/homePage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="24" column="30" lean-forward="false" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+            <state relative-caret-position="348">
+              <caret line="63" column="36" lean-forward="true" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -122,8 +112,8 @@
       <file leaf-file-name="homePagesjs.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../mysqlOld/homePagesjs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-389">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="165">
+              <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -143,6 +133,7 @@
     <findStrings>
       <find>cssmenu</find>
       <find>message</find>
+      <find>class</find>
     </findStrings>
   </component>
   <component name="GOROOT" path="/usr/local/go" />
@@ -159,7 +150,6 @@
         <option value="$PROJECT_DIR$/static/css/bootstrap-select.css" />
         <option value="$PROJECT_DIR$/static/js/homePagesjs.js" />
         <option value="$PROJECT_DIR$/static/css/design.css" />
-        <option value="$PROJECT_DIR$/static/js/all.js" />
         <option value="$PROJECT_DIR$/static/newPage.html" />
         <option value="$PROJECT_DIR$/static/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/static/homePage.html" />
@@ -169,11 +159,13 @@
         <option value="$PROJECT_DIR$/static/index4.html" />
         <option value="$PROJECT_DIR$/static/index5.html" />
         <option value="$PROJECT_DIR$/static/index6.html" />
-        <option value="$PROJECT_DIR$/main.go" />
-        <option value="$PROJECT_DIR$/static/css/simple-sidebar.css" />
         <option value="$PROJECT_DIR$/../mysqlOld/homePage.html" />
         <option value="$PROJECT_DIR$/../mysqlOld/findPage.html" />
+        <option value="$PROJECT_DIR$/../mysqlOld/homePagesjs.js" />
+        <option value="$PROJECT_DIR$/static/css/simple-sidebar.css" />
+        <option value="$PROJECT_DIR$/static/js/all.js" />
         <option value="$PROJECT_DIR$/static/index.html" />
+        <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/static/js/index.js" />
       </list>
     </option>
@@ -228,6 +220,12 @@
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="StudentSystemMysql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StudentSystemMysql" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -241,6 +239,7 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="SQL Server (jTds)" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SearchEverywhereHistoryKey" value="send&#9;null&#9;null&#10;delete&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -309,15 +308,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1270" y="23" width="1290" height="1324" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16211878" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16211878" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2334437" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="251" y="911" width="1255" height="397" />
       <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881084" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23509933" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23427153" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="0" y="970" width="1262" height="376" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.125" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="0" y="970" width="1262" height="376" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25331125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36009935" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -382,12 +382,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/main.go</url>
-          <line>108</line>
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="1" />
     </breakpoint-manager>
     <watches-manager />
@@ -406,22 +400,24 @@
           <caret line="170" column="0" lean-forward="false" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
           <folding>
             <element signature="e#14#137#0" expanded="true" />
-            <marker date="1519216479000" expanded="true" signature="1569:1616" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="6660:6707" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="6943:6990" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="7885:7938" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="8638:8677" ph="SELECT * FRO... Teacher" />
-            <marker date="1519216479000" expanded="true" signature="9304:9341" ph="SELECT * FRO... Class" />
-            <marker date="1519216479000" expanded="true" signature="9882:9906" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="10523:10544" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="10523:10546" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="10757:10804" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="11533:11552" ph="SELECT * FRO... Class" />
-            <marker date="1519216479000" expanded="true" signature="12064:12085" ph="SELECT * FRO... Teacher" />
-            <marker date="1519216479000" expanded="true" signature="12640:12678" ph="DELETE FROM Student... " />
-            <marker date="1519216479000" expanded="true" signature="13041:13085" ph="DELETE FROM University... " />
-            <marker date="1519216479000" expanded="true" signature="13439:13469" ph="DELETE FROM Teacher... " />
-            <marker date="1519216479000" expanded="true" signature="13812:13840" ph="DELETE FROM Class... " />
+            <marker date="1519651351000" expanded="true" signature="1726:1773" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="7106:7153" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="7389:7436" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="8331:8384" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="9084:9123" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="9750:9787" ph="SELECT * FRO... Class" />
+            <marker date="1519651351000" expanded="true" signature="10328:10352" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="10969:10990" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="10969:10992" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="11203:11250" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="11979:11998" ph="SELECT * FRO... Class" />
+            <marker date="1519651351000" expanded="true" signature="12542:12563" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="13100:13114" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="13100:13124" ph="SELECT * FRO... Department" />
+            <marker date="1519651351000" expanded="true" signature="13687:13725" ph="DELETE FROM Student... " />
+            <marker date="1519651351000" expanded="true" signature="14088:14132" ph="DELETE FROM University... " />
+            <marker date="1519651351000" expanded="true" signature="14486:14516" ph="DELETE FROM Teacher... " />
+            <marker date="1519651351000" expanded="true" signature="14859:14887" ph="DELETE FROM Class... " />
           </folding>
         </state>
       </provider>
@@ -475,22 +471,24 @@
           <caret line="170" column="0" lean-forward="false" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
           <folding>
             <element signature="e#14#137#0" expanded="true" />
-            <marker date="1519216479000" expanded="true" signature="1569:1616" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="6660:6707" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="6943:6990" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="7885:7938" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="8638:8677" ph="SELECT * FRO... Teacher" />
-            <marker date="1519216479000" expanded="true" signature="9304:9341" ph="SELECT * FRO... Class" />
-            <marker date="1519216479000" expanded="true" signature="9882:9906" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="10523:10544" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="10523:10546" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="10757:10804" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="11533:11552" ph="SELECT * FRO... Class" />
-            <marker date="1519216479000" expanded="true" signature="12064:12085" ph="SELECT * FRO... Teacher" />
-            <marker date="1519216479000" expanded="true" signature="12640:12678" ph="DELETE FROM Student... " />
-            <marker date="1519216479000" expanded="true" signature="13041:13085" ph="DELETE FROM University... " />
-            <marker date="1519216479000" expanded="true" signature="13439:13469" ph="DELETE FROM Teacher... " />
-            <marker date="1519216479000" expanded="true" signature="13812:13840" ph="DELETE FROM Class... " />
+            <marker date="1519651351000" expanded="true" signature="1726:1773" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="7106:7153" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="7389:7436" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="8331:8384" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="9084:9123" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="9750:9787" ph="SELECT * FRO... Class" />
+            <marker date="1519651351000" expanded="true" signature="10328:10352" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="10969:10990" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="10969:10992" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="11203:11250" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="11979:11998" ph="SELECT * FRO... Class" />
+            <marker date="1519651351000" expanded="true" signature="12542:12563" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="13100:13114" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="13100:13124" ph="SELECT * FRO... Department" />
+            <marker date="1519651351000" expanded="true" signature="13687:13725" ph="DELETE FROM Student... " />
+            <marker date="1519651351000" expanded="true" signature="14088:14132" ph="DELETE FROM University... " />
+            <marker date="1519651351000" expanded="true" signature="14486:14516" ph="DELETE FROM Teacher... " />
+            <marker date="1519651351000" expanded="true" signature="14859:14887" ph="DELETE FROM Class... " />
           </folding>
         </state>
       </provider>
@@ -544,22 +542,24 @@
           <caret line="182" column="5" lean-forward="false" selection-start-line="182" selection-start-column="5" selection-end-line="182" selection-end-column="5" />
           <folding>
             <element signature="e#14#137#0" expanded="true" />
-            <marker date="1519216479000" expanded="true" signature="1569:1616" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="6660:6707" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="6943:6990" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="7885:7938" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="8638:8677" ph="SELECT * FRO... Teacher" />
-            <marker date="1519216479000" expanded="true" signature="9304:9341" ph="SELECT * FRO... Class" />
-            <marker date="1519216479000" expanded="true" signature="9882:9906" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="10523:10544" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="10523:10546" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="10757:10804" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="11533:11552" ph="SELECT * FRO... Class" />
-            <marker date="1519216479000" expanded="true" signature="12064:12085" ph="SELECT * FRO... Teacher" />
-            <marker date="1519216479000" expanded="true" signature="12640:12678" ph="DELETE FROM Student... " />
-            <marker date="1519216479000" expanded="true" signature="13041:13085" ph="DELETE FROM University... " />
-            <marker date="1519216479000" expanded="true" signature="13439:13469" ph="DELETE FROM Teacher... " />
-            <marker date="1519216479000" expanded="true" signature="13812:13840" ph="DELETE FROM Class... " />
+            <marker date="1519651351000" expanded="true" signature="1726:1773" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="7106:7153" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="7389:7436" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="8331:8384" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="9084:9123" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="9750:9787" ph="SELECT * FRO... Class" />
+            <marker date="1519651351000" expanded="true" signature="10328:10352" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="10969:10990" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="10969:10992" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="11203:11250" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="11979:11998" ph="SELECT * FRO... Class" />
+            <marker date="1519651351000" expanded="true" signature="12542:12563" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="13100:13114" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="13100:13124" ph="SELECT * FRO... Department" />
+            <marker date="1519651351000" expanded="true" signature="13687:13725" ph="DELETE FROM Student... " />
+            <marker date="1519651351000" expanded="true" signature="14088:14132" ph="DELETE FROM University... " />
+            <marker date="1519651351000" expanded="true" signature="14486:14516" ph="DELETE FROM Teacher... " />
+            <marker date="1519651351000" expanded="true" signature="14859:14887" ph="DELETE FROM Class... " />
           </folding>
         </state>
       </provider>
@@ -674,16 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/all.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1150">
-          <caret line="4" column="672271" lean-forward="false" selection-start-line="4" selection-start-column="672271" selection-end-line="4" selection-end-column="672271" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/findPage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
@@ -716,32 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="625" column="40" lean-forward="false" selection-start-line="625" selection-start-column="40" selection-end-line="625" selection-end-column="40" />
-          <folding>
-            <element signature="e#14#137#0" expanded="true" />
-            <marker date="1519216479000" expanded="true" signature="1569:1616" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="6660:6707" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="6943:6990" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="7885:7938" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="8638:8677" ph="SELECT * FRO... Teacher" />
-            <marker date="1519216479000" expanded="true" signature="9304:9341" ph="SELECT * FRO... Class" />
-            <marker date="1519216479000" expanded="true" signature="9882:9906" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="10523:10544" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="10523:10546" ph="SELECT * FRO... Student" />
-            <marker date="1519216479000" expanded="true" signature="10757:10804" ph="SELECT * FRO... University" />
-            <marker date="1519216479000" expanded="true" signature="11533:11552" ph="SELECT * FRO... Class" />
-            <marker date="1519216479000" expanded="true" signature="12064:12085" ph="SELECT * FRO... Teacher" />
-            <marker date="1519216479000" expanded="true" signature="12640:12678" ph="DELETE FROM Student... " />
-            <marker date="1519216479000" expanded="true" signature="13041:13085" ph="DELETE FROM University... " />
-            <marker date="1519216479000" expanded="true" signature="13439:13469" ph="DELETE FROM Teacher... " />
-            <marker date="1519216479000" expanded="true" signature="13812:13840" ph="DELETE FROM Class... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/homePagesjs.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="650">
@@ -766,58 +730,94 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/simple-sidebar.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="132" column="5" lean-forward="false" selection-start-line="132" selection-start-column="5" selection-end-line="132" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../mysqlOld/findPagejs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
+        <state relative-caret-position="119">
           <caret line="10" column="24" lean-forward="false" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mysqlOld/findPage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="126" column="17" lean-forward="false" selection-start-line="126" selection-start-column="17" selection-end-line="126" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mysqlOld/homePage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="24" column="30" lean-forward="false" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../mysqlOld/homePagesjs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-389">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="165">
+          <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/all.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="977">
+          <caret line="4" column="672271" lean-forward="false" selection-start-line="4" selection-start-column="672271" selection-end-line="4" selection-end-column="672271" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/simple-sidebar.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mysqlOld/findPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="769">
+          <caret line="103" column="34" lean-forward="true" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mysqlOld/homePage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="63" column="36" lean-forward="true" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="72" column="24" lean-forward="true" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="24" />
+          <folding>
+            <element signature="e#14#137#0" expanded="true" />
+            <marker date="1519651351000" expanded="true" signature="1726:1773" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="7106:7153" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="7389:7436" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="8331:8384" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="9084:9123" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="9750:9787" ph="SELECT * FRO... Class" />
+            <marker date="1519651351000" expanded="true" signature="10328:10352" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="10969:10990" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="10969:10992" ph="SELECT * FRO... Student" />
+            <marker date="1519651351000" expanded="true" signature="11203:11250" ph="SELECT * FRO... University" />
+            <marker date="1519651351000" expanded="true" signature="11979:11998" ph="SELECT * FRO... Class" />
+            <marker date="1519651351000" expanded="true" signature="12542:12563" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="13100:13114" ph="SELECT * FRO... Teacher" />
+            <marker date="1519651351000" expanded="true" signature="13100:13124" ph="SELECT * FRO... Department" />
+            <marker date="1519651351000" expanded="true" signature="13687:13725" ph="DELETE FROM Student... " />
+            <marker date="1519651351000" expanded="true" signature="14088:14132" ph="DELETE FROM University... " />
+            <marker date="1519651351000" expanded="true" signature="14486:14516" ph="DELETE FROM Teacher... " />
+            <marker date="1519651351000" expanded="true" signature="14859:14887" ph="DELETE FROM Class... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="647">
+          <caret line="118" column="6" lean-forward="false" selection-start-line="118" selection-start-column="6" selection-end-line="118" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-22">
-          <caret line="160" column="74" lean-forward="false" selection-start-line="160" selection-start-column="74" selection-end-line="160" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="41" lean-forward="false" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
+        <state relative-caret-position="855">
+          <caret line="57" column="47" lean-forward="false" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
           <folding />
         </state>
       </provider>

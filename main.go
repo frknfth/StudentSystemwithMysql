@@ -37,8 +37,10 @@ type University struct {
 
 // Class for get response(saveTeacherAndClass)
 type Class struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
+	ID         int    `json:"id"`
+	Department string `json:"dep"`
+	Code       int    `json:"code"`
+	Name       string `json:"name"`
 }
 
 // Teacher for get response(saveTeacherAndClass)
@@ -56,6 +58,11 @@ type StudentAndClass struct {
 type TeacherAndClass struct {
 	TID int `json:"t_id"`
 	CID int `json:"c_id"`
+}
+
+type Department struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
 }
 
 //insert student to the database
@@ -146,10 +153,19 @@ func saveClass(rw http.ResponseWriter, req *http.Request) {
 	checkErr(err)
 	defer db.Close()
 
-	stmt, err := db.Prepare("INSERT Class SET Name=?")
+	stmt, err := db.Prepare("INSERT Class SET Department=?, Code=?,Name=?")
 	checkErr(err)
 
 	messageToClient := ""
+
+	class.Department = strings.TrimSpace(class.Department)
+	if len(class.Department) == 0 {
+		messageToClient = messageToClient + " Department is empty. "
+	}
+
+	if class.Code < 1 {
+		messageToClient = messageToClient + " Code is empty. "
+	}
 
 	class.Name = strings.TrimSpace(class.Name)
 	if len(class.Name) == 0 {
@@ -158,7 +174,7 @@ func saveClass(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	_, err = stmt.Exec(class.Name)
+	_, err = stmt.Exec(class.Department, class.Code, class.Name)
 	checkErr(err)
 }
 
@@ -447,7 +463,7 @@ func getAllClasses(rw http.ResponseWriter, req *http.Request) {
 
 	for rows.Next() {
 		class := Class{}
-		err := rows.Scan(&class.ID, &class.Name)
+		err := rows.Scan(&class.ID, &class.Department, &class.Code, &class.Name)
 		checkErr(err)
 
 		allClasses = append(allClasses, class)
@@ -476,6 +492,29 @@ func getAllTeachers(rw http.ResponseWriter, req *http.Request) {
 		allTeachers = append(allTeachers, teacher)
 	}
 	json.NewEncoder(rw).Encode(allTeachers)
+}
+
+//return all departments in the database
+func getAllDepartments(rw http.ResponseWriter, req *http.Request) {
+
+	allDepartments := make([]Department, 0)
+
+	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
+	checkErr(err)
+	defer db.Close()
+
+	rows, err := db.Query("SELECT * FROM Department")
+	checkErr(err)
+	defer rows.Close()
+
+	for rows.Next() {
+		depart := Department{}
+		err := rows.Scan(&depart.ID, &depart.Name)
+		checkErr(err)
+
+		allDepartments = append(allDepartments, depart)
+	}
+	json.NewEncoder(rw).Encode(allDepartments)
 }
 
 func deleteStudent(rw http.ResponseWriter, req *http.Request) {
@@ -583,8 +622,8 @@ func main() {
 		http.ServeFile(w, r, "static/css/design.css")
 	})
 
-	http.HandleFunc("/css/simple-sidebar.css", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "static/css/simple-sidebar.css")
+	http.HandleFunc("/css/index.css", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/css/index.css")
 	})
 
 	http.HandleFunc("/saveUniversity", saveUniversity)
@@ -615,6 +654,8 @@ func main() {
 
 	http.HandleFunc("/getAllTeachers", getAllTeachers)
 
+	http.HandleFunc("/getAllDepartments", getAllDepartments)
+
 	http.HandleFunc("/deleteStudent", deleteStudent)
 
 	http.HandleFunc("/deleteUniversity", deleteUniversity)
@@ -623,7 +664,7 @@ func main() {
 
 	http.HandleFunc("/deleteClass", deleteClass)
 
-	log.Fatal(http.ListenAndServe(":1112", nil))
+	log.Fatal(http.ListenAndServe(":1111", nil))
 }
 
 func checkErr(err error) {
