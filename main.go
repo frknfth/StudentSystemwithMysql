@@ -397,22 +397,37 @@ func getAllUniversities(rw http.ResponseWriter, req *http.Request) {
 //return all students in the database
 func getAllStudents(rw http.ResponseWriter, req *http.Request) {
 
-	allStudents := make([]Student, 0)
+	allStudents := make([]KomplexStudent, 0)
 
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/StudentSystem?charset=utf8")
 	checkErr(err)
 	defer db.Close()
 
+	komplexStudent := KomplexStudent{}
+	student := Student{}
 	rows, err := db.Query("SELECT * FROM Student")
 	checkErr(err)
 	defer rows.Close()
 
 	for rows.Next() {
-		stu := Student{}
-		err := rows.Scan(&stu.ID, &stu.Name, &stu.Age, &stu.UniversityID)
+		err := rows.Scan(&student.ID, &student.Name, &student.Age, &student.UniversityID)
 		checkErr(err)
 
-		allStudents = append(allStudents, stu)
+		university := University{}
+		rows, err := db.Query("SELECT * FROM University WHERE University_ID= ?", student.UniversityID)
+		checkErr(err)
+		defer rows.Close()
+
+		for rows.Next() {
+			err := rows.Scan(&university.ID, &university.Name, &university.Capacity, &university.Number)
+			checkErr(err)
+		}
+		komplexStudent.Age = student.Age
+		komplexStudent.Name = student.Name
+		komplexStudent.ID = student.ID
+		komplexStudent.University = university
+
+		allStudents = append(allStudents, komplexStudent)
 	}
 	json.NewEncoder(rw).Encode(allStudents)
 }
@@ -525,11 +540,15 @@ func deleteClass(rw http.ResponseWriter, req *http.Request) {
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "static/homePage.html")
+		http.ServeFile(w, r, "static/index.html")
 	})
 
 	http.HandleFunc("/findPage", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/findPage.html")
+	})
+
+	http.HandleFunc("/homePage", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/homePage.html")
 	})
 
 	http.HandleFunc("/js/homePagesjs.js", func(w http.ResponseWriter, r *http.Request) {
@@ -540,12 +559,32 @@ func main() {
 		http.ServeFile(w, r, "static/js/findPagejs.js")
 	})
 
+	http.HandleFunc("/js/jquery.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/jquery.js")
+	})
+
+	http.HandleFunc("/js/bootstrap.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/bootstrap.js")
+	})
+
+	http.HandleFunc("/js/all.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/all.js")
+	})
+
+	http.HandleFunc("/js/index.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/index.js")
+	})
+
 	http.HandleFunc("/css/bootstrap.css", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/css/bootstrap.css")
 	})
 
 	http.HandleFunc("/css/design.css", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/css/design.css")
+	})
+
+	http.HandleFunc("/css/simple-sidebar.css", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/css/simple-sidebar.css")
 	})
 
 	http.HandleFunc("/saveUniversity", saveUniversity)
@@ -584,7 +623,7 @@ func main() {
 
 	http.HandleFunc("/deleteClass", deleteClass)
 
-	log.Fatal(http.ListenAndServe(":1111", nil))
+	log.Fatal(http.ListenAndServe(":1112", nil))
 }
 
 func checkErr(err error) {
