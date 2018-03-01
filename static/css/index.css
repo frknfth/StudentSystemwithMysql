@@ -21,7 +21,7 @@ th{
 
 .navbar {
     background-color: #809fff;
-    margin-bottom: 0;
+    margin-bottom: 5 ;
     padding-top: 9px;
     color:white;
     font-size: 25px;
@@ -34,10 +34,6 @@ th{
 
 #wrapper {
     padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
 }
 
 #wrapper.toggled {
@@ -82,10 +78,11 @@ th{
 .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 197px;
+    width: 203px;
     margin: 0;
     padding: 0;
     list-style: none;
+    border-right: 1px solid #c9c9c9;
 }
 
 .sidebar-nav li {
@@ -137,7 +134,7 @@ th{
     }
 
     #sidebar-wrapper {
-        width: 195px;
+        width: 203px;
     }
 
     #wrapper.toggled #sidebar-wrapper {
@@ -145,7 +142,6 @@ th{
     }
 
     #page-content-wrapper {
-        padding: 20px;
         position: relative;
     }
 
@@ -157,8 +153,7 @@ th{
 
 .w3-example{
     background-color:white;
-    padding:20px 20px;
-    margin:20px 0;
+    padding:10px 10px;
     box-shadow:2px 2px 4px 2px rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
 }
 
@@ -170,4 +165,3 @@ th{
     width:195px;
     margin: 0;
 }
-

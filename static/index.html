@@ -3,296 +3,362 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <title>Registration System</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/index.css" rel="stylesheet">
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.js"></script>
-
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script data-require="angular.js@1.3.0-beta.5" data-semver="1.3.0-beta.5" src="https://code.angularjs.org/1.3.0-beta.5/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <link href="css/index.css" rel="stylesheet">
     <script src="js/index.js"></script>
+    <script src="dirPagination.js"></script>
 
 </head>
-
 <body>
-<div class="home" ng-app="myApp" ng-controller="myCtrl">
-    <nav class="navbar">
-        <div class="container-fluid">
+    <div class="home" ng-app="myApp" ng-controller="myCtrl">
+        <nav class="navbar">
+            <div class="container-fluid">
 
-            <div class="col-sm-12">
-                <p ><i class="fas fa-registered"></i>  Registration System</p>
+                <div class="col-sm-12">
+                    <p ><i class="fas fa-registered"></i>  Registration System</p>
+                </div>
+
+
+            </div>
+        </nav>
+
+        <div id="wrapper">
+            <div id="sidebar-wrapper" >
+                <ul class="sidebar-nav" >
+
+                    <li>
+                        <a ng-click="getUniData()">
+                            <p style="background-color: #ffe1f8;border-left: 5px solid #809fff;" id="p1" onclick="index(0)">
+                                <i class="fas fa-university"></i> &nbsp; University
+                            </p>
+                        </a>
+                    </li>
+
+                    <li >
+                        <a ng-click="getStudentsData()">
+                            <p id="p2" onclick="index(1)">
+                                <i class="fas fa-graduation-cap"></i> &nbsp; Student
+                            </p>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a ng-click="getClassData()">
+                            <p id="p3" onclick="index(2)">
+                                <i class="fas fa-book"></i> &nbsp; Class
+                            </p>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a ng-click="getTeacherData()">
+                            <p id="p4" onclick="index(3)">
+                                <i class="fas fa-address-card"></i> &nbsp; Teacher
+                            </p>
+                        </a>
+                    </li>
+
+                    <!--
+                    <li>
+                        <a ng-click="getAllData()">
+                            <p id="p5" onclick="index(4)">
+                                <i class="fas fa-paperclip"></i> &nbsp; Student - Class
+                            </p>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a ng-click="getAllData()">
+                            <p id="p6" onclick="index(5)">
+                                <i class="fas fa-paper-plane"></i> &nbsp; Teacher - Class
+                            </p>
+                        </a>
+                    </li>
+                    -->
+                </ul>
             </div>
 
+            <div id="page-content-wrapper">
 
-        </div>
-    </nav>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div  class="col-lg-12 w3-example">
 
-    <div id="wrapper">
-        <div id="sidebar-wrapper" >
-            <ul class="sidebar-nav" >
+                            <div style="display: block" id="index1">
+                                <div style="overflow-x: auto">
+                                    <p ng-if="messageOfSaveUniversity" class="ng-invalid">{{messageOfSaveUniversity}}</p>
 
-                <li>
-                    <a ng-click="getUniData()">
-                        <p style="background-color: #ffe1f8;border-left: 5px solid #809fff;" id="p1" onclick="index(0)">
-                            <i class="fas fa-university"></i> &nbsp; University
-                        </p>
-                    </a>
-                </li>
+                                    <div class="col-xs-6">
+                                        <h4>University Page: {{ currentPageUni }}</h4>
+                                    </div>
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-xs-4">
+                                        <input ng-model="q1" id="search" class="form-control" placeholder="Filter text">
+                                    </div>
 
-                <li >
-                    <a ng-click="getStudentsData()">
-                        <p id="p2" onclick="index(1)">
-                            <i class="fas fa-graduation-cap"></i> &nbsp; Student
-                        </p>
-                    </a>
-                </li>
+                                    <table class=" table table-bordered table-striped table-hover" >
+                                        <tr>
+                                            <th >University ID </th>
+                                            <th >University Name </th>
+                                            <th >University Capacity </th>
+                                            <th >Number of Recorded Student </th>
+                                            <th><i class="fas fa-archive"></i></th>
+                                        </tr>
+                                        <tr >
+                                            <td> ... </td>
+                                            <td> <input type="text" ng-model="university.name"> </td>
+                                            <td> <input type="number" ng-model="university.capacity"> </td>
+                                            <td> ... </td>
+                                            <td> <button ng-click="sendUniversityData()" class="btn btn-info">
+                                                <i class="fas fa-plus-square"></i>
+                                            </button>
+                                            </td>
+                                        </tr>
+                                        <tr dir-paginate="x in allUniversities | filter:q1 | itemsPerPage: pageSize"
+                                            current-page="currentPageUni" pagination-id="pagination1">
 
-                <li>
-                    <a ng-click="getClassData()">
-                        <p id="p3" onclick="index(2)">
-                            <i class="fas fa-book"></i> &nbsp; Class
-                        </p>
-                    </a>
-                </li>
+                                            <td> {{x.id }} </td>
+                                            <td> {{x.name }} </td>
+                                            <td> {{x.capacity }} </td>
+                                            <td> {{x.number }} </td>
+                                            <td> <button ng-click="deleteUniversity(x.id,x.name,x.capacity,x.number)"
+                                                         class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
+                                        </tr>
+                                    </table>
 
-                <li>
-                    <a ng-click="getTeacherData()">
-                        <p id="p4" onclick="index(3)">
-                            <i class="fas fa-address-card"></i> &nbsp; Teacher
-                        </p>
-                    </a>
-                </li>
+                                    <div class="text-center">
+                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                                             template-url="dirPagination.tpl.html" pagination-id="pagination1"></dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
 
-                <li>
-                    <a ng-click="getAllData()">
-                        <p id="p5" onclick="index(4)">
-                            <i class="fas fa-paperclip"></i> &nbsp; Student - Class
-                        </p>
-                    </a>
-                </li>
 
-                <li>
-                    <a ng-click="getAllData()">
-                        <p id="p6" onclick="index(5)">
-                            <i class="fas fa-paper-plane"></i> &nbsp; Teacher - Class
-                        </p>
-                    </a>
-                </li>
-            </ul>
-        </div>
+                            <div style="display: none" id="index2">
+                                <div style="overflow-x: auto">
 
-        <div style="background-color: #dddddd;height: 529px;" id="page-content-wrapper">
+                                    <p ng-if="messageOfSaveStudent" class="ng-invalid">{{messageOfSaveStudent}}</p>
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div style="height: 500px !important;" class="col-lg-12 w3-example">
+                                    <div class="col-md-6">
+                                        <h4>Student Page: {{ currentPageStd }}</h4>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-4">
+                                        <input ng-model="q2" id="search" class="form-control" placeholder="Filter text">
+                                    </div>
 
-                        <div style="display: block" id="index1">
-                            <div style="overflow-x: auto">
-                                <p ng-if="messageOfSaveUniversity" class="ng-invalid">{{messageOfSaveUniversity}}</p>
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>University ID</th>
-                                        <th>University Name</th>
-                                        <th>University Capacity</th>
-                                        <th>Number of Recorded Student</th>
+                                    <table align="center" class=" table table-bordered table-striped table-hover" >
+                                        <tr>
+                                            <th>Student Id</th>
+                                            <th>Student Name</th>
+                                            <th>Student Age</th>
+                                            <th>University Name</th>
+                                            <th>University Capacity</th>
+                                            <th>Recorded Student in the University</th>
+                                            <th><i class="fas fa-archive"></i></th>
+                                        </tr>
+                                        <tr >
+                                            <td> ...</td>
+                                            <td> <input type="text" ng-model="student.name"> </td>
+                                            <td> <input type="number" ng-model="student.age"> </td>
+                                            <td> <select class="form-control" ng-model="selectedUniversityOfStudent"
+                                                         ng-options="value.name for (key, value)
+                                                in allUniversities"></select> </td>
+                                            <td> {{selectedUniversityOfStudent.capacity}} </td>
+                                            <td> {{selectedUniversityOfStudent.number}} </td>
+                                            <td> <button ng-click="sendStudentData()"
+                                                    class=" btn btn-info"> <i class="fas fa-plus-square"></i>
+                                                 </button>
+                                            </td>
+                                        </tr>
+                                        <tr dir-paginate="x in allStudents| filter:q2 | itemsPerPage: pageSize"
+                                            current-page="currentPageStd" pagination-id="pagination2">
+
+                                            <td> {{x.id }} </td>
+                                            <td> {{x.name }} </td>
+                                            <td> {{x.age }} </td>
+                                            <td> {{x.uni.name }} </td>
+                                            <td> {{x.uni.capacity }} </td>
+                                            <td> {{x.uni.number }} </td>
+                                            <td align="center"> <button ng-click="deleteStudent(x.id,x.name,x.age,x.uni.id)"
+                                                                        class=" btn btn-danger"><i class="far fa-trash-alt"></i></button></td>
+                                        </tr>
+                                    </table>
+
+                                    <div class="text-center">
+                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                                                 template-url="dirPagination.tpl.html" pagination-id="pagination2"></dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div style="display: none" id="index3">
+                                <p ng-if="messageOfSaveClass" class="ng-invalid">{{messageOfSaveClass}}</p>
+
+                                <div class="col-md-6">
+                                    <h4>Class Page: {{ currentPageClass }}</h4>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-4">
+                                    <input ng-model="q3" id="search" class="form-control" placeholder="Filter text">
+                                </div>
+
+                                <table align="center" class=" table table-bordered table-striped table-hover">
+                                    <tr >
+                                        <th> ID</th>
+                                        <th> Department</th>
+                                        <th> Code</th>
+                                        <th> Name</th>
                                         <th><i class="fas fa-archive"></i></th>
                                     </tr>
-                                    <tr >
+                                    <tr>
                                         <td> ... </td>
-                                        <td> <input type="text" ng-model="university.name"> </td>
-                                        <td> <input type="number" ng-model="university.capacity"> </td>
-                                        <td> ... </td>
-                                        <td> <button ng-click="sendUniversityData()" class="btn btn-info">
-                                                    <i class="fas fa-plus-square"></i>
+                                        <td style="width: 350px;"> <select class="form-control" ng-model="selectedDepartmentOfClass"
+                                                     ng-options="value.name for (key, value)
+                                                in allDepartments"></select>
+                                        </td>
+                                        <td> <input type="number" ng-model="class.code"> </td>
+                                        <td> <input type="text" ng-model="class.name"></td>
+                                        <td> <button ng-click="sendClassData()"
+                                                     class=" btn btn-info"> <i class="fas fa-plus-square"></i>
                                              </button>
                                         </td>
                                     </tr>
-                                    <tr ng-repeat="x in allUniversities ">
-
+                                    <tr dir-paginate="x in allClasses| filter:q3 | itemsPerPage: pageSize"
+                                        current-page="currentPageClass" pagination-id="pagination3">
                                         <td> {{x.id }} </td>
+                                        <td> {{x.dep }} </td>
+                                        <td> {{x.code }} </td>
                                         <td> {{x.name }} </td>
-                                        <td> {{x.capacity }} </td>
-                                        <td> {{x.number }} </td>
-                                        <td> <button ng-click="deleteUniversity(x.id,x.name,x.capacity,x.number)"
-                                            class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
+                                        <td align="center"> <button ng-click="deleteClass(x.id,x.name)"
+                                                                    class="btn btn-danger">X</button> </td>
                                     </tr>
                                 </table>
+                                <div class="text-center">
+                                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                                                             template-url="dirPagination.tpl.html" pagination-id="pagination3"></dir-pagination-controls>
+                                </div>
                             </div>
-                        </div>
 
-                        
-                        <div style="display: none" id="index2">
-                            <div style="overflow-x: auto">
 
-                                <p ng-if="messageOfSaveStudent" class="ng-invalid">{{messageOfSaveStudent}}</p>
-                                <table align="center" class="table table-bordered" >
-                                    <tr>
-                                        <th>Student Id</th>
-                                        <th>Student Name</th>
-                                        <th>Student Age</th>
-                                        <th>University Name</th>
-                                        <th>University Capacity</th>
-                                        <th>Recorded Student in the University</th>
-                                        <th><i class="fas fa-archive"></i></th>
+
+                            <div style="display:none" id="index4">
+                                <p ng-if="messageOfSaveTeacher" class="ng-invalid">{{messageOfSaveTeacher}}</p>
+                                <div class="col-md-6">
+                                    <h4>Teacher Page: {{ currentPageTeacher }}</h4>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-4">
+                                    <input ng-model="q4" id="search" class="form-control" placeholder="Filter text">
+                                </div>
+
+                                <table align="center" class=" table table-bordered table-striped table-hover">
+                                    <tr >
+                                        <th> ID</th>
+                                        <th> Name</th>
+                                        <th>Delete</th>
                                     </tr>
                                     <tr >
-                                        <td> ...</td>
-                                        <td> <input type="text" ng-model="student.name"> </td>
-                                        <td> <input type="number" ng-model="student.age"> </td>
-                                        <td> <select ng-model="selectedUniversityOfStudent"
-                                                     ng-options="value.name for (key, value)
-                                            in allUniversities"></select> </td>
-                                        <td> {{selectedUniversityOfStudent.capacity}} </td>
-                                        <td> {{selectedUniversityOfStudent.number}} </td>
-                                        <td> <button ng-click="sendStudentData()"
-                                                class=" btn btn-info"> <i class="fas fa-plus-square"></i>
-                                             </button>
+                                        <td> ... </td>
+                                        <td> <input type="text" ng-model="teacherName"> </td>
+                                        <td> <button ng-click="sendTeacherData()"
+                                                     class=" btn btn-info"> <i class="fas fa-plus-square"></i>
+                                        </button>
                                         </td>
                                     </tr>
-                                    <tr ng-repeat="x in allStudents ">
-                                        
+                                    <tr dir-paginate="x in allTeachers| filter:q4 | itemsPerPage: pageSize"
+                                        current-page="currentPageTeacher" pagination-id="pagination4">
                                         <td> {{x.id }} </td>
                                         <td> {{x.name }} </td>
-                                        <td> {{x.age }} </td>
-                                        <td> {{x.uni.name }} </td>
-                                        <td> {{x.uni.capacity }} </td>
-                                        <td> {{x.uni.number }} </td>
-                                        <td align="center"> <button ng-click="deleteStudent(x.id,x.name,x.age,x.uni.id)"
-                                                                    class=" btn btn-danger"><i class="far fa-trash-alt"></i></button></td>
+                                        <td align="center"> <button ng-click="deleteTeacher(x.id,x.name)"
+                                                                    class="btn btn-danger">X</button> </td>
                                     </tr>
                                 </table>
+
+                                <div class="text-center">
+                                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                                                             template-url="dirPagination.tpl.html" pagination-id="pagination4"></dir-pagination-controls>
+                                </div>
                             </div>
-                        </div>
 
-                        <div style="display: none" id="index3">
-                            <p ng-if="messageOfSaveClass" class="ng-invalid">{{messageOfSaveClass}}</p>
-                            <table align="center" style="width:90%" class="table table-bordered ">
-                                <tr >
-                                    <th> ID</th>
-                                    <th> Department</th>
-                                    <th> Code</th>
-                                    <th> Name</th>
-                                    <th><i class="fas fa-archive"></i></th>
-                                </tr>
-                                <tr>
-                                    <td> ... </td>
-                                    <td> <select ng-model="selectedDepartmentOfClass"
-                                                 ng-options="value.name for (key, value)
-                                            in allDepartments"></select>
-                                    </td>
-                                    <td> <input type="number" ng-model="class.code"> </td>
-                                    <td> <input type="text" ng-model="class.name"></td>
-                                    <td> <button ng-click="sendClassData()"
-                                                 class=" btn btn-info"> <i class="fas fa-plus-square"></i>
-                                         </button>
-                                    </td>
-                                </tr>
-                                <tr ng-repeat="x in allClasses ">
-                                    <td> {{x.id }} </td>
-                                    <td> {{x.dep }} </td>
-                                    <td> {{x.code }} </td>
-                                    <td> {{x.name }} </td>
-                                    <td align="center"> <button ng-click="deleteClass(x.id,x.name)"
-                                                                class="btn btn-danger">X</button> </td>
-                                </tr>
-                            </table>
-                        </div>
 
-                        <div style="display:none" id="index4">
-                            <h1>Teacher</h1>
-                            <form>
-                                <p> Name : <input type="text" ng-model="teacherName"></p>
-                            </form>
-
-                            <p><button class="btn-primary" ng-click="sendTeacherData()">Save Teacher Data</button></p>
-                            <p ng-if="messageOfSaveTeacher" class="ng-invalid">{{messageOfSaveTeacher}}</p>
-                        </div>
-
-                        <div style="display: none" id="index5">
-                            <h1>Student - Class</h1>
-                            <form>
-                                <p>Student : <select ng-model="selectedStudentOfSC"
-                                                     ng-options="value.name for (key, value)
-                                                             in allStudents"></select></p>
-                                <p>Class : <select ng-model="selectedClassOfSC"
-                                                   ng-options="value.name for (key, value)
-                                                           in allClasses"></select></p>
-                            </form>
-                            <p><button class="btn-primary" ng-click="sendSCData()">Save Student-Class</button></p>
-                            <p ng-if="messageOfSaveSC" class="ng-invalid">{{messageOfSaveSC}}</p>
-                        </div>
-
-                        <div style="display: none" id="index6">
-                            <h1>Teacher - Class</h1>
-                            <form>
-                                <p>Teacher : <select ng-model="selectedTeacherOfTC"
-                                                     ng-options="value.name for (key, value)
-                                                                 in allTeachers"></select></p>
-
-                                <p>Class : <select ng-model="selectedClassOfTC"
-                                                   ng-options="value.name for (key, value)
+                            <div style="display: none" id="index5">
+                                <h1>Student - Class</h1>
+                                <form>
+                                    <p>Student : <select ng-model="selectedStudentOfSC"
+                                                         ng-options="value.name for (key, value)
+                                                                 in allStudents"></select></p>
+                                    <p>Class : <select ng-model="selectedClassOfSC"
+                                                       ng-options="value.name for (key, value)
                                                                in allClasses"></select></p>
-                            </form>
-                            <p><button class="btn-primary" ng-click="sendTCData()">Save Teacher-Class</button></p>
-                            <p ng-if="messageOfSaveTC" class="ng-invalid">{{messageOfSaveTC}}</p>
-                        </div>
+                                </form>
+                                <p><button class="btn-primary" ng-click="sendSCData()">Save Student-Class</button></p>
+                                <p ng-if="messageOfSaveSC" class="ng-invalid">{{messageOfSaveSC}}</p>
+                            </div>
 
+                            <div style="display: none" id="index6">
+                                <h1>Teacher - Class</h1>
+                                <form>
+                                    <p>Teacher : <select ng-model="selectedTeacherOfTC"
+                                                         ng-options="value.name for (key, value)
+                                                                     in allTeachers"></select></p>
+
+                                    <p>Class : <select ng-model="selectedClassOfTC"
+                                                       ng-options="value.name for (key, value)
+                                                                   in allClasses"></select></p>
+                                </form>
+                                <p><button class="btn-primary" ng-click="sendTCData()">Save Teacher-Class</button></p>
+                                <p ng-if="messageOfSaveTC" class="ng-invalid">{{messageOfSaveTC}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<script>
 
 
-    /*
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.1/angular.js"></script>
 
-    <a href="#menu-toggle" class="btn-outline-primary" id="menu-toggle"><i class="fas fa-arrows-alt-h"></i></a>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
 
-    */
-    
-    function index(a){
-        var indexs = ["index1","index2","index3","index4","index5","index6"];
-        for(i=0 ; i<indexs.length ; i++){
-            if(i === a){
-                document.getElementById(indexs[i]).style.display="block";
-                continue;
+    <script>
+        function index(a){
+            var indexs = ["index1","index2","index3","index4","index5","index6"];
+            for(i=0 ; i<indexs.length ; i++){
+                if(i === a){
+                    document.getElementById(indexs[i]).style.display="block";
+                    continue;
+                }
+                document.getElementById(indexs[i]).style.display="none";
             }
-            document.getElementById(indexs[i]).style.display="none";
-        }
-        var ps = ["p1","p2","p3","p4","p5","p6"];
-        for(i=0 ; i<ps.length ; i++){
-            if(i === a){
-                document.getElementById(ps[i]).style.backgroundColor="#ffe1f8";
-                document.getElementById(ps[i]).style.borderLeft="5px solid #809fff" ;
-                continue;
+            var ps = ["p1","p2","p3","p4","p5","p6"];
+            for(i=0 ; i<ps.length ; i++){
+                if(i === a){
+                    document.getElementById(ps[i]).style.backgroundColor="#ffe1f8";
+                    document.getElementById(ps[i]).style.borderLeft="5px solid #809fff" ;
+                    continue;
+                }
+                document.getElementById(ps[i]).style.backgroundColor="white";
+                document.getElementById(ps[i]).style.borderLeft="none";
             }
-            document.getElementById(ps[i]).style.backgroundColor="white";
-            document.getElementById(ps[i]).style.borderLeft="none";
         }
-    }
+    </script>
 
-</script>
+
+
 </body>
 
 </html>

@@ -578,6 +578,15 @@ func deleteClass(rw http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
+
+	http.HandleFunc("/dirPagination.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/dirPagination.js")
+	})
+
+	http.HandleFunc("/dirPagination.tpl.html", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/dirPagination.tpl.html")
+	})
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/index.html")
 	})
@@ -664,7 +673,7 @@ func main() {
 
 	http.HandleFunc("/deleteClass", deleteClass)
 
-	log.Fatal(http.ListenAndServe(":1111", nil))
+	log.Fatal(http.ListenAndServe(":1112", nil))
 }
 
 func checkErr(err error) {

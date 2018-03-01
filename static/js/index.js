@@ -1,8 +1,6 @@
-angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
+var app = angular.module("myApp",['angularUtils.directives.dirPagination']);
 
-
-    $scope.university={"name":"", "capacity": ""};
-    $scope.student={"name":"", "age": ""};
+app.controller("myCtrl", function($scope, $http) {
 
     $scope.messageOfSaveUniversity = "";
     $scope.messageOfSaveStudent = "";
@@ -30,6 +28,23 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
 
     $scope.selectedTeacherOfTC={"id":"","name":""};
     $scope.selectedClassOfTC = {"id":"","name":""};
+
+
+    $scope.currentPageUni = 1;
+    $scope.currentPageStd = 1;
+    $scope.currentPageClass=1;
+    $scope.currentPageTeacher=1;
+    $scope.pageSize = 10;
+
+
+    $scope.getUniData = function () {
+        $http.get("/getAllUniversities").then(function mySuccess(response) {
+            $scope.allUniversities = response.data;
+            $scope.currentPage = 1;
+        }, function myError(response) {
+            $scope.messageOfSaveStudent = response.statusText;
+        });
+    };
 
     $scope.sendUniversityData = function () {
         var url = "/saveUniversity";
@@ -69,6 +84,7 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
             $scope.messageOfSaveClass="";
 
             $scope.student={"name":"", "age": ""};
+            $scope.selectedUniversityOfStudent ={"id":"","name":"","capacity":"","number":""};
 
             $scope.messageOfSaveStudent = response.data;
 
@@ -103,6 +119,7 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
             $scope.messageOfSaveTeacher="";
 
             $scope.class ={"dep":"","code":"","name":""};
+            $scope.selectedDepartmentOfClass = {"id":"","name":""};
 
             $scope.getClassData();
             $scope.messageOfSaveClass = response.data;
@@ -115,6 +132,33 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
 
         }, function myError(response) {
             $scope.messageOfSaveClass = response.statusText;
+        });
+    };
+
+    $scope.sendTeacherData = function () {
+        var url = "/saveTeacher", data = {"name": $scope.teacherName};
+
+        $http.post(url,  data).then(function mySuccess(response) {
+
+            $scope.messageOfSaveUniversity = "";
+            $scope.messageOfSaveStudent = "";
+            $scope.messageOfSaveSC ="";
+            $scope.messageOfSaveTC ="";
+            $scope.messageOfSaveTeacher="";
+            $scope.messageOfSaveClass="";
+
+            $scope.teacherName ="";
+
+            $scope.messageOfSaveTeacher = response.data;
+
+            $http.get("/getAllTeachers").then(function mySuccess(response) {
+                $scope.allTeachers = response.data;
+            }, function myError(response) {
+                $scope.messageOfSaveTeacher = response.statusText;
+            });
+
+        }, function myError(response) {
+            $scope.messageOfSaveTeacher = response.statusText;
         });
     };
 
@@ -165,14 +209,6 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
         }
     };
 
-    $scope.getUniData = function () {
-        $http.get("/getAllUniversities").then(function mySuccess(response) {
-            $scope.allUniversities = response.data;
-        }, function myError(response) {
-            $scope.messageOfSaveStudent = response.statusText;
-        });
-    };
-
     $scope.getStudentsData = function () {
         $http.get("/getAllStudents").then(function mySuccess(response) {
             $scope.allStudents = response.data;
@@ -188,9 +224,6 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
             $scope.messageOfSaveClass = response.statusText;
         });
     };
-
-
-
 
     $scope.getTeacherData = function () {
         $http.get("/getAllTeachers").then(function mySuccess(response) {
@@ -211,4 +244,13 @@ angular.module("myApp",[]).controller("myCtrl", function($scope, $http) {
     }, function myError(response) {
         $scope.messageOfSaveClass = response.statusText;
     });
+
+
+
+
+
+    $scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
 });
