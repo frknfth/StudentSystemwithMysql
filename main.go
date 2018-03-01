@@ -579,8 +579,8 @@ func deleteClass(rw http.ResponseWriter, req *http.Request) {
 
 func main() {
 
-	http.HandleFunc("/dirPagination.js", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "static/dirPagination.js")
+	http.HandleFunc("/js/dirPagination.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/dirPagination.js")
 	})
 
 	http.HandleFunc("/dirPagination.tpl.html", func(w http.ResponseWriter, r *http.Request) {
