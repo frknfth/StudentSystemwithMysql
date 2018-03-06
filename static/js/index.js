@@ -2,184 +2,193 @@ var app = angular.module("myApp",['angularUtils.directives.dirPagination']);
 
 app.controller("myCtrl", function($scope, $http) {
 
-    $scope.messageOfSaveUniversity = "";
+    $scope.messageOfSaveDepartment = "";
     $scope.messageOfSaveStudent = "";
-    $scope.messageOfSaveSC ="";
-    $scope.messageOfSaveTC ="";
-    $scope.messageOfSaveTeacher="";
-    $scope.messageOfSaveClass="";
+    $scope.messageOfSaveCourse="";
+    $scope.messageOfSaveInstructor="";
+    $scope.messageOfSaveSection="";
+    $scope.messageOfSaveEnrollment="";
 
-    $scope.university = {"name":"", "capacity": ""};
-    $scope.student = {"name":"", "age": "" };
-    $scope.class ={"dep":"","code":"","name":""};
-    $scope.teacherName = "";
+    $scope.student = {"id":"","firstName":"", "lastName": "","age":"","gpa":"" };
+    $scope.department ={"id":"","code":"","name":""};
+    $scope.course = {"id":"","title":"","credit":""};
+    $scope.instructor = {"id":"","firstName":"", "lastName": "" ,"age":""};
+    $scope.section = {"id":"","courseId":"", "number": "" ,"instructorId":""};
+    $scope.enrollment ={"studentId":"","sectionId":""};
 
-    $scope.allUniversities ="";
     $scope.allStudents ="";
-    $scope.allTeachers ="";
-    $scope.allClasses ="";
     $scope.allDepartments="";
+    $scope.allCourses="";
+    $scope.allInstructors ="";
+    $scope.allSections ="";
+    $scope.allEnrollments ="";
 
-    $scope.selectedUniversityOfStudent ={"id":"","name":"","capacity":"","number":""};
-    $scope.selectedDepartmentOfClass = {"id":"","name":""};
-
-    $scope.selectedStudentOfSC={"id":"","name":"","age":"","uni":""};
-    $scope.selectedClassOfSC = {"id":"","name":""};
-
-    $scope.selectedTeacherOfTC={"id":"","name":""};
-    $scope.selectedClassOfTC = {"id":"","name":""};
-
-
-    $scope.currentPageUni = 1;
+    $scope.currentPageDpt = 1;
     $scope.currentPageStd = 1;
-    $scope.currentPageClass=1;
-    $scope.currentPageTeacher=1;
+    $scope.currentPageCourse=1;
+    $scope.currentPageInstructor=1;
+    $scope.currentPageSection=1;
+    $scope.currentPageEnrollment=1;
+
     $scope.pageSize = 10;
 
+    $scope.selectedDepartmentOfStudent ={"id":"","code":"","name":""};
+    $scope.selectedDepartmentOfCourse = {"id":"","code":"","name":""};
 
-    $scope.getUniData = function () {
-        $http.get("/getAllUniversities").then(function mySuccess(response) {
-            $scope.allUniversities = response.data;
-            $scope.currentPage = 1;
-        }, function myError(response) {
-            $scope.messageOfSaveStudent = response.statusText;
-        });
-    };
+    $scope.selectedCourseOfSection= {"id":"","title":"","credit":""};
+    $scope.selectedInstructorOfSection = {"id":"","firstName":"", "lastName": "" ,"age":""};
 
-    $scope.sendUniversityData = function () {
-        var url = "/saveUniversity";
+    $scope.selectedStudentOfEnrollment = {"id":"","firstName":"", "lastName": "","age":"","gpa":"" };
+    $scope.selectedSectionOfEnrollment = {"id":"","courseId":"", "number": "" ,"instructorId":""};
 
-        $http.post(url, $scope.university).then(function mySuccess(response) {
 
-            $scope.messageOfSaveStudent = "";
-            $scope.messageOfSaveSC ="";
-            $scope.messageOfSaveTC ="";
-            $scope.messageOfSaveTeacher="";
-            $scope.messageOfSaveClass="";
-
-            $scope.university={"name":"", "capacity": ""};
-
-            $scope.messageOfSaveUniversity = response.data;
-
-            $http.get("/getAllUniversities").then(function mySuccess(response) {
-                $scope.allUniversities = response.data;
-            }, function myError(response) {
-                $scope.messageOfSaveUniversity = response.statusText;
-            });
-
-        }, function myError(response) {
-            $scope.messageOfSaveUniversity = response.statusText;
-        });
-    };
 
     $scope.sendStudentData = function () {
-        var url = "/saveStudent", data = {"name": $scope.student.name,"age": $scope.student.age,
-            "uni": $scope.selectedUniversityOfStudent.id};
+        var url = "/saveStudent", data = {"firstName": $scope.student.firstName,"lastName": $scope.student.lastName,
+            "age": $scope.student.age,"gpa": $scope.student.gpa,"departmentId": $scope.selectedDepartmentOfStudent.id};
 
         $http.post(url, data).then(function mySuccess(response) {
-            $scope.messageOfSaveUniversity = "";
-            $scope.messageOfSaveSC ="";
-            $scope.messageOfSaveTC ="";
-            $scope.messageOfSaveTeacher="";
-            $scope.messageOfSaveClass="";
 
-            $scope.student={"name":"", "age": ""};
-            $scope.selectedUniversityOfStudent ={"id":"","name":"","capacity":"","number":""};
-
+            $scope.student = {"firstName":"", "lastName": "","age":"","gpa":"" };
+            $scope.selectedDepartmentOfStudent ={"id":"","code":"","name":""};
             $scope.messageOfSaveStudent = response.data;
-
-            $http.get("/getAllUniversities").then(function mySuccess(response) {
-                $scope.allUniversities = response.data;
-            }, function myError(response) {
-                $scope.messageOfSaveUniversity = response.statusText;
-            });
-
-            $http.get("/getAllStudents").then(function mySuccess(response) {
-                $scope.allStudents = response.data;
-            }, function myError(response) {
-                $scope.messageOfSaveStudent = response.statusText;
-            });
+            $scope.getStudentsData();
 
         }, function myError(response) {
             $scope.messageOfSaveStudent = response.statusText;
         });
     };
+    $scope.sendDepartmentData = function () {
+        var url = "/saveDepartment", data = {"code": $scope.department.code,"name": $scope.department.name};
 
-    $scope.sendClassData = function () {
-        var url = "/saveClass";
+        $http.post(url, data).then(function mySuccess(response) {
 
-        $scope.class.dep = $scope.selectedDepartmentOfClass.name;
-
-        $http.post(url,  $scope.class).then(function mySuccess(response) {
-
-            $scope.messageOfSaveUniversity = "";
-            $scope.messageOfSaveStudent = "";
-            $scope.messageOfSaveSC ="";
-            $scope.messageOfSaveTC ="";
-            $scope.messageOfSaveTeacher="";
-
-            $scope.class ={"dep":"","code":"","name":""};
-            $scope.selectedDepartmentOfClass = {"id":"","name":""};
-
-            $scope.getClassData();
-            $scope.messageOfSaveClass = response.data;
-
-            $http.get("/getAllClasses").then(function mySuccess(response) {
-                $scope.allClasses = response.data;
-            }, function myError(response) {
-                $scope.messageOfSaveClass = response.statusText;
-            });
+            $scope.department ={"code":"","name":""};
+            $scope.messageOfSaveDepartment = response.data;
+            $scope.getDepartmentData();
 
         }, function myError(response) {
-            $scope.messageOfSaveClass = response.statusText;
+            $scope.messageOfSaveDepartment = response.statusText;
+        });
+    };
+    $scope.sendCourseData = function () {
+        var url = "/saveCourse", data = {"title": $scope.course.title,"credit": $scope.course.credit,
+            "departmentId":$scope.selectedDepartmentOfCourse.id};
+
+        $http.post(url, data).then(function mySuccess(response) {
+
+            $scope.course = {"id":"","title":"","credit":""};
+            $scope.messageOfSaveCourse = response.data;
+            $scope.getCourseData();
+
+        }, function myError(response) {
+            $scope.messageOfSaveCourse = response.statusText;
+        });
+    };
+    $scope.sendInstructorData = function () {
+        var url = "/saveInstructor", data = {"firstName": $scope.instructor.firstName,"lastName":$scope.instructor.lastName,
+        "age":$scope.instructor.age};
+
+        $http.post(url, data).then(function mySuccess(response) {
+
+            $scope.instructor = {"id":"","firstName":"", "lastName": "" };
+            $scope.messageOfSaveInstructor = response.data;
+            $scope.getInstructorData();
+
+        }, function myError(response) {
+            $scope.messageOfSaveInstructor = response.statusText;
+        });
+    };
+    $scope.sendSectionData = function () {
+        var url = "/saveSection", data = {"courseId": $scope.selectedCourseOfSection.id,"number":$scope.section.number,
+            "instructorId":$scope.selectedInstructorOfSection.id};
+
+        $http.post(url, data).then(function mySuccess(response) {
+
+            $scope.section = {"id":"","courseId":"", "number": "" ,"instructorId":""};
+            $scope.messageOfSaveSection = response.data;
+            $scope.getSectionData();
+
+        }, function myError(response) {
+            $scope.messageOfSaveSection = response.statusText;
+        });
+    };
+    $scope.sendEnrollmentData = function () {
+        var url = "/saveEnrollment", data = {"studentId": $scope.selectedStudentOfEnrollment.id,
+            "sectionId":$scope.selectedSectionOfEnrollment.id};
+
+        $http.post(url, data).then(function mySuccess(response) {
+
+            $scope.messageOfSaveEnrollment = response.data;
+            $scope.getEnrollmentData();
+
+        }, function myError(response) {
+            $scope.messageOfSaveEnrollment = response.statusText;
         });
     };
 
-    $scope.sendTeacherData = function () {
-        var url = "/saveTeacher", data = {"name": $scope.teacherName};
 
-        $http.post(url,  data).then(function mySuccess(response) {
 
-            $scope.messageOfSaveUniversity = "";
-            $scope.messageOfSaveStudent = "";
-            $scope.messageOfSaveSC ="";
-            $scope.messageOfSaveTC ="";
-            $scope.messageOfSaveTeacher="";
-            $scope.messageOfSaveClass="";
-
-            $scope.teacherName ="";
-
-            $scope.messageOfSaveTeacher = response.data;
-
-            $http.get("/getAllTeachers").then(function mySuccess(response) {
-                $scope.allTeachers = response.data;
-            }, function myError(response) {
-                $scope.messageOfSaveTeacher = response.statusText;
-            });
-
-        }, function myError(response) {
-            $scope.messageOfSaveTeacher = response.statusText;
-        });
-    };
-
-    $scope.deleteUniversity=function (a, b, c, d) {
-        if(confirm("are you sure delete this university and all students in it : " + b + " ?")) {
-            $http.post("/deleteUniversity", {"id": a, "name": b, "capacity": c, "number": d}).then(function mySuccess
-                (response) {
-                $scope.getUniData();
-            }, function myError(response) {
-            });
-        } else{
-            return false;
-        }
-    };
-
-    $scope.deleteStudent=function (a, b, c, d) {
-        if(confirm("are you sure delete this student : " + b + " ?")) {
-            $http.post("/deleteStudent", {"id": a, "name": b, "age": c, "uni": d}).then(function mySuccess(response) {
+    $scope.deleteStudent=function (a, b, c) {
+        if(confirm("Are you sure delete this STUDENT : " + b + " "+ "c " +" ?")) {
+            $http.post("/deleteStudent", {"id": a, "name": b, "age": c}).then(function mySuccess(response) {
 
                 $scope.getStudentsData();
-                $scope.getUniData();
+            }, function myError(response) {
+            });
+        } else{
+            return false;
+        }
+    };
+    $scope.deleteDepartment=function (a, b, c) {
+        if(confirm("Are you sure delete this DEPARTMENT : " +b +" - "+ c + " ?")) {
+            $http.post("/deleteDepartment", {"id": a, "code": b, "name": c}).then(function mySuccess(response) {
+
+                $scope.getDepartmentData();
+            }, function myError(response) {
+            });
+        } else{
+            return false;
+        }
+    };
+    $scope.deleteCourse=function (a, b, c, d) {
+        if(confirm("Are you sure delete this COURSE : " + b + " ?")) {
+            $http.post("/deleteCourse", {"id": a, "title": b, "credit": c,"departmentId":d}).then(function mySuccess(response) {
+
+                $scope.getCourseData();
+            }, function myError(response) {
+            });
+        } else{
+            return false;
+        }
+    };
+    $scope.deleteInstructor=function (a, b, c, d) {
+        if(confirm("Are you sure delete this INSTRUCTOR : " + b + " " + c + " " + d +" ?")) {
+            $http.post("/deleteInstructor", {"id": a, "firstName": b, "lastName": c,"age":d}).then(function mySuccess(response) {
+
+                $scope.getInstructorData();
+            }, function myError(response) {
+            });
+        } else{
+            return false;
+        }
+    };
+    $scope.deleteSection=function (a, b, c, d) {
+        if(confirm("Are you sure delete this SECTİON : " + b + "-" + c + " " + d +" ?")) {
+            $http.post("/deleteSection", {"id": a, "courseId": b, "number": c,"instructorId":d}).then(function mySuccess(response) {
+
+                $scope.getSectionData();
+            }, function myError(response) {
+            });
+        } else{
+            return false;
+        }
+    };
+    $scope.deleteEnrollment=function (a, b) {
+        if(confirm("Are you sure delete this Enrollment : " + a + " " + b  +" ?")) {
+            $http.post("/deleteEnrollment", {"studentId": a, "sectionId": b}).then(function mySuccess(response) {
+
+                $scope.getEnrollmentData();
             }, function myError(response) {
             });
         } else{
@@ -187,27 +196,7 @@ app.controller("myCtrl", function($scope, $http) {
         }
     };
 
-    $scope.deleteTeacher=function (a, b) {
-        if(confirm("are you sure delete this university and all students in it? : " + b)) {
-            $http.post("/deleteTeacher", {"id": a, "name": b}).then(function mySuccess(response) {
-                $scope.getAllData();
-            }, function myError(response) {
-            });
-        } else{
-            return false;
-        }
-    };
 
-    $scope.deleteClass=function (a, b) {
-        if(confirm("are you sure delete this class? : " + b)) {
-            $http.post("/deleteClass", {"id": a}).then(function mySuccess(response) {
-                $scope.getClassData();
-            }, function myError(response) {
-            });
-        } else{
-            return false;
-        }
-    };
 
     $scope.getStudentsData = function () {
         $http.get("/getAllStudents").then(function mySuccess(response) {
@@ -216,41 +205,67 @@ app.controller("myCtrl", function($scope, $http) {
             $scope.messageOfSaveStudent = response.statusText;
         });
     };
-
-    $scope.getClassData = function () {
-        $http.get("/getAllClasses").then(function mySuccess(response) {
-            $scope.allClasses = response.data;
+    $scope.getDepartmentData = function () {
+        $http.get("/getAllDepartments").then(function mySuccess(response) {
+            $scope.allDepartments = response.data;
         }, function myError(response) {
-            $scope.messageOfSaveClass = response.statusText;
+            $scope.messageOfSaveDepartment = response.statusText;
+        });
+    };
+    $scope.getCourseData = function () {
+        $http.get("/getAllCourses").then(function mySuccess(response) {
+            $scope.allCourses = response.data;
+        }, function myError(response) {
+            $scope.messageOfSaveCourse = response.statusText;
+        });
+    };
+    $scope.getInstructorData = function () {
+        $http.get("/getAllInstructors").then(function mySuccess(response) {
+            $scope.allInstructors = response.data;
+        }, function myError(response) {
+            $scope.messageOfSaveInstructor = response.statusText;
+        });
+    };
+    $scope.getSectionData = function () {
+        $http.get("/getAllSections").then(function mySuccess(response) {
+            $scope.allSections = response.data;
+        }, function myError(response) {
+            $scope.messageOfSaveSection = response.statusText;
+        });
+    };
+    $scope.getEnrollmentData = function () {
+        $http.get("/getAllEnrollments").then(function mySuccess(response) {
+            $scope.allEnrollments = response.data;
+        }, function myError(response) {
+            $scope.messageOfSaveEnrollment = response.statusText;
         });
     };
 
-    $scope.getTeacherData = function () {
-        $http.get("/getAllTeachers").then(function mySuccess(response) {
-            $scope.allTeachers = response.data;
-        }, function myError(response) {
-            $scope.messageOfSaveStudent = response.statusText;
-        });
+    $scope.getStudentsData();
+    $scope.getDepartmentData();
+    $scope.getCourseData();
+    $scope.getInstructorData();
+    $scope.getSectionData();
+    $scope.getEnrollmentData();
+
+    $scope.setSection= function(number,  courseTitle,  courseCredit,  departCode,  departName,  instFirst,  instLast,  instAge,students){
+
+        $scope.komplexSection.course = courseTitle +"-"+ number + "    Credit:" + courseCredit ;
+        $scope.komplexSection.instructor = instFirst +" "+ instLast + "  " + instAge;
+        $scope.komplexSection.departmant =  departCode +" - "+ departName;
+        $scope.komplexSection.students =  students;
     };
 
-    $http.get("/getAllUniversities").then(function mySuccess(response) {
-        $scope.allUniversities = response.data;
-    }, function myError(response) {
-        $scope.messageOfSaveUniversity = response.statusText;
-    });
-
-    $http.get("/getAllDepartments").then(function mySuccess(response) {
-        $scope.allDepartments = response.data;
-    }, function myError(response) {
-        $scope.messageOfSaveClass = response.statusText;
-    });
+    $scope.komplexSection ={"course":" ","instructor":"","departmant":"","students":""};
 
 
+    $scope.komplexStudent = {"student":" ","sections":""};
+
+    $scope.setStudent= function(firstName, lastName, sections){
+
+        $scope.komplexStudent.student = firstName +" "+ lastName ;
+        $scope.komplexStudent.sections = sections;
+    };
 
 
-
-    $scope.sort = function(keyname){
-        $scope.sortKey = keyname;   //set the sortKey to the param passed
-        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
-    }
 });
