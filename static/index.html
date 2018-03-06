@@ -15,13 +15,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 
     <link href="css/index.css" rel="stylesheet">
     <script src="js/index.js"></script>
@@ -30,7 +26,7 @@
 </head>
 
 <body>
-    <div class="home" ng-app="myApp" ng-controller="myCtrl">
+    <div ng-app="myApp" ng-controller="myCtrl">
 
         <nav class="navbar">
             <div class="container-fluid">
@@ -46,7 +42,7 @@
 
                     <li >
                         <a ng-click="getStudentsData()">
-                            <p style="background-color: #ffe1f8;border-left: 5px solid #809fff;" id="p1" onclick="index(0)">
+                            <p style="background-color: #ffe1f8;border-left: 5px solid #809fff;" id="p1" ng-click="index(0)">
                                 <i class="fas fa-graduation-cap"></i> &nbsp; Student
                             </p>
                         </a>
@@ -54,7 +50,7 @@
 
                     <li>
                         <a ng-click="getDepartmentData()">
-                            <p id="p2" onclick="index(1)">
+                            <p id="p2" ng-click="index(1)">
                                 <i class="fas fa-university"></i> &nbsp; Department
                             </p>
                         </a>
@@ -62,7 +58,7 @@
 
                     <li>
                         <a ng-click="getCourseData()">
-                            <p id="p3" onclick="index(2)">
+                            <p id="p3" ng-click="index(2)">
                                 <i class="fas fa-book"></i> &nbsp; Course
                             </p>
                         </a>
@@ -70,7 +66,7 @@
 
                     <li>
                         <a ng-click="getInstructorData()">
-                            <p id="p4" onclick="index(3)">
+                            <p id="p4" ng-click="index(3)">
                                 <i class="fas fa-address-card"></i> &nbsp; Instructor
                             </p>
                         </a>
@@ -78,7 +74,7 @@
 
                     <li>
                         <a ng-click="getSectionData()">
-                            <p id="p5" onclick="index(4)">
+                            <p id="p5" ng-click="index(4)">
                                 <i class="fas fa-address-card"></i> &nbsp; Section
                             </p>
                         </a>
@@ -86,7 +82,7 @@
 
                     <li>
                         <a ng-click="getEnrollmentData()">
-                            <p id="p6" onclick="index(5)">
+                            <p id="p6" ng-click="index(5)">
                                 <i class="fas fa-address-card"></i> &nbsp; Enrollment
                             </p>
                         </a>
@@ -95,86 +91,351 @@
                 </ul>
             </div>
 
-                <div id="page-content-wrapper">
 
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div  class="col-lg-12 w3-example">
-                            <div style="display: block" id="index1">
+            <div id="page-content-wrapper" class="container-fluid">
+                <div class="row">
+                    <div  class="col-lg-12 w3-example">
+                        <div style="display: block" id="index1">
 
-                                <p ng-if="messageOfSaveStudent" class="ng-invalid">{{messageOfSaveStudent}}</p>
+                            <p ng-if="messageOfSaveStudent" class="ng-invalid">{{messageOfSaveStudent}}</p>
+
+                            <div style="margin-bottom: 10px">
+                                <div class="col-md-4">
+                                    <h4>Student Page: {{ currentPageStd }}</h4>
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <input ng-model="q1" id="search" class="form-control" placeholder="Filter text">
+                                </div>
+                            </div>
+
+                            <table align="center" class=" table table-bordered table-striped table-hover" >
+                                <tr>
+                                    <th>Id</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Age</th>
+                                    <th>Gpa</th>
+                                    <th>Department</th>
+                                    <th><i class="fas fa-archive"></i></th>
+                                </tr>
+                                <tr>
+                                    <td> ...</td>
+                                    <td> <input class="form-control" type="text" ng-model="student.firstName"> </td>
+                                    <td> <input class="form-control" type="text" ng-model="student.lastName"> </td>
+                                    <td> <input class="form-control" type="number" ng-model="student.age"> </td>
+                                    <td> <input class="form-control" type="number" ng-model="student.gpa"> </td>
+                                    <td> <select class="form-control" ng-model="selectedDepartmentOfStudent"
+                                                 ng-options="value.name for (key, value)
+                                            in allDepartments"></select>
+                                    </td>
+                                    <td> <button ng-click="sendStudentData()"
+                                                 class=" btn btn-info"> <i class="fas fa-plus-square"></i>
+                                    </button>
+                                    </td>
+                                </tr>
+                                <tr dir-paginate="x in allStudents| filter:q1 | itemsPerPage: pageSize"
+                                    current-page="currentPageStd" pagination-id="pagination1">
+
+                                    <td>
+                                        <button ng-click="setStudent(
+                                                     x.firstName,               x.lastName,
+                                                     x.sections     )"
+
+                                                class="btn btn-success" data-toggle="modal"
+                                                data-target="#purchaseModal2">{{x.id }}
+                                        </button>
+
+                                        <div class="modal fade" id="purchaseModal2" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel2" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title" id="purchaseLabel2">Student Detail</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p> Student     - "{{komplexStudent.student}}" </p>
+
+                                                        <p> Classes The Student Has Registered </p>
+                                                        <table class="table table-striped">
+                                                            <tr>
+                                                                <th>Course</th>
+                                                                <th>Course Credit</th>
+                                                                <th>Department</th>
+                                                                <th>Instructor</th>
+                                                            </tr>
+                                                            <tr ng-repeat="y in komplexStudent.sections">
+
+                                                                <td> {{y.course.title}} - {{y.number}} </td>
+                                                                <td> {{y.course.credit }} </td>
+                                                                <td> {{y.course.department.name }} </td>
+                                                                <td> {{y.instructor.firstName }} {{y.instructor.lastName }} </td>
+                                                            </tr>
+
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+
+                                    <td> {{x.firstName }} </td>
+                                    <td> {{x.lastName }} </td>
+                                    <td> {{x.age }} </td>
+                                    <td> {{x.gpa }} </td>
+                                    <td> {{x.department.code}} - {{x.department.name}}</td>
+                                    <td align="center"> <button ng-click="deleteStudent(x.id,x.firstName,x.lastName)"
+                                                                class=" btn btn-danger"><i class="far fa-trash-alt"></i></button></td>
+                                </tr>
+                            </table>
+
+                            <div class="text-center">
+                                <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                                                         template-url="dirPagination.tpl.html" pagination-id="pagination1"></dir-pagination-controls>
+                            </div>
+                        </div>
+
+
+                        <div style="display: none" id="index2">
+                            <div style="overflow-x: auto">
+                                <p ng-if="messageOfSaveDepartment" class="ng-invalid">{{messageOfSaveDepartment}}</p>
 
                                 <div style="margin-bottom: 10px">
                                     <div class="col-md-4">
-                                        <h4>Student Page: {{ currentPageStd }}</h4>
+                                        <h4>Department Page: {{ currentPageDpt }}</h4>
                                     </div>
                                     <div class="col-md-4"></div>
                                     <div class="col-md-4">
-                                        <input ng-model="q1" id="search" class="form-control" placeholder="Filter text">
+                                        <input ng-model="q2" id="search" class="form-control" placeholder="Filter text">
                                     </div>
                                 </div>
 
-                                <table align="center" class=" table table-bordered table-striped table-hover" >
+                                <table class=" table table-bordered table-striped table-hover" >
                                     <tr>
-                                        <th>Id</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Age</th>
-                                        <th>Gpa</th>
-                                        <th>Department</th>
+                                        <th > ID </th>
+                                        <th > Code </th>
+                                        <th > Name </th>
                                         <th><i class="fas fa-archive"></i></th>
                                     </tr>
-                                    <tr>
-                                        <td> ...</td>
-                                        <td> <input class="form-control" type="text" ng-model="student.firstName"> </td>
-                                        <td> <input class="form-control" type="text" ng-model="student.lastName"> </td>
-                                        <td> <input class="form-control" type="number" ng-model="student.age"> </td>
-                                        <td> <input class="form-control" type="number" ng-model="student.gpa"> </td>
-                                        <td> <select class="form-control" ng-model="selectedDepartmentOfStudent"
-                                                     ng-options="value.name for (key, value)
-                                                in allDepartments"></select>
-                                        </td>
-                                        <td> <button ng-click="sendStudentData()"
-                                                class=" btn btn-info"> <i class="fas fa-plus-square"></i>
-                                             </button>
+                                    <tr >
+                                        <td> ... </td>
+                                        <td> <input class="form-control" type="text" ng-model="department.code"> </td>
+                                        <td> <input class="form-control" type="text" ng-model="department.name"> </td>
+                                        <td> <button ng-click="sendDepartmentData()" class="btn btn-info">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
                                         </td>
                                     </tr>
-                                    <tr dir-paginate="x in allStudents| filter:q1 | itemsPerPage: pageSize"
-                                        current-page="currentPageStd" pagination-id="pagination1">
+                                    <tr dir-paginate="x in allDepartments | filter:q2 | itemsPerPage: pageSize"
+                                        current-page="currentPageDpt" pagination-id="pagination2">
+
+                                        <td> {{x.id }} </td>
+                                        <td> {{x.code }} </td>
+                                        <td> {{x.name }} </td>
+                                        <td> <button ng-click="deleteDepartment(x.id,x.code,x.name)"
+                                                     class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
+                                    </tr>
+                                </table>
+
+                                <div class="text-center">
+                                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                                                             template-url="dirPagination.tpl.html" pagination-id="pagination2"></dir-pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div style="display: none" id="index3">
+                            <div style="overflow-x: auto">
+                                <p ng-if="messageOfSaveCourse" class="ng-invalid">{{messageOfSaveCourse}}</p>
+
+                                <div style="margin-bottom: 10px">
+                                    <div class="col-md-4">
+                                        <h4>Course Page: {{ currentPageCourse }}</h4>
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <input ng-model="q3" id="search" class="form-control" placeholder="Filter text">
+                                    </div>
+                                </div>
+
+                                <table class=" table table-bordered table-striped table-hover" >
+                                    <tr>
+                                        <th > ID </th>
+                                        <th > Title </th>
+                                        <th > Credit </th>
+                                        <th > Department </th>
+                                        <th><i class="fas fa-archive"></i></th>
+                                    </tr>
+                                    <tr >
+                                        <td> ... </td>
+                                        <td> <input class="form-control" type="text" ng-model="course.title"> </td>
+                                        <td> <input class="form-control" type="number" ng-model="course.credit"> </td>
+                                        <td> <select class="form-control" ng-model="selectedDepartmentOfCourse"
+                                                     ng-options="value.name for (key, value)
+                                            in allDepartments"></select>
+                                        </td>
+                                        <td> <button ng-click="sendCourseData()" class="btn btn-info">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                    <tr dir-paginate="x in allCourses | filter:q3 | itemsPerPage: pageSize"
+                                        current-page="currentPageDpt" pagination-id="pagination3">
+
+                                        <td> {{x.id }} </td>
+                                        <td> {{x.title }} </td>
+                                        <td> {{x.credit }} </td>
+                                        <td> {{x.department.name}}</td>
+                                        <td> <button ng-click="deleteCourse(x.id,x.title,x.credit,x.departmentId)"
+                                                     class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
+                                    </tr>
+                                </table>
+
+                                <div class="text-center">
+                                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                                                             template-url="dirPagination.tpl.html" pagination-id="pagination3"></dir-pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: none" id="index4">
+                            <div style="overflow-x: auto">
+                                <p ng-if="messageOfSaveInstructor" class="ng-invalid">{{messageOfSaveInstructor}}</p>
+
+                                <div style="margin-bottom: 10px">
+                                    <div class="col-md-4">
+                                        <h4>Instructor Page: {{ currentPageInstructor }}</h4>
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <input ng-model="q4" id="search" class="form-control" placeholder="Filter text">
+                                    </div>
+                                </div>
+
+                                <table class=" table table-bordered table-striped table-hover" >
+                                    <tr>
+                                        <th > ID </th>
+                                        <th > First Name </th>
+                                        <th > Last Name </th>
+                                        <th > Age </th>
+                                        <th><i class="fas fa-archive"></i></th>
+                                    </tr>
+                                    <tr >
+                                        <td> ... </td>
+                                        <td> <input class="form-control" type="text" ng-model="instructor.firstName"> </td>
+                                        <td> <input class="form-control" type="text" ng-model="instructor.lastName"> </td>
+                                        <td> <input class="form-control" type="number" ng-model="instructor.age"> </td>
+
+                                        <td> <button ng-click="sendInstructorData()" class="btn btn-info">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                    <tr dir-paginate="x in allInstructors | filter:q4 | itemsPerPage: pageSize"
+                                        current-page="currentPageInstructor" pagination-id="pagination4">
+
+                                        <td> {{x.id }} </td>
+                                        <td> {{x.firstName }} </td>
+                                        <td> {{x.lastName }} </td>
+                                        <td> {{x.age }} </td>
+                                        <td> <button ng-click="deleteInstructor(x.id,x.firstName,x.lastName,x.age)"
+                                                     class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
+                                    </tr>
+                                </table>
+
+                                <div class="text-center">
+                                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                                                             template-url="dirPagination.tpl.html" pagination-id="pagination4"></dir-pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div style="display: none" id="index5">
+                            <div style="overflow-x: auto">
+                                <p ng-if="messageOfSaveSection" class="ng-invalid">{{messageOfSaveSection}}</p>
+
+                                <div style="margin-bottom: 10px">
+                                    <div class="col-md-4">
+                                        <h4>Section Page: {{ currentPageSection }}</h4>
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <input ng-model="q5" id="search" class="form-control" placeholder="Filter text">
+                                    </div>
+                                </div>
+
+                                <table class=" table table-bordered table-striped table-hover" >
+                                    <tr>
+                                        <th > ID </th>
+                                        <th > Course </th>
+                                        <th > Section Number </th>
+                                        <th > Instructor </th>
+                                        <th><i class="fas fa-archive"></i></th>
+                                    </tr>
+                                    <tr >
+                                        <td> ... </td>
+                                        <td> <select class="form-control" ng-model="selectedCourseOfSection"
+                                                     ng-options="value.title for (key, value)
+                                            in allCourses"></select>
+                                        </td>
+                                        <td> <input class="form-control" type="number" ng-model="section.number"> </td>
+                                        <td> <select class="form-control" ng-model="selectedInstructorOfSection"
+                                                     ng-options="(value.firstName +' '+ value.lastName) for (key, value)
+                                            in allInstructors"></select>
+                                        </td>
+                                        <td> <button ng-click="sendSectionData()" class="btn btn-info">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                    <tr dir-paginate="x in allSections | filter:q5 | itemsPerPage: pageSize"
+                                        current-page="currentPageSection" pagination-id="pagination5">
 
                                         <td>
-                                            <button ng-click="setStudent(
-                                                         x.firstName,               x.lastName,
-                                                         x.sections     )"
+                                            <button ng-click="setSection(
+                                                     x.number,                  x.course.title,
+                                                     x.course.credit,           x.course.department.code,
+                                                     x.course.department.name,  x.instructor.firstName,
+                                                     x.instructor.lastName,     x.instructor.age,
+                                                     x.students)"
 
                                                     class="btn btn-success" data-toggle="modal"
-                                                    data-target="#purchaseModal2">{{x.id }}
+                                                    data-target="#purchaseModal">{{x.id }}
                                             </button>
 
-                                            <div class="modal fade" id="purchaseModal2" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel2" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
+                                            <div class="modal fade" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                            <h4 class="modal-title" id="purchaseLabel2">Student Detail</h4>
+                                                            <h4 class="modal-title" id="purchaseLabel">Section Detail</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p> Student     - "{{komplexStudent.student}}" </p>
-
-                                                            <p> Classes The Student Has Registered </p>
+                                                            <p> Course     - "{{komplexSection.course}}" </p>
+                                                            <p> Instructor - "{{komplexSection.instructor }}" </p>
+                                                            <p> Department - "{{komplexSection.departmant }}" </p>
+                                                            <p> Students in this Section </p>
                                                             <table class="table table-striped">
                                                                 <tr>
-                                                                    <th>Course</th>
-                                                                    <th>Course Credit</th>
-                                                                    <th>Department</th>
-                                                                    <th>Instructor</th>
+                                                                    <th>Id</th>
+                                                                    <th>First Name</th>
+                                                                    <th>Last Name</th>
+                                                                    <th>Age</th>
+                                                                    <th>Gpa</th>
                                                                 </tr>
-                                                                <tr ng-repeat="y in komplexStudent.sections">
+                                                                <tr ng-repeat="y in komplexSection.students">
 
-                                                                    <td> {{y.course.title}} - {{y.number}} </td>
-                                                                    <td> {{y.course.credit }} </td>
-                                                                    <td> {{y.course.department.name }} </td>
-                                                                    <td> {{y.instructor.firstName }} {{y.instructor.lastName }} </td>
+                                                                    <td> {{y.id }} </td>
+                                                                    <td> {{y.firstName }} </td>
+                                                                    <td> {{y.lastName }} </td>
+                                                                    <td> {{y.age }} </td>
+                                                                    <td> {{y.gpa }} </td>
                                                                 </tr>
 
                                                             </table>
@@ -185,374 +446,81 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </td>
-
-
-                                        <td> {{x.firstName }} </td>
-                                        <td> {{x.lastName }} </td>
-                                        <td> {{x.age }} </td>
-                                        <td> {{x.gpa }} </td>
-                                        <td> {{x.department.code}} - {{x.department.name}}</td>
-                                        <td align="center"> <button ng-click="deleteStudent(x.id,x.firstName,x.lastName)"
-                                            class=" btn btn-danger"><i class="far fa-trash-alt"></i></button></td>
+                                        <td> {{x.course.title }} </td>
+                                        <td> {{x.number }} </td>
+                                        <td> {{x.instructor.firstName }} {{x.instructor.lastName }} </td>
+                                        <td>
+                                            <button ng-click="deleteSection(x.id,x.courseId,x.number,x.instructorId)"
+                                                    class="btn btn-danger"><i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </td>
                                     </tr>
                                 </table>
 
                                 <div class="text-center">
                                     <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
-                                        template-url="dirPagination.tpl.html" pagination-id="pagination1"></dir-pagination-controls>
+                                                             template-url="dirPagination.tpl.html" pagination-id="pagination5"></dir-pagination-controls>
                                 </div>
                             </div>
+                        </div>
 
+                        <div style="display: none" id="index6">
+                            <div style="overflow-x: auto">
+                                <p ng-if="messageOfSaveEnrollment" class="ng-invalid">{{messageOfSaveEnrollment}}</p>
 
-                            <div style="display: none" id="index2">
-                                <div style="overflow-x: auto">
-                                    <p ng-if="messageOfSaveDepartment" class="ng-invalid">{{messageOfSaveDepartment}}</p>
-
-                                    <div style="margin-bottom: 10px">
-                                        <div class="col-md-4">
-                                            <h4>Department Page: {{ currentPageDpt }}</h4>
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-4">
-                                            <input ng-model="q2" id="search" class="form-control" placeholder="Filter text">
-                                        </div>
+                                <div style="margin-bottom: 10px">
+                                    <div class="col-md-4">
+                                        <h4>Enrollment Page: {{ currentPageEnrollment }}</h4>
                                     </div>
-
-                                    <table class=" table table-bordered table-striped table-hover" >
-                                        <tr>
-                                            <th > ID </th>
-                                            <th > Code </th>
-                                            <th > Name </th>
-                                            <th><i class="fas fa-archive"></i></th>
-                                        </tr>
-                                        <tr >
-                                            <td> ... </td>
-                                            <td> <input class="form-control" type="text" ng-model="department.code"> </td>
-                                            <td> <input class="form-control" type="text" ng-model="department.name"> </td>
-                                            <td> <button ng-click="sendDepartmentData()" class="btn btn-info">
-                                                <i class="fas fa-plus-square"></i>
-                                            </button>
-                                            </td>
-                                        </tr>
-                                        <tr dir-paginate="x in allDepartments | filter:q2 | itemsPerPage: pageSize"
-                                            current-page="currentPageDpt" pagination-id="pagination2">
-
-                                            <td> {{x.id }} </td>
-                                            <td> {{x.code }} </td>
-                                            <td> {{x.name }} </td>
-                                            <td> <button ng-click="deleteDepartment(x.id,x.code,x.name)"
-                                                         class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
-                                        </tr>
-                                    </table>
-
-                                    <div class="text-center">
-                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
-                                                                 template-url="dirPagination.tpl.html" pagination-id="pagination2"></dir-pagination-controls>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <input ng-model="q6" id="search" class="form-control" placeholder="Filter text">
                                     </div>
                                 </div>
-                            </div>
 
+                                <table class=" table table-bordered table-striped table-hover" >
+                                    <tr>
+                                        <th > Student </th>
+                                        <th > Section </th>
+                                        <th><i class="fas fa-archive"></i></th>
+                                    </tr>
+                                    <tr >
+                                        <td> <select class="form-control" ng-model="selectedStudentOfEnrollment"
+                                                     ng-options="(value.firstName+' '+value.lastName) for (key, value)
+                                            in allStudents"></select>
+                                        </td>
+                                        <td> <select class="form-control" ng-model="selectedSectionOfEnrollment"
+                                                     ng-options="(value.course.title+' - '+ value.number) for (key, value)
+                                            in allSections"></select>
+                                        </td>
+                                        <td> <button ng-click="sendEnrollmentData()" class="btn btn-info">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                    <tr dir-paginate="x in allEnrollments | filter:q6 | itemsPerPage: pageSize"
+                                        current-page="currentPageEnrollment" pagination-id="pagination6">
 
-                            <div style="display: none" id="index3">
-                                <div style="overflow-x: auto">
-                                    <p ng-if="messageOfSaveCourse" class="ng-invalid">{{messageOfSaveCourse}}</p>
+                                        <td> {{x.student.firstName }} {{x.student.lastName}}</td>
+                                        <td> {{x.section.course.title }}-{{x.section.number }}  </td>
+                                        <td> <button ng-click="deleteEnrollment(x.student.id,x.section.id)"
+                                                     class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
+                                    </tr>
+                                </table>
 
-                                    <div style="margin-bottom: 10px">
-                                        <div class="col-md-4">
-                                            <h4>Course Page: {{ currentPageCourse }}</h4>
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-4">
-                                            <input ng-model="q3" id="search" class="form-control" placeholder="Filter text">
-                                        </div>
-                                    </div>
-
-                                    <table class=" table table-bordered table-striped table-hover" >
-                                        <tr>
-                                            <th > ID </th>
-                                            <th > Title </th>
-                                            <th > Credit </th>
-                                            <th > Department </th>
-                                            <th><i class="fas fa-archive"></i></th>
-                                        </tr>
-                                        <tr >
-                                            <td> ... </td>
-                                            <td> <input class="form-control" type="text" ng-model="course.title"> </td>
-                                            <td> <input class="form-control" type="number" ng-model="course.credit"> </td>
-                                            <td> <select class="form-control" ng-model="selectedDepartmentOfCourse"
-                                                         ng-options="value.name for (key, value)
-                                                in allDepartments"></select>
-                                            </td>
-                                            <td> <button ng-click="sendCourseData()" class="btn btn-info">
-                                                <i class="fas fa-plus-square"></i>
-                                            </button>
-                                            </td>
-                                        </tr>
-                                        <tr dir-paginate="x in allCourses | filter:q3 | itemsPerPage: pageSize"
-                                            current-page="currentPageDpt" pagination-id="pagination3">
-
-                                            <td> {{x.id }} </td>
-                                            <td> {{x.title }} </td>
-                                            <td> {{x.credit }} </td>
-                                            <td> {{x.department.name}}</td>
-                                            <td> <button ng-click="deleteCourse(x.id,x.title,x.credit,x.departmentId)"
-                                                         class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
-                                        </tr>
-                                    </table>
-
-                                    <div class="text-center">
-                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
-                                                                 template-url="dirPagination.tpl.html" pagination-id="pagination3"></dir-pagination-controls>
-                                    </div>
+                                <div class="text-center">
+                                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                                                             template-url="dirPagination.tpl.html" pagination-id="pagination6"></dir-pagination-controls>
                                 </div>
                             </div>
-
-                            <div style="display: none" id="index4">
-                                <div style="overflow-x: auto">
-                                    <p ng-if="messageOfSaveInstructor" class="ng-invalid">{{messageOfSaveInstructor}}</p>
-
-                                    <div style="margin-bottom: 10px">
-                                        <div class="col-md-4">
-                                            <h4>Instructor Page: {{ currentPageInstructor }}</h4>
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-4">
-                                            <input ng-model="q4" id="search" class="form-control" placeholder="Filter text">
-                                        </div>
-                                    </div>
-
-                                    <table class=" table table-bordered table-striped table-hover" >
-                                        <tr>
-                                            <th > ID </th>
-                                            <th > First Name </th>
-                                            <th > Last Name </th>
-                                            <th > Age </th>
-                                            <th><i class="fas fa-archive"></i></th>
-                                        </tr>
-                                        <tr >
-                                            <td> ... </td>
-                                            <td> <input class="form-control" type="text" ng-model="instructor.firstName"> </td>
-                                            <td> <input class="form-control" type="text" ng-model="instructor.lastName"> </td>
-                                            <td> <input class="form-control" type="number" ng-model="instructor.age"> </td>
-
-                                            <td> <button ng-click="sendInstructorData()" class="btn btn-info">
-                                                <i class="fas fa-plus-square"></i>
-                                            </button>
-                                            </td>
-                                        </tr>
-                                        <tr dir-paginate="x in allInstructors | filter:q4 | itemsPerPage: pageSize"
-                                            current-page="currentPageInstructor" pagination-id="pagination4">
-
-                                            <td> {{x.id }} </td>
-                                            <td> {{x.firstName }} </td>
-                                            <td> {{x.lastName }} </td>
-                                            <td> {{x.age }} </td>
-                                            <td> <button ng-click="deleteInstructor(x.id,x.firstName,x.lastName,x.age)"
-                                                         class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
-                                        </tr>
-                                    </table>
-
-                                    <div class="text-center">
-                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
-                                                                 template-url="dirPagination.tpl.html" pagination-id="pagination4"></dir-pagination-controls>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div style="display: none" id="index5">
-                                <div style="overflow-x: auto">
-                                    <p ng-if="messageOfSaveSection" class="ng-invalid">{{messageOfSaveSection}}</p>
-
-                                    <div style="margin-bottom: 10px">
-                                        <div class="col-md-4">
-                                            <h4>Section Page: {{ currentPageSection }}</h4>
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-4">
-                                            <input ng-model="q5" id="search" class="form-control" placeholder="Filter text">
-                                        </div>
-                                    </div>
-
-                                    <table class=" table table-bordered table-striped table-hover" >
-                                        <tr>
-                                            <th > ID </th>
-                                            <th > Course </th>
-                                            <th > Section Number </th>
-                                            <th > Instructor </th>
-                                            <th><i class="fas fa-archive"></i></th>
-                                        </tr>
-                                        <tr >
-                                            <td> ... </td>
-                                            <td> <select class="form-control" ng-model="selectedCourseOfSection"
-                                                         ng-options="value.title for (key, value)
-                                                in allCourses"></select>
-                                            </td>
-                                            <td> <input class="form-control" type="number" ng-model="section.number"> </td>
-                                            <td> <select class="form-control" ng-model="selectedInstructorOfSection"
-                                                         ng-options="(value.firstName +' '+ value.lastName) for (key, value)
-                                                in allInstructors"></select>
-                                            </td>
-                                            <td> <button ng-click="sendSectionData()" class="btn btn-info">
-                                                <i class="fas fa-plus-square"></i>
-                                            </button>
-                                            </td>
-                                        </tr>
-                                        <tr dir-paginate="x in allSections | filter:q5 | itemsPerPage: pageSize"
-                                            current-page="currentPageSection" pagination-id="pagination5">
-
-                                            <td>
-                                                <button ng-click="setSection(
-                                                         x.number,                  x.course.title,
-                                                         x.course.credit,           x.course.department.code,
-                                                         x.course.department.name,  x.instructor.firstName,
-                                                         x.instructor.lastName,     x.instructor.age,
-                                                         x.students)"
-
-                                                        class="btn btn-success" data-toggle="modal"
-                                                        data-target="#purchaseModal">{{x.id }}
-                                                </button>
-
-                                                <div class="modal fade" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                <h4 class="modal-title" id="purchaseLabel">Section Detail</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p> Course     - "{{komplexSection.course}}" </p>
-                                                                <p> Instructor - "{{komplexSection.instructor }}" </p>
-                                                                <p> Department - "{{komplexSection.departmant }}" </p>
-                                                                <p> Students in this Section </p>
-                                                                <table class="table table-striped">
-                                                                    <tr>
-                                                                        <th>Id</th>
-                                                                        <th>First Name</th>
-                                                                        <th>Last Name</th>
-                                                                        <th>Age</th>
-                                                                        <th>Gpa</th>
-                                                                    </tr>
-                                                                    <tr ng-repeat="y in komplexSection.students">
-
-                                                                        <td> {{y.id }} </td>
-                                                                        <td> {{y.firstName }} </td>
-                                                                        <td> {{y.lastName }} </td>
-                                                                        <td> {{y.age }} </td>
-                                                                        <td> {{y.gpa }} </td>
-                                                                    </tr>
-
-                                                                </table>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </td>
-                                            <td> {{x.course.title }} </td>
-                                            <td> {{x.number }} </td>
-                                            <td> {{x.instructor.firstName }} {{x.instructor.lastName }} </td>
-                                            <td>
-                                                <button ng-click="deleteSection(x.id,x.courseId,x.number,x.instructorId)"
-                                                         class="btn btn-danger"><i class="far fa-trash-alt"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                    <div class="text-center">
-                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
-                                                                 template-url="dirPagination.tpl.html" pagination-id="pagination5"></dir-pagination-controls>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style="display: none" id="index6">
-                                <div style="overflow-x: auto">
-                                    <p ng-if="messageOfSaveEnrollment" class="ng-invalid">{{messageOfSaveEnrollment}}</p>
-
-                                    <div style="margin-bottom: 10px">
-                                        <div class="col-md-4">
-                                            <h4>Enrollment Page: {{ currentPageEnrollment }}</h4>
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-4">
-                                            <input ng-model="q6" id="search" class="form-control" placeholder="Filter text">
-                                        </div>
-                                    </div>
-
-                                    <table class=" table table-bordered table-striped table-hover" >
-                                        <tr>
-                                            <th > Student </th>
-                                            <th > Section </th>
-                                            <th><i class="fas fa-archive"></i></th>
-                                        </tr>
-                                        <tr >
-                                            <td> <select class="form-control" ng-model="selectedStudentOfEnrollment"
-                                                         ng-options="(value.firstName+' '+value.lastName) for (key, value)
-                                                in allStudents"></select>
-                                            </td>
-                                            <td> <select class="form-control" ng-model="selectedSectionOfEnrollment"
-                                                         ng-options="(value.course.title+' - '+ value.number) for (key, value)
-                                                in allSections"></select>
-                                            </td>
-                                            <td> <button ng-click="sendEnrollmentData()" class="btn btn-info">
-                                                <i class="fas fa-plus-square"></i>
-                                            </button>
-                                            </td>
-                                        </tr>
-                                        <tr dir-paginate="x in allEnrollments | filter:q6 | itemsPerPage: pageSize"
-                                            current-page="currentPageEnrollment" pagination-id="pagination6">
-
-                                            <td> {{x.student.firstName }} {{x.student.lastName}}</td>
-                                            <td> {{x.section.course.title }}-{{x.section.number }}  </td>
-                                            <td> <button ng-click="deleteEnrollment(x.student.id,x.section.id)"
-                                                         class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
-                                        </tr>
-                                    </table>
-
-                                    <div class="text-center">
-                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
-                                                                 template-url="dirPagination.tpl.html" pagination-id="pagination6"></dir-pagination-controls>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <script>
-        function index(a){
-            var indexs = ["index1","index2","index3","index4","index5","index6"];
-            for(i=0 ; i<indexs.length ; i++){
-                if(i === a){
-                    document.getElementById(indexs[i]).style.display="block";
-                    continue;
-                }
-                document.getElementById(indexs[i]).style.display="none";
-            }
-            var ps = ["p1","p2","p3","p4","p5","p6"];
-            for(i=0 ; i<ps.length ; i++){
-                if(i === a){
-                    document.getElementById(ps[i]).style.backgroundColor="#ffe1f8";
-                    document.getElementById(ps[i]).style.borderLeft="5px solid #809fff" ;
-                    continue;
-                }
-                document.getElementById(ps[i]).style.backgroundColor="white";
-                document.getElementById(ps[i]).style.borderLeft="none";
-            }
-        }
-    </script>
-
+        </div> <!-- end of wrapper -->
+    </div> <!-- end of ngApp -->
 </body>
 
 </html>

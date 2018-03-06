@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="myCtrl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>New System</title>
+
+    <script src="js/fontawesome5.0.6.js"></script>
+    <script src="js/angular1.6.4.js"></script>
+    <script src="js/angular-route1.6.4.js"></script>
+    <script src="js/jquery3.3.1.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap3.3.7.css">
+    <script src="js/bootstrap3.3.7.min.js"></script>
+
+    <link rel="stylesheet" href="css/index.css" >
+    <script src="js/new.js"></script>
+    <script src="js/dirPagination.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="col-sm-12">
+                <p >
+                    <a href="#!/"> <i class="fas fa-registered"></i></a>  Registration System
+                </p>
+            </div>
+        </div>
+    </nav>
+    <div id="wrapper">
+        <div id="sidebar-wrapper" >
+            <ul class="sidebar-nav" >
+                <li >
+                    <a href="#!page1" ng-click="getStudentsData()">
+                        <p style="background-color: #ffe1f8;border-left: 5px solid #809fff;" id="p1" ng-click="index(0)">
+                            <i class="fas fa-graduation-cap"></i> &nbsp; Student
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!page2" ng-click="getDepartmentData()">
+                        <p id="p2" ng-click="index(1)">
+                            <i class="fas fa-university"></i> &nbsp; Department
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!page3" ng-click="getCourseData()">
+                        <p id="p3" ng-click="index(2)">
+                            <i class="fas fa-book"></i> &nbsp; Course
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!page4" ng-click="getInstructorData()">
+                        <p id="p4" ng-click="index(3)">
+                            <i class="fas fa-address-card"></i> &nbsp; Instructor
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!page5" ng-click="getSectionData()">
+                        <p id="p5" ng-click="index(4)">
+                            <i class="fas fa-address-card"></i> &nbsp; Section
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!page6" ng-click="getEnrollmentData()">
+                        <p id="p6" ng-click="index(5)">
+                            <i class="fas fa-address-card"></i> &nbsp; Enrollment
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div  class="col-lg-12 w3-example">
+                        <div ng-view></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

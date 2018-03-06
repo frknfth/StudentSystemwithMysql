@@ -1,5 +1,29 @@
+var app = angular.module("myApp",['angularUtils.directives.dirPagination','ngRoute']);
 
-var app = angular.module("myApp",['angularUtils.directives.dirPagination']);
+app.config(function($routeProvider) {
+    $routeProvider
+        .when("/page1", {
+            templateUrl : "pages/page1.html"
+        })
+        .when("/page2", {
+            templateUrl : "pages/page2.html"
+        })
+        .when("/page3", {
+            templateUrl : "pages/page3.html"
+        })
+        .when("/page4", {
+            templateUrl : "pages/page4.html"
+        })
+        .when("/page5", {
+            templateUrl : "pages/page5.html"
+        })
+        .when("/page6", {
+            templateUrl : "pages/page6.html"
+        })
+        .otherwise({
+            redirectTo: "/page1"
+        });
+});
 
 app.controller("myCtrl", function($scope, $http) {
 
@@ -51,7 +75,9 @@ app.controller("myCtrl", function($scope, $http) {
             $scope.student = {"firstName":"", "lastName": "","age":"","gpa":"" };
             $scope.selectedDepartmentOfStudent ={"id":"","code":"","name":""};
             $scope.messageOfSaveStudent = response.data;
-            $scope.getStudentsData();
+            if ($scope.messageOfSaveStudent === "") {
+                $scope.getStudentsData();
+            }
 
         }, function myError(response) {
             $scope.messageOfSaveStudent = response.statusText;
@@ -64,7 +90,9 @@ app.controller("myCtrl", function($scope, $http) {
 
             $scope.department ={"code":"","name":""};
             $scope.messageOfSaveDepartment = response.data;
-            $scope.getDepartmentData();
+            if ($scope.messageOfSaveDepartment === "") {
+                $scope.getDepartmentData();
+            }
 
         }, function myError(response) {
             $scope.messageOfSaveDepartment = response.statusText;
@@ -78,7 +106,9 @@ app.controller("myCtrl", function($scope, $http) {
 
             $scope.course = {"id":"","title":"","credit":""};
             $scope.messageOfSaveCourse = response.data;
-            $scope.getCourseData();
+            if ($scope.messageOfSaveCourse === "") {
+                $scope.getCourseData();
+            }
 
         }, function myError(response) {
             $scope.messageOfSaveCourse = response.statusText;
@@ -92,7 +122,9 @@ app.controller("myCtrl", function($scope, $http) {
 
             $scope.instructor = {"id":"","firstName":"", "lastName": "" };
             $scope.messageOfSaveInstructor = response.data;
-            $scope.getInstructorData();
+            if ($scope.messageOfSaveInstructor === "") {
+                $scope.getInstructorData();
+            }
 
         }, function myError(response) {
             $scope.messageOfSaveInstructor = response.statusText;
@@ -106,7 +138,9 @@ app.controller("myCtrl", function($scope, $http) {
 
             $scope.section = {"id":"","courseId":"", "number": "" ,"instructorId":""};
             $scope.messageOfSaveSection = response.data;
-            $scope.getSectionData();
+            if ($scope.messageOfSaveSection === "") {
+                $scope.getSectionData();
+            }
 
         }, function myError(response) {
             $scope.messageOfSaveSection = response.statusText;
@@ -119,7 +153,9 @@ app.controller("myCtrl", function($scope, $http) {
         $http.post(url, data).then(function mySuccess(response) {
 
             $scope.messageOfSaveEnrollment = response.data;
-            $scope.getEnrollmentData();
+            if ($scope.messageOfSaveEnrollment === "") {
+                $scope.getEnrollmentData();
+            }
 
         }, function myError(response) {
             $scope.messageOfSaveEnrollment = response.statusText;
@@ -203,6 +239,7 @@ app.controller("myCtrl", function($scope, $http) {
         }, function myError(response) {
             $scope.messageOfSaveStudent = response.statusText;
         });
+        $scope.clearMessage();
     };
     $scope.getDepartmentData = function () {
         $http.get("/getAllDepartments").then(function mySuccess(response) {
@@ -210,6 +247,7 @@ app.controller("myCtrl", function($scope, $http) {
         }, function myError(response) {
             $scope.messageOfSaveDepartment = response.statusText;
         });
+        $scope.clearMessage();
     };
     $scope.getCourseData = function () {
         $http.get("/getAllCourses").then(function mySuccess(response) {
@@ -217,6 +255,7 @@ app.controller("myCtrl", function($scope, $http) {
         }, function myError(response) {
             $scope.messageOfSaveCourse = response.statusText;
         });
+        $scope.clearMessage();
     };
     $scope.getInstructorData = function () {
         $http.get("/getAllInstructors").then(function mySuccess(response) {
@@ -224,6 +263,7 @@ app.controller("myCtrl", function($scope, $http) {
         }, function myError(response) {
             $scope.messageOfSaveInstructor = response.statusText;
         });
+        $scope.clearMessage();
     };
     $scope.getSectionData = function () {
         $http.get("/getAllSections").then(function mySuccess(response) {
@@ -231,6 +271,7 @@ app.controller("myCtrl", function($scope, $http) {
         }, function myError(response) {
             $scope.messageOfSaveSection = response.statusText;
         });
+        $scope.clearMessage();
     };
     $scope.getEnrollmentData = function () {
         $http.get("/getAllEnrollments").then(function mySuccess(response) {
@@ -238,6 +279,15 @@ app.controller("myCtrl", function($scope, $http) {
         }, function myError(response) {
             $scope.messageOfSaveEnrollment = response.statusText;
         });
+        $scope.clearMessage();
+    };
+    $scope.clearMessage = function () {
+        $scope.messageOfSaveDepartment = "";
+        $scope.messageOfSaveStudent = "";
+        $scope.messageOfSaveCourse="";
+        $scope.messageOfSaveInstructor="";
+        $scope.messageOfSaveSection="";
+        $scope.messageOfSaveEnrollment="";
     };
 
     $scope.getStudentsData();
@@ -247,6 +297,8 @@ app.controller("myCtrl", function($scope, $http) {
     $scope.getSectionData();
     $scope.getEnrollmentData();
 
+    $scope.komplexSection ={"course":" ","instructor":"","departmant":"","students":""};
+
     $scope.setSection= function(number,  courseTitle,  courseCredit,  departCode,  departName,  instFirst,  instLast,  instAge,students){
 
         $scope.komplexSection.course = courseTitle +"-"+ number + "    Credit:" + courseCredit ;
@@ -254,9 +306,6 @@ app.controller("myCtrl", function($scope, $http) {
         $scope.komplexSection.departmant =  departCode +" - "+ departName;
         $scope.komplexSection.students =  students;
     };
-
-    $scope.komplexSection ={"course":" ","instructor":"","departmant":"","students":""};
-
 
     $scope.komplexStudent = {"student":" ","sections":""};
 
@@ -267,14 +316,6 @@ app.controller("myCtrl", function($scope, $http) {
     };
 
     $scope.index = function (a) {
-        var indexs = ["index1","index2","index3","index4","index5","index6"];
-        for(i=0 ; i<indexs.length ; i++){
-            if(i === a){
-                document.getElementById(indexs[i]).style.display="block";
-                continue;
-            }
-            document.getElementById(indexs[i]).style.display="none";
-        }
         var ps = ["p1","p2","p3","p4","p5","p6"];
         for(i=0 ; i<ps.length ; i++){
             if(i === a){
@@ -285,5 +326,5 @@ app.controller("myCtrl", function($scope, $http) {
             document.getElementById(ps[i]).style.backgroundColor="white";
             document.getElementById(ps[i]).style.borderLeft="none";
         }
-    };
+    }
 });

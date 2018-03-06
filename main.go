@@ -726,6 +726,54 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/index.html")
 	})
+
+	http.HandleFunc("/new", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/new.html")
+	})
+	http.HandleFunc("/js/new.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/new.js")
+	})
+
+	http.HandleFunc("/js/angular1.6.4.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/angular1.6.4.js")
+	})
+	http.HandleFunc("/js/angular-route1.6.4.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/angular-route1.6.4.js")
+	})
+
+	http.HandleFunc("/js/jquery3.3.1.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/jquery3.3.1.js")
+	})
+
+	http.HandleFunc("/js/bootstrap3.3.7.min.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/bootstrap3.3.7.min.js")
+	})
+
+	http.HandleFunc("/js/fontawesome5.0.6.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/fontawesome5.0.6.js")
+	})
+
+	http.HandleFunc("/css/bootstrap3.3.7.css", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/css/bootstrap3.3.7.css")
+	})
+	http.HandleFunc("/pages/page1.html", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/pages/page1.html")
+	})
+	http.HandleFunc("/pages/page2.html", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/pages/page2.html")
+	})
+	http.HandleFunc("/pages/page3.html", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/pages/page3.html")
+	})
+	http.HandleFunc("/pages/page4.html", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/pages/page4.html")
+	})
+	http.HandleFunc("/pages/page5.html", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/pages/page5.html")
+	})
+	http.HandleFunc("/pages/page6.html", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/pages/page6.html")
+	})
 	http.HandleFunc("/js/index.js", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/js/index.js")
 	})
@@ -771,7 +819,7 @@ func main() {
 
 	http.HandleFunc("/deleteEnrollment", deleteEnrollment)
 
-	log.Fatal(http.ListenAndServe(":1111", nil))
+	log.Fatal(http.ListenAndServe(":1112", nil))
 }
 
 func checkErr(err error) {

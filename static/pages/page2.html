@@ -1,0 +1,48 @@
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<div style="overflow-x: auto">
+    <p ng-if="messageOfSaveDepartment" class="ng-invalid">{{messageOfSaveDepartment}}</p>
+
+    <div style="margin-bottom: 10px">
+        <div class="col-md-4">
+            <h4>Department Page: {{ currentPageDpt }}</h4>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <input ng-model="q2" id="search" class="form-control" placeholder="Filter text">
+        </div>
+    </div>
+
+    <table class=" table table-bordered table-striped table-hover" >
+        <tr>
+            <th > ID </th>
+            <th > Code </th>
+            <th > Name </th>
+            <th><i class="fas fa-archive"></i></th>
+        </tr>
+        <tr >
+            <td> ... </td>
+            <td> <input class="form-control" type="text" ng-model="department.code"> </td>
+            <td> <input class="form-control" type="text" ng-model="department.name"> </td>
+            <td> <button ng-click="sendDepartmentData()" class="btn btn-info">
+                <i class="fas fa-plus-square"></i>
+            </button>
+            </td>
+        </tr>
+        <tr dir-paginate="x in allDepartments | filter:q2 | itemsPerPage: pageSize"
+            current-page="currentPageDpt" pagination-id="pagination2">
+
+            <td> {{x.id }} </td>
+            <td> {{x.code }} </td>
+            <td> {{x.name }} </td>
+            <td> <button ng-click="deleteDepartment(x.id,x.code,x.name)"
+                         class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
+        </tr>
+    </table>
+
+    <div class="text-center">
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                                 template-url="dirPagination.tpl.html" pagination-id="pagination2"></dir-pagination-controls>
+    </div>
+</div>
+</div>
