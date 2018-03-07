@@ -724,12 +724,9 @@ func main() {
 		http.ServeFile(w, r, "static/dirPagination.tpl.html")
 	})
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "static/index.html")
-	})
-
-	http.HandleFunc("/new", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/new.html")
 	})
+
 	http.HandleFunc("/js/new.js", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/js/new.js")
 	})
@@ -773,9 +770,6 @@ func main() {
 	})
 	http.HandleFunc("/pages/page6.html", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/pages/page6.html")
-	})
-	http.HandleFunc("/js/index.js", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "static/js/index.js")
 	})
 	http.HandleFunc("/css/design.css", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/css/design.css")

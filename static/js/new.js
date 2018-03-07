@@ -2,6 +2,9 @@ var app = angular.module("myApp",['angularUtils.directives.dirPagination','ngRou
 
 app.config(function($routeProvider) {
     $routeProvider
+        .when("/", {
+            template : ""
+        })
         .when("/page1", {
             templateUrl : "pages/page1.html"
         })
