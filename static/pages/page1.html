@@ -1,6 +1,5 @@
-<div ng-app="myApp" ng-controller="myCtrl">
-
-<p ng-if="messageOfSaveStudent" class="ng-invalid">{{messageOfSaveStudent}}</p>
+<p ng-if="messageOfSaveStudent" class="ng-invalid">
+    {{messageOfSaveStudent}}</p>
 
 <div style="margin-bottom: 10px">
     <div class="col-md-4">
@@ -12,7 +11,7 @@
     </div>
 </div>
 
-<table align="center" class=" table table-bordered table-striped table-hover" >
+<table align="center" class=" table table-bordered table-striped table-hover">
     <tr>
         <th>Id</th>
         <th>First Name</th>
@@ -20,24 +19,43 @@
         <th>Age</th>
         <th>Gpa</th>
         <th>Department</th>
-        <th><i class="fas fa-archive"></i></th>
+        <th>
+            <i class="fas fa-archive"></i>
+        </th>
     </tr>
     <tr>
         <td> ...</td>
-        <td> <input class="form-control" type="text" ng-model="student.firstName"> </td>
-        <td> <input class="form-control" type="text" ng-model="student.lastName"> </td>
-        <td> <input class="form-control" type="number" ng-model="student.age"> </td>
-        <td> <input class="form-control" type="number" ng-model="student.gpa"> </td>
-        <td> <select class="form-control" ng-model="selectedDepartmentOfStudent" ng-options="value.name for (key, value) in allDepartments"></select>
+        <td>
+            <input class="form-control" type="text" ng-model="student.firstName"> </td>
+        <td>
+            <input class="form-control" type="text" ng-model="student.lastName"> </td>
+        <td>
+            <input class="form-control" type="number" ng-model="student.age"> </td>
+        <td>
+            <input class="form-control" type="number" ng-model="student.gpa"> </td>
+        <td>
+            <select class="form-control" ng-model="selectedDepartmentOfStudent" ng-options="value.name for (key, value) in allDepartments"></select>
         </td>
-        <td> <button ng-click="sendStudentData()" class=" btn btn-info"> <i class="fas fa-plus-square"></i>
-                </button>
+        <td align="center">
+            <button ng-click="sendStudentData()" class=" btn btn-info">
+                <i class="fas fa-plus-square"></i>
+            </button>
         </td>
     </tr>
     <tr dir-paginate="x in allStudents| filter:q1 | itemsPerPage: pageSize" current-page="currentPageStd" pagination-id="pagination1">
 
-        <td>
-            <button ng-click="setStudent(x.firstName, x.lastName, x.sections)" class="btn btn-success" data-toggle="modal" data-target="#purchaseModal2">{{x.id }}
+        <td> {{x.id }}</td>
+        <td> {{x.firstName }} </td>
+        <td> {{x.lastName }} </td>
+        <td> {{x.age }} </td>
+        <td> {{x.gpa }} </td>
+        <td> {{x.department.code}} - {{x.department.name}}</td>
+        <td align="center">
+            <button ng-click="deleteStudent(x.id,x.firstName,x.lastName)" class=" btn btn-danger">
+                <i class="far fa-trash-alt"></i>
+            </button>
+            <button ng-click="setStudent(x.firstName, x.lastName, x.sections)" class="btn btn-success" data-toggle="modal" data-target="#purchaseModal2">
+                <i class="fas fa-code-branch"></i>
             </button>
 
             <div class="modal fade" id="purchaseModal2" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel2" aria-hidden="true">
@@ -48,7 +66,7 @@
                             <h4 class="modal-title" id="purchaseLabel2">Student Detail</h4>
                         </div>
                         <div class="modal-body">
-                            <p> Student     - "{{komplexStudent.student}}" </p>
+                            <p> Student - "{{komplexStudent.student}}" </p>
 
                             <p> Classes The Student Has Registered </p>
                             <table class="table table-striped">
@@ -74,18 +92,12 @@
                     </div>
                 </div>
             </div>
-        </td>
 
-        <td> {{x.firstName }} </td>
-        <td> {{x.lastName }} </td>
-        <td> {{x.age }} </td>
-        <td> {{x.gpa }} </td>
-        <td> {{x.department.code}} - {{x.department.name}}</td>
-        <td align="center"> <button ng-click="deleteStudent(x.id,x.firstName,x.lastName)" class=" btn btn-danger"><i class="far fa-trash-alt"></i></button></td>
+        </td>
     </tr>
 </table>
 
 <div class="text-center">
-    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination.tpl.html" pagination-id="pagination1"></dir-pagination-controls>
-</div>
+    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination.tpl.html"
+        pagination-id="pagination1"></dir-pagination-controls>
 </div>

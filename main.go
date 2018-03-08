@@ -3,54 +3,65 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
-	_ "github.com/go-sql-driver/mysql"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
+//Student type for saveStudent
 type Student struct {
-	Id           int     `json:"id"`
+	ID           int     `json:"id"`
 	FirstName    string  `json:"firstName"`
 	LastName     string  `json:"lastName"`
 	Age          int     `json:"age"`
 	Gpa          float32 `json:"gpa"`
-	DepartmentId int     `json:"departmentId"`
+	DepartmentID int     `json:"departmentId"`
 }
+
+//Department type for saveDepartment
 type Department struct {
 	ID   int    `json:"id"`
 	Code string `json:"code"`
 	Name string `json:"name"`
 }
 
+//Course type for saveCourse
 type Course struct {
 	ID           int    `json:"id"`
 	Title        string `json:"title"`
 	Credit       int    `json:"credit"`
-	DepartmentId int    `json:"departmentId"`
+	DepartmentID int    `json:"departmentId"`
 }
 
+//Instructor type for saveInstructor
 type Instructor struct {
-	Id        int    `json:"id"`
+	ID        int    `json:"id"`
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
 	Age       int    `json:"age"`
 }
+
+//Section type for saveSection
 type Section struct {
-	Id           int `json:"id"`
-	CourseId     int `json:"courseId"`
+	ID           int `json:"id"`
+	CourseID     int `json:"courseId"`
 	Number       int `json:"number"`
-	InstructorId int `json:"instructorId"`
-}
-type Enrollment struct {
-	Id        int `json:"id"`
-	StudentId int `json:"studentId"`
-	SectionId int `json:"sectionId"`
+	InstructorID int `json:"instructorId"`
 }
 
+//Enrollment type for saveEnrollment
+type Enrollment struct {
+	ID        int `json:"id"`
+	StudentID int `json:"studentId"`
+	SectionID int `json:"sectionId"`
+}
+
+//KomplexStudent type for getAllStudents
 type KomplexStudent struct {
-	Id         int              `json:"id"`
+	ID         int              `json:"id"`
 	FirstName  string           `json:"firstName"`
 	LastName   string           `json:"lastName"`
 	Age        int              `json:"age"`
@@ -58,21 +69,27 @@ type KomplexStudent struct {
 	Department Department       `json:"department"`
 	Section    []KomplexSection `json:"sections"`
 }
+
+//KomplexCourse type for getAllCourses
 type KomplexCourse struct {
 	ID         int        `json:"id"`
 	Title      string     `json:"title"`
 	Credit     int        `json:"credit"`
 	Department Department `json:"department"`
 }
+
+//KomplexSection type for getAllSections
 type KomplexSection struct {
-	Id         int           `json:"id"`
+	ID         int           `json:"id"`
 	Course     KomplexCourse `json:"course"`
 	Number     int           `json:"number"`
 	Instructor Instructor    `json:"instructor"`
 	Student    []Student     `json:"students"`
 }
+
+//KomplexEnrollment type for getAllEnrollments
 type KomplexEnrollment struct {
-	Id      int            `json:"id"`
+	ID      int            `json:"id"`
 	Student Student        `json:"student"`
 	Section KomplexSection `json:"section"`
 }
@@ -102,7 +119,7 @@ func saveStudent(rw http.ResponseWriter, req *http.Request) {
 	if student.Gpa < 0 || student.Gpa > 4 {
 		messageToClient = messageToClient + "Gpa is wrong. "
 	}
-	if student.DepartmentId == 0 {
+	if student.DepartmentID == 0 {
 		messageToClient = messageToClient + "Department is not selected. "
 	}
 	if messageToClient != "" {
@@ -111,7 +128,7 @@ func saveStudent(rw http.ResponseWriter, req *http.Request) {
 	}
 	stmt, err := db.Prepare("INSERT Student SET firstName=?,lastName=?,age=?,gpa=?,department_Id=?")
 	checkErr(err)
-	_, err = stmt.Exec(student.FirstName, student.LastName, student.Age, student.Gpa, student.DepartmentId)
+	_, err = stmt.Exec(student.FirstName, student.LastName, student.Age, student.Gpa, student.DepartmentID)
 	checkErr(err)
 }
 func saveDepartment(rw http.ResponseWriter, req *http.Request) {
@@ -158,10 +175,10 @@ func saveCourse(rw http.ResponseWriter, req *http.Request) {
 	if len(course.Title) == 0 {
 		messageToClient = messageToClient + "Title is empty. "
 	}
-	if course.Credit < 0 || course.Credit > 4 {
+	if course.Credit <= 0 || course.Credit > 4 {
 		messageToClient = messageToClient + "Credit is wrong. "
 	}
-	if course.DepartmentId == 0 {
+	if course.DepartmentID == 0 {
 		messageToClient = messageToClient + "Department is not selected. "
 	}
 	if messageToClient != "" {
@@ -170,7 +187,7 @@ func saveCourse(rw http.ResponseWriter, req *http.Request) {
 	}
 	stmt, err := db.Prepare("INSERT Course SET title=?,credit=?,dep_id=?")
 	checkErr(err)
-	_, err = stmt.Exec(course.Title, course.Credit, course.DepartmentId)
+	_, err = stmt.Exec(course.Title, course.Credit, course.DepartmentID)
 	checkErr(err)
 }
 func saveInstructor(rw http.ResponseWriter, req *http.Request) {
@@ -192,7 +209,7 @@ func saveInstructor(rw http.ResponseWriter, req *http.Request) {
 	if len(inst.LastName) == 0 {
 		messageToClient = messageToClient + "Last name is empty. "
 	}
-	if inst.Age < 0 || inst.Age > 130 {
+	if inst.Age <= 0 || inst.Age > 130 {
 		messageToClient = messageToClient + "Age is wrong. "
 	}
 	if messageToClient != "" {
@@ -204,6 +221,7 @@ func saveInstructor(rw http.ResponseWriter, req *http.Request) {
 	_, err = stmt.Exec(inst.FirstName, inst.LastName, inst.Age)
 	checkErr(err)
 }
+
 func saveSection(rw http.ResponseWriter, req *http.Request) {
 	body, err := ioutil.ReadAll(req.Body)
 	checkErr(err)
@@ -215,13 +233,14 @@ func saveSection(rw http.ResponseWriter, req *http.Request) {
 	defer db.Close()
 	messageToClient := ""
 
-	if section.CourseId == 0 {
+	if section.CourseID == 0 {
 		messageToClient = messageToClient + "Course is not selected. "
 	}
 	if section.Number < 1 {
 		messageToClient = messageToClient + "Section number is wrong. "
 	}
-	if section.InstructorId == 0 {
+
+	if section.InstructorID == 0 {
 		messageToClient = messageToClient + "Instructor is not selected. "
 	}
 	if messageToClient != "" {
@@ -230,7 +249,7 @@ func saveSection(rw http.ResponseWriter, req *http.Request) {
 	}
 	stmt, err := db.Prepare("INSERT Section SET course_id=?,number=?,instructor_id=?")
 	checkErr(err)
-	_, err = stmt.Exec(section.CourseId, section.Number, section.InstructorId)
+	_, err = stmt.Exec(section.CourseID, section.Number, section.InstructorID)
 	checkErr(err)
 }
 func saveEnrollment(rw http.ResponseWriter, req *http.Request) {
@@ -244,10 +263,10 @@ func saveEnrollment(rw http.ResponseWriter, req *http.Request) {
 	defer db.Close()
 	messageToClient := ""
 
-	if enroll.SectionId == 0 {
+	if enroll.SectionID == 0 {
 		messageToClient = messageToClient + "Section is not selected. "
 	}
-	if enroll.StudentId == 0 {
+	if enroll.StudentID == 0 {
 		messageToClient = messageToClient + "Student is not selected. "
 	}
 	if messageToClient != "" {
@@ -256,7 +275,7 @@ func saveEnrollment(rw http.ResponseWriter, req *http.Request) {
 	}
 	stmt, err := db.Prepare("INSERT Enrollment SET student_id=?,section_id=?")
 	checkErr(err)
-	_, err = stmt.Exec(enroll.StudentId, enroll.SectionId)
+	_, err = stmt.Exec(enroll.StudentID, enroll.SectionID)
 	checkErr(err)
 }
 
@@ -273,10 +292,10 @@ func getAllStudents(rw http.ResponseWriter, req *http.Request) {
 	for rows.Next() {
 		komplexStudent := KomplexStudent{}
 		student := Student{}
-		err := rows.Scan(&student.Id, &student.FirstName, &student.LastName, &student.Age, &student.Gpa, &student.DepartmentId)
+		err := rows.Scan(&student.ID, &student.FirstName, &student.LastName, &student.Age, &student.Gpa, &student.DepartmentID)
 		checkErr(err)
 
-		rows2, err2 := db.Query("SELECT * FROM Department WHERE id=?", student.DepartmentId)
+		rows2, err2 := db.Query("SELECT * FROM Department WHERE id=?", student.DepartmentID)
 		checkErr(err2)
 		defer rows2.Close()
 		department := Department{}
@@ -284,43 +303,43 @@ func getAllStudents(rw http.ResponseWriter, req *http.Request) {
 			err := rows2.Scan(&department.ID, &department.Code, &department.Name)
 			checkErr(err)
 		}
-		komplexStudent.Id = student.Id
+		komplexStudent.ID = student.ID
 		komplexStudent.FirstName = student.FirstName
 		komplexStudent.LastName = student.LastName
 		komplexStudent.Age = student.Age
 		komplexStudent.Gpa = student.Gpa
 		komplexStudent.Department = department
 
-		rows3, err3 := db.Query("SELECT * FROM Enrollment WHERE student_id=?", student.Id)
+		rows3, err3 := db.Query("SELECT * FROM Enrollment WHERE student_id=?", student.ID)
 		checkErr(err3)
 		allEnroll := make([]Enrollment, 0)
 		for rows3.Next() {
 			enroll := Enrollment{}
-			err := rows3.Scan(&enroll.Id, &enroll.StudentId, &enroll.SectionId)
+			err := rows3.Scan(&enroll.ID, &enroll.StudentID, &enroll.SectionID)
 			checkErr(err)
 			allEnroll = append(allEnroll, enroll)
 		}
 
 		allSections := make([]KomplexSection, 0)
 		for i := 0; i < len(allEnroll); i++ {
-			rows4, err4 := db.Query("SELECT * FROM Section WHERE id=?", allEnroll[i].SectionId)
+			rows4, err4 := db.Query("SELECT * FROM Section WHERE id=?", allEnroll[i].SectionID)
 			checkErr(err4)
 
 			for rows4.Next() {
 				komplexSection := KomplexSection{}
 				section := Section{}
-				err := rows4.Scan(&section.Id, &section.CourseId, &section.Number, &section.InstructorId)
+				err := rows4.Scan(&section.ID, &section.CourseID, &section.Number, &section.InstructorID)
 				checkErr(err)
 
-				rows2, err2 := db.Query("SELECT * FROM Course WHERE id=?", section.CourseId)
+				rows2, err2 := db.Query("SELECT * FROM Course WHERE id=?", section.CourseID)
 				checkErr(err2)
 				komplexCourse := KomplexCourse{}
 				course := Course{}
 				for rows2.Next() {
-					err := rows2.Scan(&course.ID, &course.Title, &course.Credit, &course.DepartmentId)
+					err := rows2.Scan(&course.ID, &course.Title, &course.Credit, &course.DepartmentID)
 					checkErr(err)
 
-					rows3, err3 := db.Query("SELECT * FROM Department WHERE id=?", course.DepartmentId)
+					rows3, err3 := db.Query("SELECT * FROM Department WHERE id=?", course.DepartmentID)
 					checkErr(err3)
 					department := Department{}
 					for rows3.Next() {
@@ -333,38 +352,38 @@ func getAllStudents(rw http.ResponseWriter, req *http.Request) {
 					komplexCourse.Department = department
 				}
 
-				rows4, err4 := db.Query("SELECT * FROM Instructor WHERE id=?", section.InstructorId)
+				rows4, err4 := db.Query("SELECT * FROM Instructor WHERE id=?", section.InstructorID)
 				checkErr(err4)
 				instructor := Instructor{}
 				for rows4.Next() {
-					err := rows4.Scan(&instructor.Id, &instructor.FirstName, &instructor.LastName, &instructor.Age)
+					err := rows4.Scan(&instructor.ID, &instructor.FirstName, &instructor.LastName, &instructor.Age)
 					checkErr(err)
 				}
 
-				rows5, err5 := db.Query("SELECT * FROM Enrollment WHERE section_id=?", section.Id)
+				rows5, err5 := db.Query("SELECT * FROM Enrollment WHERE section_id=?", section.ID)
 				checkErr(err5)
 				allEnroll := make([]Enrollment, 0)
 				for rows5.Next() {
 					enroll := Enrollment{}
-					err := rows5.Scan(&enroll.Id, &enroll.StudentId, &enroll.SectionId)
+					err := rows5.Scan(&enroll.ID, &enroll.StudentID, &enroll.SectionID)
 					checkErr(err)
 					allEnroll = append(allEnroll, enroll)
 				}
 
 				allStudents := make([]Student, 0)
 				for i := 0; i < len(allEnroll); i++ {
-					rows6, err6 := db.Query("SELECT * FROM Student WHERE id=?", allEnroll[i].StudentId)
+					rows6, err6 := db.Query("SELECT * FROM Student WHERE id=?", allEnroll[i].StudentID)
 					checkErr(err6)
 					for rows6.Next() {
 						student := Student{}
-						err := rows6.Scan(&student.Id, &student.FirstName, &student.LastName, &student.Age, &student.Gpa, &student.DepartmentId)
+						err := rows6.Scan(&student.ID, &student.FirstName, &student.LastName, &student.Age, &student.Gpa, &student.DepartmentID)
 						checkErr(err)
 						allStudents = append(allStudents, student)
 					}
 				}
 
 				komplexSection.Course = komplexCourse
-				komplexSection.Id = section.Id
+				komplexSection.ID = section.ID
 				komplexSection.Number = section.Number
 				komplexSection.Instructor = instructor
 				komplexSection.Student = allStudents
@@ -414,10 +433,10 @@ func getAllCourses(rw http.ResponseWriter, req *http.Request) {
 	for rows.Next() {
 		komplexCourse := KomplexCourse{}
 		course := Course{}
-		err := rows.Scan(&course.ID, &course.Title, &course.Credit, &course.DepartmentId)
+		err := rows.Scan(&course.ID, &course.Title, &course.Credit, &course.DepartmentID)
 		checkErr(err)
 
-		rows2, err2 := db.Query("SELECT * FROM Department WHERE id=?", course.DepartmentId)
+		rows2, err2 := db.Query("SELECT * FROM Department WHERE id=?", course.DepartmentID)
 		checkErr(err2)
 		defer rows2.Close()
 
@@ -450,7 +469,7 @@ func getAllInstructors(rw http.ResponseWriter, req *http.Request) {
 
 	for rows.Next() {
 		instructor := Instructor{}
-		err := rows.Scan(&instructor.Id, &instructor.FirstName, &instructor.LastName, &instructor.Age)
+		err := rows.Scan(&instructor.ID, &instructor.FirstName, &instructor.LastName, &instructor.Age)
 		checkErr(err)
 
 		allInstructors = append(allInstructors, instructor)
@@ -469,18 +488,18 @@ func getAllSections(rw http.ResponseWriter, req *http.Request) {
 	for rows.Next() {
 		komplexSection := KomplexSection{}
 		section := Section{}
-		err := rows.Scan(&section.Id, &section.CourseId, &section.Number, &section.InstructorId)
+		err := rows.Scan(&section.ID, &section.CourseID, &section.Number, &section.InstructorID)
 		checkErr(err)
 
-		rows2, err2 := db.Query("SELECT * FROM Course WHERE id=?", section.CourseId)
+		rows2, err2 := db.Query("SELECT * FROM Course WHERE id=?", section.CourseID)
 		checkErr(err2)
 		komplexCourse := KomplexCourse{}
 		course := Course{}
 		for rows2.Next() {
-			err := rows2.Scan(&course.ID, &course.Title, &course.Credit, &course.DepartmentId)
+			err := rows2.Scan(&course.ID, &course.Title, &course.Credit, &course.DepartmentID)
 			checkErr(err)
 
-			rows3, err3 := db.Query("SELECT * FROM Department WHERE id=?", course.DepartmentId)
+			rows3, err3 := db.Query("SELECT * FROM Department WHERE id=?", course.DepartmentID)
 			checkErr(err3)
 			department := Department{}
 			for rows3.Next() {
@@ -493,38 +512,38 @@ func getAllSections(rw http.ResponseWriter, req *http.Request) {
 			komplexCourse.Department = department
 		}
 
-		rows4, err4 := db.Query("SELECT * FROM Instructor WHERE id=?", section.InstructorId)
+		rows4, err4 := db.Query("SELECT * FROM Instructor WHERE id=?", section.InstructorID)
 		checkErr(err4)
 		instructor := Instructor{}
 		for rows4.Next() {
-			err := rows4.Scan(&instructor.Id, &instructor.FirstName, &instructor.LastName, &instructor.Age)
+			err := rows4.Scan(&instructor.ID, &instructor.FirstName, &instructor.LastName, &instructor.Age)
 			checkErr(err)
 		}
 
-		rows5, err5 := db.Query("SELECT * FROM Enrollment WHERE section_id=?", section.Id)
+		rows5, err5 := db.Query("SELECT * FROM Enrollment WHERE section_id=?", section.ID)
 		checkErr(err5)
 		allEnroll := make([]Enrollment, 0)
 		for rows5.Next() {
 			enroll := Enrollment{}
-			err := rows5.Scan(&enroll.Id, &enroll.StudentId, &enroll.SectionId)
+			err := rows5.Scan(&enroll.ID, &enroll.StudentID, &enroll.SectionID)
 			checkErr(err)
 			allEnroll = append(allEnroll, enroll)
 		}
 
 		allStudents := make([]Student, 0)
 		for i := 0; i < len(allEnroll); i++ {
-			rows6, err6 := db.Query("SELECT * FROM Student WHERE id=?", allEnroll[i].StudentId)
+			rows6, err6 := db.Query("SELECT * FROM Student WHERE id=?", allEnroll[i].StudentID)
 			checkErr(err6)
 			for rows6.Next() {
 				student := Student{}
-				err := rows6.Scan(&student.Id, &student.FirstName, &student.LastName, &student.Age, &student.Gpa, &student.DepartmentId)
+				err := rows6.Scan(&student.ID, &student.FirstName, &student.LastName, &student.Age, &student.Gpa, &student.DepartmentID)
 				checkErr(err)
 				allStudents = append(allStudents, student)
 			}
 		}
 
 		komplexSection.Course = komplexCourse
-		komplexSection.Id = section.Id
+		komplexSection.ID = section.ID
 		komplexSection.Number = section.Number
 		komplexSection.Instructor = instructor
 		komplexSection.Student = allStudents
@@ -548,36 +567,35 @@ func getAllEnrollments(rw http.ResponseWriter, req *http.Request) {
 		komplexEnroll := KomplexEnrollment{}
 
 		enroll := Enrollment{}
-		err := rows.Scan(&enroll.Id, &enroll.StudentId, &enroll.SectionId)
+		err := rows.Scan(&enroll.ID, &enroll.StudentID, &enroll.SectionID)
 		checkErr(err)
 
-		rows2, err2 := db.Query("SELECT * FROM Student WHERE id=?", enroll.StudentId)
+		rows2, err2 := db.Query("SELECT * FROM Student WHERE id=?", enroll.StudentID)
 		checkErr(err2)
 		student := Student{}
 		for rows2.Next() {
-			err := rows2.Scan(&student.Id, &student.FirstName, &student.LastName, &student.Age, &student.Gpa, &student.DepartmentId)
+			err := rows2.Scan(&student.ID, &student.FirstName, &student.LastName, &student.Age, &student.Gpa, &student.DepartmentID)
 			checkErr(err)
 		}
-		komplexEnroll.Student = student
 
-		rows3, err3 := db.Query("SELECT * FROM Section WHERE id=?", enroll.SectionId)
+		rows3, err3 := db.Query("SELECT * FROM Section WHERE id=?", enroll.SectionID)
 		checkErr(err3)
 		komplexSection := KomplexSection{}
 
 		for rows3.Next() {
 			section := Section{}
-			err := rows3.Scan(&section.Id, &section.CourseId, &section.Number, &section.InstructorId)
+			err := rows3.Scan(&section.ID, &section.CourseID, &section.Number, &section.InstructorID)
 			checkErr(err)
 
-			rows4, err4 := db.Query("SELECT * FROM Course WHERE id=?", section.CourseId)
+			rows4, err4 := db.Query("SELECT * FROM Course WHERE id=?", section.CourseID)
 			checkErr(err4)
 			komplexCourse := KomplexCourse{}
 			course := Course{}
 			for rows4.Next() {
-				err := rows4.Scan(&course.ID, &course.Title, &course.Credit, &course.DepartmentId)
+				err := rows4.Scan(&course.ID, &course.Title, &course.Credit, &course.DepartmentID)
 				checkErr(err)
 
-				rows5, err5 := db.Query("SELECT * FROM Department WHERE id=?", course.DepartmentId)
+				rows5, err5 := db.Query("SELECT * FROM Department WHERE id=?", course.DepartmentID)
 				checkErr(err5)
 				department := Department{}
 				for rows5.Next() {
@@ -590,43 +608,45 @@ func getAllEnrollments(rw http.ResponseWriter, req *http.Request) {
 				komplexCourse.Department = department
 			}
 
-			rows6, err6 := db.Query("SELECT * FROM Instructor WHERE id=?", section.InstructorId)
+			rows6, err6 := db.Query("SELECT * FROM Instructor WHERE id=?", section.InstructorID)
 			checkErr(err6)
 			instructor := Instructor{}
 			for rows6.Next() {
-				err := rows6.Scan(&instructor.Id, &instructor.FirstName, &instructor.LastName, &instructor.Age)
+				err := rows6.Scan(&instructor.ID, &instructor.FirstName, &instructor.LastName, &instructor.Age)
 				checkErr(err)
 			}
 
-			rows7, err7 := db.Query("SELECT * FROM Enrollment WHERE section_id=?", section.Id)
+			rows7, err7 := db.Query("SELECT * FROM Enrollment WHERE section_id=?", section.ID)
 			checkErr(err7)
 			allEnroll := make([]Enrollment, 0)
 			for rows7.Next() {
 				enroll := Enrollment{}
-				err := rows7.Scan(&enroll.Id, &enroll.StudentId, &enroll.SectionId)
+				err := rows7.Scan(&enroll.ID, &enroll.StudentID, &enroll.SectionID)
 				checkErr(err)
 				allEnroll = append(allEnroll, enroll)
 			}
 
 			allStudents := make([]Student, 0)
 			for i := 0; i < len(allEnroll); i++ {
-				rows8, err8 := db.Query("SELECT * FROM Student WHERE id=?", allEnroll[i].StudentId)
+				rows8, err8 := db.Query("SELECT * FROM Student WHERE id=?", allEnroll[i].StudentID)
 				checkErr(err8)
 				for rows8.Next() {
 					student := Student{}
-					err := rows8.Scan(&student.Id, &student.FirstName, &student.LastName, &student.Age, &student.Gpa, &student.DepartmentId)
+					err := rows8.Scan(&student.ID, &student.FirstName, &student.LastName, &student.Age, &student.Gpa, &student.DepartmentID)
 					checkErr(err)
 					allStudents = append(allStudents, student)
 				}
 			}
 
 			komplexSection.Course = komplexCourse
-			komplexSection.Id = section.Id
+			komplexSection.ID = section.ID
 			komplexSection.Number = section.Number
 			komplexSection.Instructor = instructor
 			komplexSection.Student = allStudents
 		}
 
+		komplexEnroll.ID = enroll.ID
+		komplexEnroll.Student = student
 		komplexEnroll.Section = komplexSection
 
 		allEnroll = append(allEnroll, komplexEnroll)
@@ -644,7 +664,7 @@ func deleteStudent(rw http.ResponseWriter, req *http.Request) {
 	checkErr(err)
 	defer db.Close()
 
-	_, err = db.Query("DELETE FROM Student WHERE id=?", student.Id)
+	_, err = db.Query("DELETE FROM Student WHERE id=?", student.ID)
 	checkErr(err)
 }
 func deleteDepartment(rw http.ResponseWriter, req *http.Request) {
@@ -683,7 +703,7 @@ func deleteInstructor(rw http.ResponseWriter, req *http.Request) {
 	checkErr(err)
 	defer db.Close()
 
-	_, err = db.Query("DELETE FROM Instructor WHERE id=?", inst.Id)
+	_, err = db.Query("DELETE FROM Instructor WHERE id=?", inst.ID)
 	checkErr(err)
 }
 func deleteSection(rw http.ResponseWriter, req *http.Request) {
@@ -696,7 +716,7 @@ func deleteSection(rw http.ResponseWriter, req *http.Request) {
 	checkErr(err)
 	defer db.Close()
 
-	_, err = db.Query("DELETE FROM Section WHERE id=?", section.Id)
+	_, err = db.Query("DELETE FROM Section WHERE id=?", section.ID)
 	checkErr(err)
 }
 func deleteEnrollment(rw http.ResponseWriter, req *http.Request) {
@@ -709,9 +729,9 @@ func deleteEnrollment(rw http.ResponseWriter, req *http.Request) {
 	checkErr(err)
 	defer db.Close()
 
-	stmt, err := db.Prepare("DELETE FROM Enrollment WHERE student_id =? AND section_id=?")
+	stmt, err := db.Prepare("DELETE FROM Enrollment WHERE id=?")
 	checkErr(err)
-	_, err = stmt.Exec(&enroll.Id, enroll.StudentId, enroll.SectionId)
+	_, err = stmt.Exec(&enroll.ID)
 	checkErr(err)
 }
 
@@ -720,11 +740,19 @@ func main() {
 	http.HandleFunc("/js/dirPagination.js", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/js/dirPagination.js")
 	})
+
+	http.HandleFunc("/js/angucomplete-alt.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/js/angucomplete-alt.js")
+	})
+
 	http.HandleFunc("/dirPagination.tpl.html", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/dirPagination.tpl.html")
 	})
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/new.html")
+	})
+	http.HandleFunc("/new", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/index.html")
 	})
 
 	http.HandleFunc("/js/new.js", func(w http.ResponseWriter, r *http.Request) {
@@ -771,6 +799,20 @@ func main() {
 	http.HandleFunc("/pages/page6.html", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/pages/page6.html")
 	})
+
+	http.HandleFunc("/pages/about.html", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/pages/about.html")
+	})
+	http.HandleFunc("/pages/contact.html", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/pages/contact.html")
+	})
+	http.HandleFunc("/pages/home.html", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/pages/home.html")
+	})
+	http.HandleFunc("/script.js", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/script.js")
+	})
+
 	http.HandleFunc("/css/design.css", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/css/design.css")
 	})

@@ -1,110 +1,107 @@
-<div ng-app="myApp" ng-controller="myCtrl">
-
 <div style="overflow-x: auto">
-        <p ng-if="messageOfSaveSection" class="ng-invalid">{{messageOfSaveSection}}</p>
+    <p ng-if="messageOfSaveSection" class="ng-invalid">{{messageOfSaveSection}}</p>
 
-        <div style="margin-bottom: 10px">
-            <div class="col-md-4">
-                <h4>Section Page: {{ currentPageSection }}</h4>
-            </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <input ng-model="q5" id="search" class="form-control" placeholder="Filter text">
-            </div>
+    <div style="margin-bottom: 10px">
+        <div class="col-md-4">
+            <h4>Section Page: {{ currentPageSection }}</h4>
         </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <input ng-model="q5" id="search" class="form-control" placeholder="Filter text">
+        </div>
+    </div>
 
-        <table class=" table table-bordered table-striped table-hover" >
-            <tr>
-                <th > ID </th>
-                <th > Course </th>
-                <th > Section Number </th>
-                <th > Instructor </th>
-                <th><i class="fas fa-archive"></i></th>
-            </tr>
-            <tr >
-                <td> ... </td>
-                <td> <select class="form-control" ng-model="selectedCourseOfSection"
-                             ng-options="value.title for (key, value)
+    <table class=" table table-bordered table-striped table-hover">
+        <tr>
+            <th> ID </th>
+            <th> Course </th>
+            <th> Section Number </th>
+            <th> Instructor </th>
+            <th>
+                <i class="fas fa-archive"></i>
+            </th>
+        </tr>
+        <tr>
+            <td> ... </td>
+            <td>
+                <select class="form-control" ng-model="selectedCourseOfSection" ng-options="value.title for (key, value)
                     in allCourses"></select>
-                </td>
-                <td> <input class="form-control" type="number" ng-model="section.number"> </td>
-                <td> <select class="form-control" ng-model="selectedInstructorOfSection"
-                             ng-options="(value.firstName +' '+ value.lastName) for (key, value)
+            </td>
+            <td>
+                <input class="form-control" type="number" ng-model="section.number"> </td>
+            <td>
+                <select class="form-control" ng-model="selectedInstructorOfSection" ng-options="(value.firstName +' '+ value.lastName) for (key, value)
                     in allInstructors"></select>
-                </td>
-                <td> <button ng-click="sendSectionData()" class="btn btn-info">
+            </td>
+            <td align="center">
+                <button ng-click="sendSectionData()" class="btn btn-info">
                     <i class="fas fa-plus-square"></i>
                 </button>
-                </td>
-            </tr>
-            <tr dir-paginate="x in allSections | filter:q5 | itemsPerPage: pageSize"
-                current-page="currentPageSection" pagination-id="pagination5">
+            </td>
+        </tr>
+        <tr dir-paginate="x in allSections | filter:q5 | itemsPerPage: pageSize" current-page="currentPageSection" pagination-id="pagination5">
 
-                <td>
-                    <button ng-click="setSection(
+            <td>{{x.id }}</td>
+            <td> {{x.course.title }} </td>
+            <td> {{x.number }} </td>
+            <td> {{x.instructor.firstName }} {{x.instructor.lastName }} </td>
+            <td align="center" >
+                <button ng-click="deleteSection(x.id,x.course.title,x.number,x.instructor.lastName)" class="btn btn-danger">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+                <button ng-click="setSection(
                              x.number,                  x.course.title,
                              x.course.credit,           x.course.department.code,
                              x.course.department.name,  x.instructor.firstName,
                              x.instructor.lastName,     x.instructor.age,
-                             x.students)"
+                             x.students)" class="btn btn-success" data-toggle="modal" data-target="#purchaseModal">
+                    <i class="fas fa-code-branch"></i>
+                </button>
 
-                            class="btn btn-success" data-toggle="modal"
-                            data-target="#purchaseModal">{{x.id }}
-                    </button>
+                <div class="modal fade" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="purchaseLabel">Section Detail</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p> Course - "{{komplexSection.course}}" </p>
+                                <p> Instructor - "{{komplexSection.instructor }}" </p>
+                                <p> Department - "{{komplexSection.departmant }}" </p>
+                                <p> Students in this Section </p>
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Age</th>
+                                        <th>Gpa</th>
+                                    </tr>
+                                    <tr ng-repeat="y in komplexSection.students">
 
-                    <div class="modal fade" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="purchaseLabel">Section Detail</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p> Course     - "{{komplexSection.course}}" </p>
-                                    <p> Instructor - "{{komplexSection.instructor }}" </p>
-                                    <p> Department - "{{komplexSection.departmant }}" </p>
-                                    <p> Students in this Section </p>
-                                    <table class="table table-striped">
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Age</th>
-                                            <th>Gpa</th>
-                                        </tr>
-                                        <tr ng-repeat="y in komplexSection.students">
+                                        <td> {{y.id }} </td>
+                                        <td> {{y.firstName }} </td>
+                                        <td> {{y.lastName }} </td>
+                                        <td> {{y.age }} </td>
+                                        <td> {{y.gpa }} </td>
+                                    </tr>
 
-                                            <td> {{y.id }} </td>
-                                            <td> {{y.firstName }} </td>
-                                            <td> {{y.lastName }} </td>
-                                            <td> {{y.age }} </td>
-                                            <td> {{y.gpa }} </td>
-                                        </tr>
-
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                </td>
-                <td> {{x.course.title }} </td>
-                <td> {{x.number }} </td>
-                <td> {{x.instructor.firstName }} {{x.instructor.lastName }} </td>
-                <td>
-                    <button ng-click="deleteSection(x.id,x.courseId,x.number,x.instructorId)"
-                             class="btn btn-danger"><i class="far fa-trash-alt"></i>
-                    </button>
-                </td>
-            </tr>
-        </table>
+            </td>
+        </tr>
+    </table>
 
-        <div class="text-center">
-            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
-                                     template-url="dirPagination.tpl.html" pagination-id="pagination5"></dir-pagination-controls>
-        </div>
+    <div class="text-center">
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination.tpl.html"
+            pagination-id="pagination5"></dir-pagination-controls>
     </div>
 </div>

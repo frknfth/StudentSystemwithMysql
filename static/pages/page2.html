@@ -1,4 +1,3 @@
-<div ng-app="myApp" ng-controller="myCtrl">
 
 <div style="overflow-x: auto">
     <p ng-if="messageOfSaveDepartment" class="ng-invalid">{{messageOfSaveDepartment}}</p>
@@ -24,7 +23,7 @@
             <td> ... </td>
             <td> <input class="form-control" type="text" ng-model="department.code"> </td>
             <td> <input class="form-control" type="text" ng-model="department.name"> </td>
-            <td> <button ng-click="sendDepartmentData()" class="btn btn-info">
+            <td align="center">  <button ng-click="sendDepartmentData()" class="btn btn-info">
                 <i class="fas fa-plus-square"></i>
             </button>
             </td>
@@ -35,7 +34,7 @@
             <td> {{x.id }} </td>
             <td> {{x.code }} </td>
             <td> {{x.name }} </td>
-            <td> <button ng-click="deleteDepartment(x.id,x.code,x.name)"
+            <td align="center"> <button ng-click="deleteDepartment(x.id,x.code,x.name)"
                          class="btn btn-danger"><i class="far fa-trash-alt"></i></button> </td>
         </tr>
     </table>
@@ -44,5 +43,4 @@
         <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
                                  template-url="dirPagination.tpl.html" pagination-id="pagination2"></dir-pagination-controls>
     </div>
-</div>
 </div>
