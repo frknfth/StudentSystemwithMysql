@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ['angularUtils.directives.dirPagination', 'ngRoute']);
+var app = angular.module("myApp", ['angularUtils.directives.dirPagination', 'ngRoute','angucomplete-alt']);
 
 app.config(function ($routeProvider) {
     $routeProvider

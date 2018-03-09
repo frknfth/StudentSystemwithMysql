@@ -6,9 +6,13 @@
             <h4>Instructor Page: {{ currentPageInstructor }}</h4>
         </div>
         <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <input ng-model="q4" id="search" class="form-control" placeholder="Filter text">
+        <div class="col-md-3">
+            <div angucomplete-alt id="ex4" placeholder="Instructor Last Name" selected-object="selectedObj" local-data="allInstructors"
+                search-fields="lastName" title-field="lastName" minlength="1">
+
+            </div>
         </div>
+        <div class="col-md-1"></div>
     </div>
 
     <table class=" table table-bordered table-striped table-hover">
@@ -36,7 +40,7 @@
                 </button>
             </td>
         </tr>
-        <tr dir-paginate="x in allInstructors | filter:q4 | itemsPerPage: pageSize" current-page="currentPageInstructor" pagination-id="pagination4">
+        <tr dir-paginate="x in allInstructors | filter:selectedObj.originalObject.lastName | itemsPerPage: pageSize" current-page="currentPageInstructor" pagination-id="pagination4">
 
             <td> {{x.id }} </td>
             <td> {{x.firstName }} </td>
