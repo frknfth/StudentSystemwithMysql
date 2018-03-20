@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ['angularUtils.directives.dirPagination', 'ngRoute','angucomplete-alt']);
+var app = angular.module("myApp", ['angularUtils.directives.dirPagination', 'ngRoute', 'angucomplete-alt']);
 
 app.config(function ($routeProvider) {
     $routeProvider
@@ -316,7 +316,7 @@ app.controller("myCtrlForSection", function ($scope, $http) {
         "number": "",
         "instructorId": ""
     };
-    
+
     $scope.sendSectionData = function () {
         var url = "/saveSection",
             data = {
@@ -343,7 +343,9 @@ app.controller("myCtrlForSection", function ($scope, $http) {
                 "age": ""
             };
             $scope.messageOfSaveSection = response.data;
-            $scope.getSectionData();
+            if ($scope.messageOfSaveSection === "") {
+                $scope.getSectionData();
+            }
 
         }, function myError(response) {
             $scope.messageOfSaveSection = response.statusText;

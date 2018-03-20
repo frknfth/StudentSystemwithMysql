@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="455f3428-cbaf-4b02-a703-c32f17338602" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/main.go" afterPath="$PROJECT_DIR$/main.go" />
+      <change beforePath="$PROJECT_DIR$/static/css/index.css" afterPath="$PROJECT_DIR$/static/css/index.css" />
+      <change beforePath="$PROJECT_DIR$/static/js/new.js" afterPath="$PROJECT_DIR$/static/js/new.js" />
       <change beforePath="$PROJECT_DIR$/static/new.html" afterPath="$PROJECT_DIR$/static/new.html" />
       <change beforePath="$PROJECT_DIR$/static/pages/page1.html" afterPath="$PROJECT_DIR$/static/pages/page1.html" />
       <change beforePath="$PROJECT_DIR$/static/pages/page5.html" afterPath="$PROJECT_DIR$/static/pages/page5.html" />
@@ -28,13 +31,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11685">
-              <caret line="787" column="48" lean-forward="false" selection-start-line="787" selection-start-column="48" selection-end-line="787" selection-end-column="48" />
+            <state relative-caret-position="421">
+              <caret line="822" column="0" lean-forward="true" selection-start-line="822" selection-start-column="0" selection-end-line="822" selection-end-column="0" />
               <folding>
-                <element signature="e#14#136#0" expanded="true" />
+                <marker date="1521531858000" expanded="true" signature="3442:3456" ph="INSERT Student... " />
+                <marker date="1521531858000" expanded="true" signature="3457:3511" ph="SET firstNam... " />
+                <marker date="1521531858000" expanded="true" signature="4315:4332" ph="INSERT Department... " />
+                <marker date="1521531858000" expanded="true" signature="4333:4350" ph="SET code=?,n... " />
+                <marker date="1521531858000" expanded="true" signature="5185:5198" ph="INSERT Course... " />
+                <marker date="1521531858000" expanded="true" signature="5199:5228" ph="SET title=?,... " />
+                <marker date="1521531858000" expanded="true" signature="6138:6155" ph="INSERT Instructor... " />
+                <marker date="1521531858000" expanded="true" signature="6156:6188" ph="SET firstNam... " />
+                <marker date="1521531858000" expanded="true" signature="6997:7011" ph="INSERT Section... " />
+                <marker date="1521531858000" expanded="true" signature="7012:7052" ph="SET course_i... " />
+                <marker date="1521531858000" expanded="true" signature="7778:7795" ph="INSERT Enrollment... " />
+                <marker date="1521531858000" expanded="true" signature="7796:7825" ph="SET student_... " />
+                <marker date="1521531858000" expanded="true" signature="8169:8190" ph="SELECT * FRO... Student" />
+                <marker date="1521531858000" expanded="true" signature="8474:8509" ph="SELECT * FRO... Department" />
+                <marker date="1521531858000" expanded="true" signature="8981:9024" ph="SELECT * FRO... Enrollment" />
+                <marker date="1521531858000" expanded="true" signature="9385:9417" ph="SELECT * FRO... Section" />
+                <marker date="1521531858000" expanded="true" signature="9691:9722" ph="SELECT * FRO... Course" />
+                <marker date="1521531858000" expanded="true" signature="9983:10018" ph="SELECT * FRO... Department" />
+                <marker date="1521531858000" expanded="true" signature="10416:10451" ph="SELECT * FRO... Instructor" />
+                <marker date="1521531858000" expanded="true" signature="10705:10748" ph="SELECT * FRO... Enrollment" />
+                <marker date="1521531858000" expanded="true" signature="11124:11156" ph="SELECT * FRO... Student" />
+                <marker date="1521531858000" expanded="true" signature="12127:12151" ph="SELECT * FRO... Department" />
+                <marker date="1521531858000" expanded="true" signature="12659:12679" ph="SELECT * FRO... Course" />
+                <marker date="1521531858000" expanded="true" signature="12921:12956" ph="SELECT * FRO... Department" />
+                <marker date="1521531858000" expanded="true" signature="13663:13687" ph="SELECT * FRO... Instructor" />
+                <marker date="1521531858000" expanded="true" signature="14243:14264" ph="SELECT * FRO... Section" />
+                <marker date="1521531858000" expanded="true" signature="14497:14528" ph="SELECT * FRO... Course" />
+                <marker date="1521531858000" expanded="true" signature="14775:14810" ph="SELECT * FRO... Department" />
+                <marker date="1521531858000" expanded="true" signature="15184:15219" ph="SELECT * FRO... Instructor" />
+                <marker date="1521531858000" expanded="true" signature="15459:15502" ph="SELECT * FRO... Enrollment" />
+                <marker date="1521531858000" expanded="true" signature="15856:15888" ph="SELECT * FRO... Student" />
+                <marker date="1521531858000" expanded="true" signature="16730:16754" ph="SELECT * FRO... Enrollment" />
+                <marker date="1521531858000" expanded="true" signature="16990:17022" ph="SELECT * FRO... Student" />
+                <marker date="1521531858000" expanded="true" signature="17277:17309" ph="SELECT * FRO... Section" />
+                <marker date="1521531858000" expanded="true" signature="17569:17600" ph="SELECT * FRO... Course" />
+                <marker date="1521531858000" expanded="true" signature="17854:17889" ph="SELECT * FRO... Department" />
+                <marker date="1521531858000" expanded="true" signature="18275:18310" ph="SELECT * FRO... Instructor" />
+                <marker date="1521531858000" expanded="true" signature="18557:18600" ph="SELECT * FRO... Enrollment" />
+                <marker date="1521531858000" expanded="true" signature="18965:18997" ph="SELECT * FRO... Student" />
+                <marker date="1521531858000" expanded="true" signature="20014:20044" ph="DELETE FROM " />
+                <marker date="1521531858000" expanded="true" signature="20388:20421" ph="DELETE FROM " />
+                <marker date="1521531858000" expanded="true" signature="20759:20788" ph="DELETE FROM " />
+                <marker date="1521531858000" expanded="true" signature="21133:21166" ph="DELETE FROM " />
+                <marker date="1521531858000" expanded="true" signature="21509:21539" ph="DELETE FROM " />
+                <marker date="1521531858000" expanded="true" signature="21895:21928" ph="DELETE FROM " />
               </folding>
             </state>
           </provider>
@@ -50,11 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="new.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="new.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/new.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="22" column="35" lean-forward="false" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+            <state relative-caret-position="91">
+              <caret line="49" column="54" lean-forward="true" selection-start-line="49" selection-start-column="54" selection-end-line="49" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -97,7 +144,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/static/index5.html" />
         <option value="$PROJECT_DIR$/static/index6.html" />
         <option value="$PROJECT_DIR$/../mysqlOld/homePage.html" />
         <option value="$PROJECT_DIR$/../mysqlOld/homePagesjs.js" />
@@ -143,11 +189,12 @@
         <option value="$PROJECT_DIR$/static/css/bootstrap3.3.7.css" />
         <option value="$PROJECT_DIR$/static/js/bootstrap3.3.7.min.js" />
         <option value="$PROJECT_DIR$/static/js/fontawesome5.0.6.js" />
-        <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/static/js/new.js" />
         <option value="$PROJECT_DIR$/static/new.html" />
         <option value="$PROJECT_DIR$/static/pages/page1.html" />
         <option value="$PROJECT_DIR$/static/pages/page5.html" />
+        <option value="$PROJECT_DIR$/.dockerignore" />
+        <option value="$PROJECT_DIR$/main.go" />
       </list>
     </option>
   </component>
@@ -161,7 +208,7 @@
     <option name="x" value="867" />
     <option name="y" value="23" />
     <option name="width" value="1693" />
-    <option name="height" value="1324" />
+    <option name="height" value="1322" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -181,7 +228,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -198,7 +245,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -280,18 +327,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="867" y="23" width="1693" height="1324" extended-state="0" />
+    <frame x="867" y="23" width="1693" height="1322" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13826561" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13765919" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2334437" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="251" y="911" width="1255" height="397" />
       <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881084" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286612" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1119403" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="0" y="970" width="1262" height="376" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23509933" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11258278" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="0" y="970" width="1262" height="376" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21937086" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -354,25 +402,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/main.go</url>
-          <line>442</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../mysqlOld/findPage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1245">
-          <caret line="83" column="34" lean-forward="true" selection-start-line="83" selection-start-column="34" selection-end-line="83" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../mysqlOld/homePagesjs.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1680">
@@ -529,16 +563,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11685">
-          <caret line="787" column="48" lean-forward="false" selection-start-line="787" selection-start-column="48" selection-end-line="787" selection-end-column="48" />
-          <folding>
-            <element signature="e#14#136#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/pages/page2.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -568,11 +592,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.dockerignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="4" lean-forward="true" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/static/new.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="22" column="35" lean-forward="false" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+        <state relative-caret-position="91">
+          <caret line="49" column="54" lean-forward="true" selection-start-line="49" selection-start-column="54" selection-end-line="49" selection-end-column="54" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="822" column="0" lean-forward="true" selection-start-line="822" selection-start-column="0" selection-end-line="822" selection-end-column="0" />
+          <folding>
+            <marker date="1521531858000" expanded="true" signature="3442:3456" ph="INSERT Student... " />
+            <marker date="1521531858000" expanded="true" signature="3457:3511" ph="SET firstNam... " />
+            <marker date="1521531858000" expanded="true" signature="4315:4332" ph="INSERT Department... " />
+            <marker date="1521531858000" expanded="true" signature="4333:4350" ph="SET code=?,n... " />
+            <marker date="1521531858000" expanded="true" signature="5185:5198" ph="INSERT Course... " />
+            <marker date="1521531858000" expanded="true" signature="5199:5228" ph="SET title=?,... " />
+            <marker date="1521531858000" expanded="true" signature="6138:6155" ph="INSERT Instructor... " />
+            <marker date="1521531858000" expanded="true" signature="6156:6188" ph="SET firstNam... " />
+            <marker date="1521531858000" expanded="true" signature="6997:7011" ph="INSERT Section... " />
+            <marker date="1521531858000" expanded="true" signature="7012:7052" ph="SET course_i... " />
+            <marker date="1521531858000" expanded="true" signature="7778:7795" ph="INSERT Enrollment... " />
+            <marker date="1521531858000" expanded="true" signature="7796:7825" ph="SET student_... " />
+            <marker date="1521531858000" expanded="true" signature="8169:8190" ph="SELECT * FRO... Student" />
+            <marker date="1521531858000" expanded="true" signature="8474:8509" ph="SELECT * FRO... Department" />
+            <marker date="1521531858000" expanded="true" signature="8981:9024" ph="SELECT * FRO... Enrollment" />
+            <marker date="1521531858000" expanded="true" signature="9385:9417" ph="SELECT * FRO... Section" />
+            <marker date="1521531858000" expanded="true" signature="9691:9722" ph="SELECT * FRO... Course" />
+            <marker date="1521531858000" expanded="true" signature="9983:10018" ph="SELECT * FRO... Department" />
+            <marker date="1521531858000" expanded="true" signature="10416:10451" ph="SELECT * FRO... Instructor" />
+            <marker date="1521531858000" expanded="true" signature="10705:10748" ph="SELECT * FRO... Enrollment" />
+            <marker date="1521531858000" expanded="true" signature="11124:11156" ph="SELECT * FRO... Student" />
+            <marker date="1521531858000" expanded="true" signature="12127:12151" ph="SELECT * FRO... Department" />
+            <marker date="1521531858000" expanded="true" signature="12659:12679" ph="SELECT * FRO... Course" />
+            <marker date="1521531858000" expanded="true" signature="12921:12956" ph="SELECT * FRO... Department" />
+            <marker date="1521531858000" expanded="true" signature="13663:13687" ph="SELECT * FRO... Instructor" />
+            <marker date="1521531858000" expanded="true" signature="14243:14264" ph="SELECT * FRO... Section" />
+            <marker date="1521531858000" expanded="true" signature="14497:14528" ph="SELECT * FRO... Course" />
+            <marker date="1521531858000" expanded="true" signature="14775:14810" ph="SELECT * FRO... Department" />
+            <marker date="1521531858000" expanded="true" signature="15184:15219" ph="SELECT * FRO... Instructor" />
+            <marker date="1521531858000" expanded="true" signature="15459:15502" ph="SELECT * FRO... Enrollment" />
+            <marker date="1521531858000" expanded="true" signature="15856:15888" ph="SELECT * FRO... Student" />
+            <marker date="1521531858000" expanded="true" signature="16730:16754" ph="SELECT * FRO... Enrollment" />
+            <marker date="1521531858000" expanded="true" signature="16990:17022" ph="SELECT * FRO... Student" />
+            <marker date="1521531858000" expanded="true" signature="17277:17309" ph="SELECT * FRO... Section" />
+            <marker date="1521531858000" expanded="true" signature="17569:17600" ph="SELECT * FRO... Course" />
+            <marker date="1521531858000" expanded="true" signature="17854:17889" ph="SELECT * FRO... Department" />
+            <marker date="1521531858000" expanded="true" signature="18275:18310" ph="SELECT * FRO... Instructor" />
+            <marker date="1521531858000" expanded="true" signature="18557:18600" ph="SELECT * FRO... Enrollment" />
+            <marker date="1521531858000" expanded="true" signature="18965:18997" ph="SELECT * FRO... Student" />
+            <marker date="1521531858000" expanded="true" signature="20014:20044" ph="DELETE FROM " />
+            <marker date="1521531858000" expanded="true" signature="20388:20421" ph="DELETE FROM " />
+            <marker date="1521531858000" expanded="true" signature="20759:20788" ph="DELETE FROM " />
+            <marker date="1521531858000" expanded="true" signature="21133:21166" ph="DELETE FROM " />
+            <marker date="1521531858000" expanded="true" signature="21509:21539" ph="DELETE FROM " />
+            <marker date="1521531858000" expanded="true" signature="21895:21928" ph="DELETE FROM " />
+          </folding>
         </state>
       </provider>
     </entry>

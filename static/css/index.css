@@ -74,11 +74,11 @@ th {
 }
 
 #page-content-wrapper {
-    width: 100%;
-    position: absolute;
     padding-top: 0px !important;
     padding-left: 30px;
     padding-right: 30px;
+    position: absolute;
+    width: -moz-available;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -146,12 +146,14 @@ th {
     }
     #sidebar-wrapper {
         width: 203px;
+        height: 530px;
     }
     #wrapper.toggled #sidebar-wrapper {
         width: 0;
     }
     #page-content-wrapper {
-        position: relative;
+        position: absolute;
+        width: -moz-available;
     }
     #wrapper.toggled #page-content-wrapper {
         position: relative;
