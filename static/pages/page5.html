@@ -43,59 +43,53 @@
                 </button>
             </td>
         </tr>
-        <tr dir-paginate="x in allSections | filter:selectedObj.originalObject.course.title | itemsPerPage: pageSize" current-page="currentPageSection" pagination-id="pagination5">
+        <tr dir-paginate="x in allSections | filter:selectedObj.originalObject.course.title | itemsPerPage: pageSize" current-page="currentPageSection"
+            pagination-id="pagination5">
 
             <td>{{x.id }}</td>
             <td> {{x.course.title }} </td>
             <td> {{x.number }} </td>
             <td> {{x.instructor.firstName }} {{x.instructor.lastName }} </td>
-            <td align="center" >
+            <td align="center">
                 <button ng-click="deleteSection(x.id,x.course.title,x.number,x.instructor.lastName)" class="btn btn-danger">
                     <i class="far fa-trash-alt"></i>
                 </button>
                 <button ng-click="setSection(
-                             x.number,                  x.course.title,
-                             x.course.credit,           x.course.department.code,
-                             x.course.department.name,  x.instructor.firstName,
-                             x.instructor.lastName,     x.instructor.age,
-                             x.students)" class="btn btn-success" data-toggle="modal" data-target="#purchaseModal">
+                    x.number,                  x.course.title,
+                    x.course.credit,           x.course.department.code,
+                    x.course.department.name,  x.instructor.firstName,
+                    x.instructor.lastName,     x.instructor.age,
+                    x.students)" onclick="document.getElementById('id01').style.display='block'" class="btn btn-success">
                     <i class="fas fa-code-branch"></i>
                 </button>
+                <div id="id01" class="w3-modal">
+                    <div class="w3-modal-content w3-animate-top w3-card-4">
+                        <header class="w3-container">
+                            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                            <h4 class="modal-title" id="purchaseLabel2">Section Detail</h4>
+                        </header>
+                        <div class="w3-container">
+                            <p> Course - "{{komplexSection.course}}" </p>
+                            <p> Instructor - "{{komplexSection.instructor }}" </p>
+                            <p> Department - "{{komplexSection.departmant }}" </p>
+                            <p> Students in this Section </p>
+                            <table class="table table-bordered table-striped table-hover">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Age</th>
+                                    <th>Gpa</th>
+                                </tr>
+                                <tr ng-repeat="y in komplexSection.students">
 
-                <div class="modal fade" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="purchaseLabel">Section Detail</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p> Course - "{{komplexSection.course}}" </p>
-                                <p> Instructor - "{{komplexSection.instructor }}" </p>
-                                <p> Department - "{{komplexSection.departmant }}" </p>
-                                <p> Students in this Section </p>
-                                <table class="table table-striped">
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Age</th>
-                                        <th>Gpa</th>
-                                    </tr>
-                                    <tr ng-repeat="y in komplexSection.students">
-
-                                        <td> {{y.id }} </td>
-                                        <td> {{y.firstName }} </td>
-                                        <td> {{y.lastName }} </td>
-                                        <td> {{y.age }} </td>
-                                        <td> {{y.gpa }} </td>
-                                    </tr>
-
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
+                                    <td> {{y.id }} </td>
+                                    <td> {{y.firstName }} </td>
+                                    <td> {{y.lastName }} </td>
+                                    <td> {{y.age }} </td>
+                                    <td> {{y.gpa }} </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>

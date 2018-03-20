@@ -62,41 +62,36 @@
                 <button ng-click="deleteStudent(x.id,x.firstName,x.lastName)" class=" btn btn-danger">
                     <i class="far fa-trash-alt"></i>
                 </button>
-                <button ng-click="setStudent(x.firstName, x.lastName, x.sections)" class="btn btn-success" data-toggle="modal" data-target="#purchaseModal2">
+
+                <button ng-click="setStudent(x.firstName, x.lastName, x.sections)" onclick="document.getElementById('id01').style.display='block'"
+                    class="btn btn-success">
                     <i class="fas fa-code-branch"></i>
                 </button>
+                <div id="id01" class="w3-modal">
+                    <div class="w3-modal-content w3-animate-top w3-card-4">
+                        <header class="w3-container">
+                            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                            <h4 class="modal-title" id="purchaseLabel2">Student Detail</h4>
+                        </header>
+                        <div class="w3-container">
+                            <p> Student - "{{komplexStudent.student}}" </p>
 
-                <div class="modal fade" id="purchaseModal2" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel2" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="purchaseLabel2">Student Detail</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p> Student - "{{komplexStudent.student}}" </p>
+                            <p> Classes The Student Has Registered </p>
+                            <table class="table table-bordered table-striped table-hover">
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Course Credit</th>
+                                    <th>Department</th>
+                                    <th>Instructor</th>
+                                </tr>
+                                <tr ng-repeat="y in komplexStudent.sections">
 
-                                <p> Classes The Student Has Registered </p>
-                                <table class="table table-striped">
-                                    <tr>
-                                        <th>Course</th>
-                                        <th>Course Credit</th>
-                                        <th>Department</th>
-                                        <th>Instructor</th>
-                                    </tr>
-                                    <tr ng-repeat="y in komplexStudent.sections">
-
-                                        <td> {{y.course.title}} - {{y.number}} </td>
-                                        <td> {{y.course.credit }} </td>
-                                        <td> {{y.course.department.name }} </td>
-                                        <td> {{y.instructor.firstName }} {{y.instructor.lastName }} </td>
-                                    </tr>
-
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
+                                    <td> {{y.course.title}} - {{y.number}} </td>
+                                    <td> {{y.course.credit }} </td>
+                                    <td> {{y.course.department.name }} </td>
+                                    <td> {{y.instructor.firstName }} {{y.instructor.lastName }} </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
