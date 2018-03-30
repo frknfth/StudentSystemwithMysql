@@ -20,7 +20,8 @@ cd src/github.com/frknfth/StudentSystemwithMysql
 # Run go app
 go run main.go
 
+```
 Our App :
-```
-localhost:8081
-```
+
+localhost:8000
+
