@@ -78,6 +78,7 @@ th {
     padding-left: 30px;
     padding-right: 30px;
     position: absolute;
+    width: 100%;
     width: -moz-available;
 }
 
@@ -153,6 +154,7 @@ th {
     }
     #page-content-wrapper {
         position: absolute;
+        width: 80%;
         width: -moz-available;
     }
     #wrapper.toggled #page-content-wrapper {
