@@ -12,7 +12,7 @@ Steps:
 cd $GOPATH
 
 # Clone the project
-git clone github.com/frknfth/StudentSystemwithMysql
+go get github.com/frknfth/StudentSystemwithMysql
 
 # cd into project directory
 cd src/github.com/frknfth/StudentSystemwithMysql
